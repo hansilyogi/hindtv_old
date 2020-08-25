@@ -1,37 +1,24 @@
 $(document).ready(function () {
+  var URL = "http://localhost:3000/api/";
   var id = $(location).attr("href").split("=")[1];
   if (id != undefined) {
     $.ajax({
       type: "POST",
       url: $("#website-url").attr("value") + "employee",
-      data: { type: "getsingledata", id: id },
-      dataType: "json",
-      cache: false,
+      data: { type: "getsingledata", id: id, token : $("#website-token").attr("value") },
       success: function (data) {
-        if (data.isSuccess === true) {
+        if (data.isSuccess == true) {
           $("#displaydata").html(
-            "<tr><td>Name</td><td>" +
-              data.Data[0]["Name"] +
-              "</td></tr><td>First Name</td><td>" +
-              data.Data[0]["FirstName"] +
-              "</td></tr><tr><td>Last Name</td><td>" +
-              data.Data[0]["LastName"] +
-              "</td></tr><tr><td>DOB</td><td>" +
-              data.Data[0]["DOB"] +
-              "</td><tr><td>Gender</td><td>" +
-              data.Data[0]["Gender"] +
-              "</td></tr><tr><td>Mobile</td><td>" +
-              data.Data[0]["Mobile"] +
-              "</td></tr></td></tr><tr><td>Email</td><td>" +
-              data.Data[0]["MailId"] +
-              "</td></tr><tr><td>Confirmation Date</td><td>" +
-              data.Data[0]["ConfirmationDate"] +
-              "</td></tr><tr><td>Join Date</td><td>" +
-              data.Data[0]["JoinDate"] +
-              "</td></tr><tr><td>Termination Date</td><td>" +
-              data.Data[0]["TerminationDate"] +
-              "</td></tr><tr><td>Prohibition(Months)</td><td>" +
-              data.Data[0]["Prohibition"] +
+            "<tr><td>"+data.Data["Name"]+"</td>" +
+              "<td>"+data.Data.FirstName+"</td>" +
+              "<td>"+data.Data.Gender+"</td>" +
+              "<td>"+data.Data.Mobile +"</td>" +
+              "<td>"+data.Data.MailId+"</td>" +
+              "<td>"+data.Data.ConfirmationDate+"</td>" +
+              "<td>"+data.Data.JoinDate+"</td>" +
+              "<td>"+data.Data.TerminationDate+"</td>" +
+              "<td>"+data.Data.Prohibition+"</td>" +
+              "<td>"+data.Data.WifiName+"</td>" +
               "</td></tr>"
           );
         } else {

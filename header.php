@@ -1,14 +1,14 @@
-<?php 
-  session_start(); 
+<?php
+  session_start();
   if($_SESSION['id'] == "") {
     header("Location:index.php");
   }
 ?>
-<head>    
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta value="http://15.206.236.83/api/" id="website-url">
-    <!-- <meta value="http://localhost:3000/api/" id="website-url"> -->
+    <!--<meta value="http://15.206.236.83/api/" id="website-url"> -->
+     <meta value="http://localhost:3000/api/" id="website-url">
     <!-- <meta value="https://itfutrz-attendance-system.herokuapp.com/api/" id="website-url">     -->
     <meta value="<?php echo $_SESSION['id']; ?>" id="website-token">
     <meta http-equiv="x-ua-compatible" content="ie=edge" />

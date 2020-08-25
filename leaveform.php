@@ -27,8 +27,8 @@
                         <div class="input-group">
                           <select
                             class="form-control"
-                            id="subcompany"
-                            name="subcompany"
+                            id="companyname"
+                            name="companyname"
                           ></select>
                         </div>
                       </div>
@@ -50,8 +50,8 @@
                         <div class="input-group">
                           <select
                             class="form-control"
-                            id="subcompany"
-                            name="subcompany"
+                            id="employeename"
+                            name="employeename"
                           ></select>
                         </div>
 
@@ -63,13 +63,13 @@
                             <div class="input-group">
                               <select
                                 class="form-control"
-                                id="subcompany"
-                                name="subcompany"
+                                id="leavereason"
+                                name="leavereason"
                               ></select>
                             </div>
                           </div>
                         </div>
-                      </div>                      
+                      </div>
                     </div>
                     <!-- /.card-body -->
                     <center>
@@ -98,10 +98,6 @@
             </div>
             <!-- /.row -->
 
-
-
-
-
           </div>
                       <!-- /.container-fluid -->
         </div>
@@ -113,5 +109,6 @@
       </footer>
     </div>
     <?php include('script.php'); ?>
+    <script src="js/leaveform.js"></script>
   </body>
 </html>

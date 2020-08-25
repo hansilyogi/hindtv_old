@@ -35,8 +35,6 @@
                 <thead>
                   <tr>
                     <th>Name</th>
-                    <th>FirstName</th>
-                    <th>LastName</th>
                     <th>DOB</th>
                     <th>Mobile</th>
                     <th>Gender</th>
@@ -44,7 +42,8 @@
                     <th>ConfirmationDate</th>
                     <th>JoinDate</th>
                     <th>TerminationDate</th>
-                    <th>Prohibition</th>                    
+                    <th>Prohibition</th>
+                    <th>WifiName</th>
                   </tr>
                 </thead>
                   <tbody id="displaydata"></tbody>
@@ -61,7 +60,7 @@
       <footer class="main-footer">
         All rights reserved.
       </footer>
-    </div>        
+    </div>
     <?php include('script.php'); ?>
     <script src="js/singleemployee.js"></script>
   </body>

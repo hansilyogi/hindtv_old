@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  var id = $(location).attr("href").split("=")[1];
   loaddata();
   loadsubcompany();
   loadtiming();
@@ -61,84 +62,35 @@ $(document).ready(function () {
     $.ajax({
       type: "POST",
       url: $("#website-url").attr("value") + "employee",
-      data: { type: "getdata", token: $("#website-token").attr("value") },
-      dataType: "json",
-      cache: false,
-      beforeSend: function () {
-        $("#displaydata").html(
-          '<tr><td colspan="5" class="text-center font-weight-bold">Loading...</td></tr></center>'
-        );
-      },
-      success: function (data) {
-        if (data.isSuccess == true) {
-          $("#displaydata").html("");
-          for (i = 0; i < data.Data.length; i++) {
-            data.Data[i]["MailId"] =
-              data.Data[i]["MailId"] == undefined
-                ? "-"
-                : data.Data[i]["MailId"];
-            $("#displaydata").append(
-              "<tr><td>" +
-                data.Data[i]["Name"] +
-                "</td><td>" +
-                data.Data[i]["MailId"] +
-                "</td><td>" +
-                data.Data[i]["Mobile"] +
-                "</td><td>" +
-                '<a id="edit-data" href="employee.php?id=' +
-                data.Data[i]["_id"] +
-                '"><i class="fas fa-edit" aria-hidden="true"></i></a>' +
-                "</td><td>" +
-                "<a href=singleemployee.php?id=" +
-                data.Data[i]["_id"] +
-                ">View More</a></td></tr>"
-            );
-          }
-        } else {
-          $("#displaydata").html(
-            '<tr><td colspan="5" class="text-center font-weight-bold">' +
-              data.Message +
-              "</td></tr></center>"
-          );
-        }
-      },
-    });
-  }
-
-  $(document).on("click", "#edit-data", function (e) {
-    e.preventDefault();
-    var id = $(this).attr("href").split("=")[1];
-    $.ajax({
-      type: "POST",
-      url: $("#website-url").attr("value") + "employee",
       data: {
         type: "getemployee",
         id: id,
         token: $("#website-token").attr("value"),
       },
-      dataType: "json",
-      cache: false,
       success: function (data) {
         if (data.isSuccess == true) {
           UPDATEID = id;
-          $("#firstname").val(data.Data[0].FirstName);
-          $("#middlename").val(data.Data[0].MiddleName);
-          $("#lastname").val(data.Data[0].LastName);
-          $("#gender").val(data.Data[0].Gender);
-          $("#dob").val(data.Data[0].DOB);
-          $("#mobile").val(data.Data[0].Mobile);
-          $("#mail").val(data.Data[0].Mail);
-          $("#married").val(data.Data[0].MartialStatus);
-          $("#joindate").val(data.Data[0].JoinDate);
-          $("#subcompany").val(data.Data[0].SubCompany);
-          $("#confirmationdate").val(data.Data[0].ConfirmationDate);
-          $("#terminationdate").val(data.Data[0].TerminationDate);
-          $("#prohibition").val(data.Data[0].Prohibition);
-          $("#department").val(data.Data[0].Department);
-          $("#designation").val(data.Data[0].Designation);
-          $("#idtype").val(data.Data[0].IDtype);
-          $("#idnumber").val(data.Data[0].IDNumber);
-          $("#timing").val(data.Data[0].Timing);
+          $("#firstname").val(data.Data.FirstName);
+          $("#middlename").val(data.Data.MiddleName);
+          $("#lastname").val(data.Data.LastName);
+          $("#gender").val(data.Data.Gender);
+          $("#dob").val(data.Data.DOB);
+          $("#mobile").val(data.Data.Mobile);
+          $("#mail").val(data.Data.Mail);
+          $("#married").val(data.Data.MartialStatus);
+          $("#joindate").val(data.Data.JoinDate);
+          $("#subcompany").val(data.Data.SubCompany);
+          $("#confirmationdate").val(data.Data.ConfirmationDate);
+          $("#terminationdate").val(data.Data.TerminationDate);
+          $("#prohibition").val(data.Data.Prohibition);
+          $("#department").val(data.Data.Department);
+          $("#designation").val(data.Data.Designation);
+          $("#idtype").val(data.Data.Idtype);
+          $("#idnumber").val(data.Data.IDNumber);
+          $("#wifiname").val(data.Data.WifiName);
+          $("#weekdayname").val(data.Data.WeekName);
+          $("#numofday").val(data.Data.WeekDay);
+          $("#timing").val(data.Data.Timing);
           window.scrollTo(0, 0);
           $("#btn-submit-on").html(
             "<button type='submit' class='btn btn-success' id='btn-update'>Update</button>" +
@@ -149,7 +101,53 @@ $(document).ready(function () {
         }
       },
     });
-  });
+    // $.ajax({
+    //   type: "POST",
+    //   url: $("#website-url").attr("value") + "employee",
+    //   data: { type: "getdata", token: $("#website-token").attr("value") },
+    //   dataType: "json",
+    //   cache: false,
+    //   beforeSend: function () {
+    //     $("#displaydata").html(
+    //       '<tr><td colspan="5" class="text-center font-weight-bold">Loading...</td></tr></center>'
+    //     );
+    //   },
+    //   success: function (data) {
+    //     if (data.isSuccess == true) {
+    //       $("#displaydata").html("");
+    //       for (i = 0; i < data.Data.length; i++) {
+    //         data.Data[i]["MailId"] =
+    //           data.Data[i]["MailId"] == undefined
+    //             ? "-"
+    //             : data.Data[i]["MailId"];
+    //         $("#displaydata").append(
+    //           "<tr><td>" +
+    //             data.Data[i]["Name"] +
+    //             "</td><td>" +
+    //             data.Data[i]["MailId"] +
+    //             "</td><td>" +
+    //             data.Data[i]["Mobile"] +
+    //             "</td><td>" +
+    //             '<a id="edit-data" href="employee.php?id=' +
+    //             data.Data[i]["_id"] +
+    //             '"><i class="fas fa-edit" aria-hidden="true"></i></a>' +
+    //             "</td><td>" +
+    //             "<a href=singleemployee.php?id=" +
+    //             data.Data[i]["_id"] +
+    //             ">View More</a></td></tr>"
+    //         );
+    //       }
+    //     } else {
+    //       $("#displaydata").html(
+    //         '<tr><td colspan="5" class="text-center font-weight-bold">' +
+    //           data.Message +
+    //           "</td></tr></center>"
+    //       );
+    //     }
+    //   },
+    // });
+  }
+
 
   $(document).on("click", "#btn-cancel", function (e) {
     e.preventDefault();
@@ -189,6 +187,9 @@ $(document).ready(function () {
           designation: $("#designation").val(),
           idtype: $("#idtype").val(),
           idnumber: $("#idnumber").val(),
+          wifiname: $("#wifiname").val(),
+          weekdayname: $("#weekdayname").val(),
+          numofday: $("#numofday").val(),
           timing: $("#timing").val(),
           token: $("#website-token").attr("value"),
         },
@@ -258,7 +259,10 @@ $(document).ready(function () {
           idtype: $("#idtype").val(),
           idnumber: $("#idnumber").val(),
           timing: $("#timing").val(),
-          token: $("#website-token").attr("value"),
+          wifiname: $("#wifiname").val(),
+          weekdayname: $("#weekdayname").val(),
+          numofday: $("#numofday").val(),
+          token: $("#website-token").attr("value")
         },
         dataType: "json",
         cache: false,

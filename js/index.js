@@ -15,8 +15,6 @@ $(document).ready(function () {
           mobile: $("#mobile").val(),
           password: $("#password").val(),
         },
-        dataType: "json",
-        cache: false,
         beforeSend: function () {
           $("#btn-box").html(
             '<button type="submit" class="btn btn-primary btn-block"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Signing In... </button>'
@@ -53,8 +51,6 @@ $(document).ready(function () {
       data: {
         id: id,
       },
-      dataType: "json",
-      cache: false,
       success: function () {},
     });
   }

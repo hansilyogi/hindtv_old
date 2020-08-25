@@ -21,8 +21,8 @@
         <!-- /.content-header -->
 
         <!-- Main content -->
-        <div class="content">        
-          
+        <div class="content">
+
 
           <!-- /.container-fluid -->
           <div class="container-fluid">
@@ -38,7 +38,7 @@
                     <th>Mail</th>
                     <th>Mobile</th>
                     <th>Action</th>
-                    <th>View More</th>                    
+                    <th>View More</th>
                   </tr>
                 </thead>
                 <tbody id="displaydata"></tbody>
@@ -53,9 +53,9 @@
       <footer class="main-footer">
         All rights reserved.
       </footer>
-    </div>        
+    </div>
     <?php include('script.php'); ?>
-    <script src="js/employee.js"></script>
+    <script src="js/employeeview.js"></script>
     <script src="plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function () {

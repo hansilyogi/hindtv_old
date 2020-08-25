@@ -318,7 +318,7 @@
                         </div>
 
                         <div class="form-group col-md-3">
-                          <label for="weekdayname">Week Name</label>
+                          <label for="weekdayname">Week of Days</label>
                           <div class="input-group">
                             <select
                               class="form-control"
@@ -332,13 +332,12 @@
                               <option value="Thursday">Thursday</option>
                               <option value="Friday">Friday</option>
                               <option value="Saturday">Saturday</option>
-
                             </select>
                           </div>
                         </div>
 
                         <div class="form-group col-md-3">
-                          <label for="numofday">Number of Day</label>
+                          <label for="numofday">Number of Leave</label>
                           <div class="input-group">
                             <select
                               class="form-control"
@@ -353,7 +352,6 @@
                               <option value="5">5</option>
                               <option value="6">6</option>
                               <option value="7">7</option>
-
                             </select>
                           </div>
                         </div>
