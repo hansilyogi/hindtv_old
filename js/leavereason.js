@@ -1,12 +1,11 @@
 $(document).ready(function () {
-  var URL = "http://localhost:3000/api/";
   var UPDATEID;
   loaddata();
 
   function loaddata() {
     $.ajax({
       type: "POST",
-      url: URL + "leavereason",
+      url: $("#website-url").attr("value") + "leavereason",
       data: { type: "getalldata",token:$("#website-token").attr("value")},
       beforeSend: function () {
         $("#displaydata").html(
@@ -61,7 +60,7 @@ $(document).ready(function () {
     e.preventDefault();
     $.ajax({
       type: "POST",
-      url:URL+ "leavereason",
+      url:$("#website-url").attr("value")+ "leavereason",
       data: {
         type: "insert",
         name: $("#reasonname").val(),
@@ -110,7 +109,7 @@ $(document).ready(function () {
       }
       $.ajax({
         type: "POST",
-        url: URL + "leavereason",
+        url: $("#website-url").attr("value") + "leavereason",
         data: {
           type: "statusupdate",
           id: dataId,
@@ -142,7 +141,7 @@ $(document).ready(function () {
       UPDATEID = id;
       $.ajax({
         type: "POST",
-        url: URL + "leavereason",
+        url: $("#website-url").attr("value") + "leavereason",
         data: {
           type: "getdata",
           id: id,
@@ -170,7 +169,7 @@ $(document).ready(function () {
         if (val == 1) {
           $.ajax({
             type: "POST",
-            url: URL + "leavereason",
+            url: $("#website-url").attr("value") + "leavereason",
             data: {
               type: "update",
               id: UPDATEID,
