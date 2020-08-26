@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  var URL = "http://localhost:3000/api/";
+  //display data in single employee data
   var id = $(location).attr("href").split("=")[1];
   if (id != undefined) {
     $.ajax({
@@ -10,7 +10,7 @@ $(document).ready(function () {
         if (data.isSuccess == true) {
           $("#displaydata").html(
             "<tr><td>"+data.Data["Name"]+"</td>" +
-              "<td>"+data.Data.FirstName+"</td>" +
+              "<td>"+data.Data.DOB+"</td>" +
               "<td>"+data.Data.Gender+"</td>" +
               "<td>"+data.Data.Mobile +"</td>" +
               "<td>"+data.Data.MailId+"</td>" +
@@ -19,6 +19,8 @@ $(document).ready(function () {
               "<td>"+data.Data.TerminationDate+"</td>" +
               "<td>"+data.Data.Prohibition+"</td>" +
               "<td>"+data.Data.WifiName+"</td>" +
+              "<a href = "+ $("#website-url").attr("value") +"uploads/" +
+              "<td>"+ data.Data.ProfileImage + " target=_blank>View Image</a>" + "</td>"+
               "</td></tr>"
           );
         } else {
@@ -30,3 +32,4 @@ $(document).ready(function () {
     alert("Invalid Id");
   }
 });
+  

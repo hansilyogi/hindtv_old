@@ -91,6 +91,8 @@ $(document).ready(function () {
           $("#weekdayname").val(data.Data.WeekName);
           $("#numofday").val(data.Data.WeekDay);
           $("#timing").val(data.Data.Timing);
+          $("#employeeimage").val(data.Data.ProfileImage);
+          $("#employeecertficate").val(data.Data.CertificateImage);
           window.scrollTo(0, 0);
           $("#btn-submit-on").html(
             "<button type='submit' class='btn btn-success' id='btn-update'>Update</button>" +
@@ -191,6 +193,8 @@ $(document).ready(function () {
           weekdayname: $("#weekdayname").val(),
           numofday: $("#numofday").val(),
           timing: $("#timing").val(),
+          employeeimage:$("#employeeimage").val(),
+          employeecertificate:$("#employeecertficate").val(),
           token: $("#website-token").attr("value"),
         },
         dataType: "json",
@@ -262,6 +266,8 @@ $(document).ready(function () {
           wifiname: $("#wifiname").val(),
           weekdayname: $("#weekdayname").val(),
           numofday: $("#numofday").val(),
+          employeeimage:$("#employeeimage").val(),
+          employeecertificate:$("#employeecertficate").val(),
           token: $("#website-token").attr("value")
         },
         dataType: "json",

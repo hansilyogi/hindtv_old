@@ -316,7 +316,7 @@
                           placeholder="Wifi Name"
                         />
                         </div>
-
+                         <!--Name of days Drop Down-->
                         <div class="form-group col-md-3">
                           <label for="weekdayname">Week of Days</label>
                           <div class="input-group">
@@ -335,7 +335,8 @@
                             </select>
                           </div>
                         </div>
-
+                         <!--End Name of days Drop Down-->
+                        <!--Number of Leave Drop Down-->
                         <div class="form-group col-md-3">
                           <label for="numofday">Number of Leave</label>
                           <div class="input-group">
@@ -355,8 +356,36 @@
                             </select>
                           </div>
                         </div>
+                        <!--End Number of Leave Drop Down-->
 
-
+                        <!--Employee Profile Input File-->
+                        <div class="form-group  col-md-3">
+                          <label for="employeeimage">Employee's Image</label>
+                          <div class="input-group">
+                            <div class="custom-file">
+                              <input type="file" 
+                              class="custom-file-input" 
+                              id="employeeimage" 
+                              name="employeeimage"   
+                              accept=".png, .jpg, .jpeg">
+                              <label class="custom-file-label" for="employeeimage">Choose file</label>
+                            </div>
+                          </div>
+                        </div>
+                        <!--Employee Certificate Input File-->
+                        <div class="form-group  col-md-3">
+                          <label for="employeecertficate">Employee's Living Certificate</label>
+                          <div class="input-group">
+                            <div class="custom-file">
+                              <input type="file" 
+                              class="custom-file-input" 
+                              id="employeecertficate" 
+                              name="employeecertficate"
+                              accept=".png, .jpg, .jpeg">
+                              <label class="custom-file-label" for="employeecertficate">Choose file</label>
+                            </div>
+                          </div>
+                        </div>
                       </div>
 
                     </div>

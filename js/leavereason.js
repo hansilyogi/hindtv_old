@@ -56,7 +56,7 @@ $(document).ready(function () {
     });
   }
 
-  $(document).on("click", "#btn-submit", function (e) {
+  $(document).on("click","#btn-submit", function (e) {
     e.preventDefault();
     $.ajax({
       type: "POST",
@@ -76,8 +76,8 @@ $(document).ready(function () {
         );
       },
       success: function (data) {
+        loaddata();
         if (data.isSuccess == true) {
-          $("form")[0].reset();
           $("#staticmessage")
             .removeClass("text-success text-danger")
             .addClass("text-success font-weight-bold");
@@ -87,7 +87,6 @@ $(document).ready(function () {
             $("#staticmessage").removeAttr("style");
             $("#staticmessage");
           });
-          loaddata();
         }
       },
       complete: function () {
@@ -99,122 +98,121 @@ $(document).ready(function () {
     });
   });
 
-
-    $(document).on("click", ".status-update", function (e) {
-      var dataId = $(this).attr("data-id");
-      if ($("#status-update-" + dataId).hasClass("fa-toggle-off")) {
-        sts = true; /*It is used for unblocking the block thought*/
-      } else {
-        sts = false; /*It is used for blocking the unblock thought*/
-      }
-      $.ajax({
-        type: "POST",
-        url: $("#website-url").attr("value") + "leavereason",
-        data: {
-          type: "statusupdate",
-          id: dataId,
-          sts: sts,
-          token: $("#website-token").attr("value"),
-        },
-        success: function (data) {
-          if (data.isSuccess == true) {
-            toastr.success(data.Message);
-            if ($("#status-update-" + dataId).hasClass("fa-toggle-off")) {
-              $("#status-update-" + dataId)
-                .removeClass("fa-toggle-off text-danger")
-                .addClass("fa-toggle-on text-success");
-            } else {
-              $("#status-update-" + dataId)
-                .removeClass("fa-toggle-on text-success")
-                .addClass("fa-toggle-off text-danger");
-            }
+  $(document).on("click",".status-update", function (e) {
+    var dataId = $(this).attr("data-id");
+    if ($("#status-update-" + dataId).hasClass("fa-toggle-off")) {
+      sts = true; /*It is used for unblocking the block thought*/
+    } else {
+      sts = false; /*It is used for blocking the unblock thought*/
+    }
+    $.ajax({
+      type: "POST",
+      url: $("#website-url").attr("value") + "leavereason",
+      data: {
+        type: "statusupdate",
+        id: dataId,
+        sts: sts,
+        token: $("#website-token").attr("value"),
+      },
+      success: function (data) {
+        if (data.isSuccess == true) {
+          toastr.success(data.Message);
+          if ($("#status-update-" + dataId).hasClass("fa-toggle-off")) {
+            $("#status-update-" + dataId)
+              .removeClass("fa-toggle-off text-danger")
+              .addClass("fa-toggle-on text-success");
           } else {
-            toastr.error(data.Message);
+            $("#status-update-" + dataId)
+              .removeClass("fa-toggle-on text-success")
+              .addClass("fa-toggle-off text-danger");
           }
-        },
-      });
+        } else {
+          toastr.error(data.Message);
+        }
+      },
     });
+  });
 
-    $(document).on("click", "#edit-reason", function (e) {
-      e.preventDefault();
-      var id = $(this).attr("href").split("=")[1];
-      UPDATEID = id;
+  $(document).on("click","#edit-reason", function (e) {
+    e.preventDefault();
+    var id = $(this).attr("href").split("=")[1];
+    UPDATEID = id;
+    $.ajax({
+      type: "POST",
+      url: $("#website-url").attr("value") + "leavereason",
+      data: {
+        type: "getdata",
+        id: id,
+        token: $("#website-token").attr("value"),
+      },
+      dataType: "json",
+      cache: false,
+      success: function (data) {
+        if (data.isSuccess == true) {
+          $("#reasonname").val(data.Data.MasterName);
+          $("#btn-submit-on").html(
+            '<button type="submit" class="btn btn-success" id="btn-update">Update</button>' +
+              "<button type='submit' class='btn btn-danger ml-1' id='btn-cancel'>Cancel</button>"
+          );
+        } else {
+          toastr.error(data.Message);
+        }
+      },
+    });
+  });
+
+  $(document).on("click","#btn-update", function (e) {
+    e.preventDefault();
+    val = validation();
+    if (val == 1) {
       $.ajax({
         type: "POST",
         url: $("#website-url").attr("value") + "leavereason",
         data: {
-          type: "getdata",
-          id: id,
+          type: "update",
+          id: UPDATEID,
+          name: $("#reasonname").val(),
           token: $("#website-token").attr("value"),
         },
         dataType: "json",
         cache: false,
+        beforeSend: function () {
+          $("#btn-submit-on").html(
+            '<button class="btn btn-success" type="button">\
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>\
+                Loading...\
+            </button>'
+          );
+        },
         success: function (data) {
           if (data.isSuccess == true) {
-            $("#reasonname").val(data.Data.MasterName);
+            loaddata();
+            $("form")[0].reset();
+            toastr.success(data.Message);
             $("#btn-submit-on").html(
-              '<button type="submit" class="btn btn-success" id="btn-update">Update</button>' +
+              '<button type="submit" class="btn btn-success" id="btn-submit">Submit</button>' +
                 "<button type='submit' class='btn btn-danger ml-1' id='btn-cancel'>Cancel</button>"
             );
           } else {
             toastr.error(data.Message);
+            $("#btn-submit-on").html(
+              '<button type="submit" class="btn btn-success" id="btn-update">Update</button>' +
+                "<button type='submit' class='btn btn-danger ml-1' id='btn-cancel'>Cancel</button>"
+            );
           }
         },
       });
-    });
+    }
+  });
 
-      $(document).on("click", "#btn-update", function (e) {
-        e.preventDefault();
-        val = validation();
-        if (val == 1) {
-          $.ajax({
-            type: "POST",
-            url: $("#website-url").attr("value") + "leavereason",
-            data: {
-              type: "update",
-              id: UPDATEID,
-              name: $("#reasonname").val(),
-              token: $("#website-token").attr("value"),
-            },
-            dataType: "json",
-            cache: false,
-            beforeSend: function () {
-              $("#btn-submit-on").html(
-                '<button class="btn btn-success" type="button">\
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>\
-                    Loading...\
-                </button>'
-              );
-            },
-            success: function (data) {
-              if (data.isSuccess == true) {
-                loaddata();
-                $("form")[0].reset();
-                toastr.success(data.Message);
-                $("#btn-submit-on").html(
-                  '<button type="submit" class="btn btn-success" id="btn-submit">Submit</button>' +
-                    "<button type='submit' class='btn btn-danger ml-1' id='btn-cancel'>Cancel</button>"
-                );
-              } else {
-                toastr.error(data.Message);
-                $("#btn-submit-on").html(
-                  '<button type="submit" class="btn btn-success" id="btn-update">Update</button>' +
-                    "<button type='submit' class='btn btn-danger ml-1' id='btn-cancel'>Cancel</button>"
-                );
-              }
-            },
-          });
-        }
-      });
-
-      function validation() {
-        val = 1;
-        $("#errorquote").html("");
-        if ($("#quote").val() == "") {
-          $("#errorquote").html("Quote can't be empty");
-          val = 0;
-        }
-        return val;
-      }
+  function validation() {
+    val = 1;
+    $("#errorquote").html("");
+    if ($("#quote").val() == "") {
+      $("#errorquote").html("Quote can't be empty");
+      val = 0;
+    }
+    return val;
+  }
 
 });

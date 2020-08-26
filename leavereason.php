@@ -22,7 +22,7 @@
                     <div class="card-body row">
 
                       <div class="form-group col-md-4">
-                        <label for="reasonname">Name</label>
+                        <label for="reasonname">Reason</label>
                         <input
                           type="text"
                           class="form-control"

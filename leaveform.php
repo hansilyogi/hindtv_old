@@ -22,6 +22,7 @@
                   </div>
                   <form role="form">
                     <div class="card-body row">
+
                       <div class="form-group col-md-3">
                         <label for="companyname">Company Name</label>
                         <div class="input-group">
@@ -32,21 +33,20 @@
                           ></select>
                         </div>
                       </div>
-                      <div class="form-group col-md-3">
-                        <label for="companyaddress">Sub Company Name</label>
 
+                      <div class="form-group col-md-3">
+                        <label for="subcompanyname">Sub Company Name</label>
                         <div class="input-group">
                           <select
                             class="form-control"
-                            id="subcompany"
-                            name="subcompany"
+                            id="subcompanyname"
+                            name="subcompanyname"
                           ></select>
                         </div>
-
                       </div>
-                      <div class="form-group col-md-3">
-                        <label for="ccpn">Employee Name</label>
 
+                      <div class="form-group col-md-3">
+                        <label for="employeename">Employee Name</label>
                         <div class="input-group">
                           <select
                             class="form-control"
@@ -54,21 +54,38 @@
                             name="employeename"
                           ></select>
                         </div>
-
                       </div>
+
                       <div class="form-group col-md-3">
-                        <label for="ccpn">Description</label>
+                        <label for="leavereason">Reason</label>
                         <div class="input-group">
                           <div class="custom-file">
                             <div class="input-group">
                               <select
                                 class="form-control"
-                                id="leavereason"
-                                name="leavereason"
+                                id="leavereasonname"
+                                name="leavereasonname"
                               ></select>
                             </div>
                           </div>
                         </div>
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <label>Date</label>
+                        <input type="date" class="form-control" id="ldate" name="ldate">
+                      </div>
+                      
+                      <div class="form-group col-md-6">
+                      <label for="description">Description</label>
+                      <textarea
+                          type="textarea"
+                          class="form-control"
+                          id="description"
+                          name="description"
+                          placeholder="Description"
+                          rows="3"
+                        ></textarea>
                       </div>
                     </div>
                     <!-- /.card-body -->

@@ -36,14 +36,15 @@
                   <tr>
                     <th>Name</th>
                     <th>DOB</th>
-                    <th>Mobile</th>
                     <th>Gender</th>
+                    <th>Mobile</th>
                     <th>MailId</th>
                     <th>ConfirmationDate</th>
                     <th>JoinDate</th>
                     <th>TerminationDate</th>
                     <th>Prohibition</th>
                     <th>WifiName</th>
+                    <th>ProfileImage</th>
                   </tr>
                 </thead>
                   <tbody id="displaydata"></tbody>
