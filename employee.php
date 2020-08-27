@@ -379,7 +379,8 @@
                             class="custom-file-input" 
                             id="employeeimage" 
                             name="employeeimage"   
-                            accept=".png, .jpg, .jpeg">
+                            accept=".png, .jpg, .jpeg"
+                            required>
                             <label class="custom-file-label" for="employeeimage">Choose file</label>
                           </div>
                         </div>
@@ -393,7 +394,8 @@
                               class="custom-file-input" 
                               id="employeedocument" 
                               name="employeedocument"
-                              accept=".png, .jpg, .jpeg">
+                              accept=".png, .jpg, .jpeg"
+                              required>
                               <label class="custom-file-label" for="employeedocument">Choose file</label>
                           </div>
                        </div> 
