@@ -62,7 +62,7 @@
                   <div class="card-header">
                     <h3 class="card-title">Add Employee</h3>
                   </div>
-                  <form role="form" id="employeedata">
+                  <form  id="employeedata" enctype="multipart/form-data"> 
                     <div class="card-body row">
                       <div class="form-group col-md-3">
                         <label for="firstname">First Name</label>
@@ -219,7 +219,7 @@
                         <label id="errorTerminationDate"></label>
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="prohibition">Prohibition</label>
+                        <label for="prohibition">Probation Period</label>
                         <input
                           type="text"
                           class="form-control"
@@ -315,78 +315,184 @@
                           name="wifiname"
                           placeholder="Wifi Name"
                         />
-                        </div>
+                      </div>
                          <!--Name of days Drop Down-->
-                        <div class="form-group col-md-3">
-                          <label for="weekdayname">Week of Days</label>
-                          <div class="input-group">
-                            <select
-                              class="form-control"
-                              id="weekdayname"
-                              name="weekdayname"
-                            >
-                              <option value="Sunday">Sunday</option>
-                              <option value="Monday">Monday</option>
-                              <option value="Tuesday">Tuesday</option>
-                              <option value="Wednesday">Wednesday</option>
-                              <option value="Thursday">Thursday</option>
-                              <option value="Friday">Friday</option>
-                              <option value="Saturday">Saturday</option>
-                            </select>
-                          </div>
+                      <div class="form-group col-md-3">
+                        <label for="weekdayname">Week of Days</label>
+                        <div class="input-group">
+                          <select
+                            class="form-control"
+                            id="weekdayname"
+                            name="weekdayname"
+                          >
+                            <option value="Sunday">Sunday</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                          </select>
                         </div>
+                      </div>
                          <!--End Name of days Drop Down-->
                         <!--Number of Leave Drop Down-->
-                        <div class="form-group col-md-3">
-                          <label for="numofday">Number of Leave</label>
-                          <div class="input-group">
-                            <select
-                              class="form-control"
-                              id="numofday"
-                              name="numofday"
-                            >
-                              <option value="0">0</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                              <option value="7">7</option>
-                            </select>
-                          </div>
+                      <div class="form-group col-md-3">
+                        <label for="numofday">Number of Leave</label>
+                        <div class="input-group">
+                          <select
+                            class="form-control"
+                            id="numofday"
+                            name="numofday"
+                          >
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                          </select>
                         </div>
+                      </div>
                         <!--End Number of Leave Drop Down-->
 
-                        <!--Employee Profile Input File-->
-                        <div class="form-group  col-md-3">
-                          <label for="employeeimage">Employee's Image</label>
-                          <div class="input-group">
-                            <div class="custom-file">
-                              <input type="file" 
-                              class="custom-file-input" 
-                              id="employeeimage" 
-                              name="employeeimage"   
-                              accept=".png, .jpg, .jpeg">
-                              <label class="custom-file-label" for="employeeimage">Choose file</label>
-                            </div>
-                          </div>
+                      <div class="form-group  col-md-3">
+                        <label for="gpstrack">GPS Track </label>
+                        <div>
+                          <label class="btn btn-default ml-3">
+                            <input type="radio" id="gpstrack1" name="gpstrack" value=1> Yes <br>
+                          </label>
+                          <label class="btn btn-default mr-3">
+                            <input type="radio" id="gpstrack2" name="gpstrack" value=0> No <br>
+                          </label>
                         </div>
-                        <!--Employee Certificate Input File-->
-                        <div class="form-group  col-md-3">
-                          <label for="employeecertficate">Employee's Living Certificate</label>
-                          <div class="input-group">
-                            <div class="custom-file">
-                              <input type="file" 
-                              class="custom-file-input" 
-                              id="employeecertficate" 
-                              name="employeecertficate"
-                              accept=".png, .jpg, .jpeg">
-                              <label class="custom-file-label" for="employeecertficate">Choose file</label>
-                            </div>
+                      </div>
+
+                        <!--Employee Profile Input File-->
+                      <div class="form-group  col-md-3">
+                        <label for="employeeimage">Employee's Image</label>
+                        <div class="input-group">
+                          <div class="custom-file">
+                            <input type="file" 
+                            class="custom-file-input" 
+                            id="employeeimage" 
+                            name="employeeimage"   
+                            accept=".png, .jpg, .jpeg">
+                            <label class="custom-file-label" for="employeeimage">Choose file</label>
                           </div>
                         </div>
                       </div>
+                        <!--Employee Certificate Input File-->
+                        <div class="form-group  col-md-3">
+                          <label for="employeedocument">Document</label>
+                          <div class="input-group">
+                           <div class="custom-file">
+                              <input type="file" 
+                              class="custom-file-input" 
+                              id="employeedocument" 
+                              name="employeedocument"
+                              accept=".png, .jpg, .jpeg">
+                              <label class="custom-file-label" for="employeedocument">Choose file</label>
+                          </div>
+                       </div> 
+                       </div>
+                       <!--<div> <input type="file" 
+                              id="employeeimage" 
+                              name="employeeimage"
+                              accept=".png, .jpg, .jpeg" 
+                              value=""></div>
+                      <div><input type="file" 
+                              id="employeedocument" 
+                              name="employeedocument"
+                              accept=".png, .jpg, .jpeg" 
+                              value=""></div>-->
+                              
+                      <div class="form-group col-md-12 mt-3 rounded">
+                        <h6><b>Bank Details</b></h6>
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <label for="accountname">Account's Name</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="accountname"
+                          name="accountname"
+                          placeholder="Account Name"
+                        />
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <label for="bankname">Bank Name</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="bankname"
+                          name="bankname"
+                          placeholder="Bank Name"
+                        />
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <label for="accountnumber">Account Number</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="accountnumber"
+                          name="accountnumber"
+                          placeholder="Account Number"
+                        />
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <label for="ifsccode">IFSC Code</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="ifsccode"
+                          name="ifsccode"
+                          placeholder="IFSC Code"
+                        />
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <label for="branchname">Branch Name</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="branchname"
+                          name="branchname"
+                          placeholder="Branch Name"
+                        />
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <label for="micrcode">MICR Code</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="micrcode"
+                          name="micrcode"
+                          placeholder="MICR Code"
+                        />
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <label for="upicode">UPI</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="upicode"
+                          name="upicode"
+                          placeholder="UPI"
+                        />
+                      </div>
+
+
+                    </div>
+                    </div>
 
                     </div>
                     <!-- /.card-body -->

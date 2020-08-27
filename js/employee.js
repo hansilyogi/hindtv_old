@@ -91,13 +91,26 @@ $(document).ready(function () {
           $("#weekdayname").val(data.Data.WeekName);
           $("#numofday").val(data.Data.WeekDay);
           $("#timing").val(data.Data.Timing);
-          $("#employeeimage").val(data.Data.ProfileImage);
-          $("#employeecertficate").val(data.Data.CertificateImage);
+          if(data.Data.GpsTrack == true){
+            $("#gpstrack1").prop('checked',true);
+          }else{
+            $("#gpstrack2").prop('checked',true);
+          }
+          
+          $("#accountname").val(data.Data.AccountName);
+          $("#bankname").val(data.Data.BankName);
+          $("#accountnumber").val(data.Data.AccountNumber);
+          $("#ifsccode").val(data.Data.IFSCCode);
+          $("#branchname").val(data.Data.BranchName);
+          $("#micrcode").val(data.Data.MICRCode);
+          $("#upicode").val(data.Data.UPICode);
+          //$("#employeeimage").val(data.Data.ProfileImage);
+          //$("#employeedocument").val(data.Data.CertificateImage);
           window.scrollTo(0, 0);
-          $("#btn-submit-on").html(
+          /*$("#btn-submit-on").html(
             "<button type='submit' class='btn btn-success' id='btn-update'>Update</button>" +
               "<button type='submit' class='btn btn-danger ml-2' id='btn-cancel'>Cancel</button>"
-          );
+          );*/
         } else {
           toastr.error(data.Message);
         }
@@ -164,12 +177,16 @@ $(document).ready(function () {
 
   $(document).on("click", "#btn-update", function (e) {
     e.preventDefault();
+    var formData = new FormData(this);
+    formData.append('type', 'updated');
+    formData.append('token',$("#website-token").attr("value"));   
+    formData.append('id',UPDATEID);
     val = validation();
     if (val == 1) {
       $.ajax({
         type: "POST",
         url: $("#website-url").attr("value") + "employee",
-        data: {
+       /* data: {
           type: "update",
           id: UPDATEID,
           firstname: $("#firstname").val(),
@@ -193,11 +210,14 @@ $(document).ready(function () {
           weekdayname: $("#weekdayname").val(),
           numofday: $("#numofday").val(),
           timing: $("#timing").val(),
-          employeeimage:$("#employeeimage").val(),
-          employeecertificate:$("#employeecertficate").val(),
+          
+    
+          //employeeimage:$("#employeeimage")[0].files[0],
+          //employeedocument:$("#employeedocument")[0].files[0],
           token: $("#website-token").attr("value"),
-        },
-        dataType: "json",
+        },*/
+        data: formData,
+        dataType: "application/json",
         cache: false,
         beforeSend: function () {
           $("#btn-submit-on").html(
@@ -235,16 +255,19 @@ $(document).ready(function () {
       });
     }
   });
-
+/*
   $(document).on("click", "#btn-submit", function (e) {
+    var formData = new FormData(this);
+    formData.append('type', 'insert');
+    formData.append('token',$("#website-token").attr("value"));
     e.preventDefault();
     val = validation();
     if (val == 1) {
       $.ajax({
         type: "POST",
         url: $("#website-url").attr("value") + "employee",
+          /*type: "insert",
         data: {
-          type: "insert",
           firstname: $("#firstname").val(),
           middlename: $("#middlename").val(),
           lastname: $("#lastname").val(),
@@ -266,10 +289,11 @@ $(document).ready(function () {
           wifiname: $("#wifiname").val(),
           weekdayname: $("#weekdayname").val(),
           numofday: $("#numofday").val(),
-          employeeimage:$("#employeeimage").val(),
-          employeecertificate:$("#employeecertficate").val(),
+          employeeimage:$("#employeeimage").val(), //$('input[type=file]')[0].files[0])
+          employeedocument:$("#employeedocument").val(),
           token: $("#website-token").attr("value")
         },
+        data: formData,
         dataType: "json",
         cache: false,
         beforeSend: function () {
@@ -305,7 +329,7 @@ $(document).ready(function () {
         },
       });
     }
-  });
+  });*/
 
   function validation() {
     val = 1;
@@ -397,6 +421,53 @@ $(document).ready(function () {
         $("#btn-upload-on").html(
           '<div class="form-group ml-1"><button type="submit" class="btn btn-primary" id="uploadexcelsheet">Upload</button></div><div class="form-group ml-3"><button type="submit" class="btn btn-primary" id="removeexcelsheet">Cancel</button></div>'
         );
+      },
+    });
+  });
+
+  $('#employeedata').submit(function (e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+    if( id == undefined ){
+      formData.append('type', 'insert');
+      console.log("insert");
+    }
+    else{
+      formData.append('type','update');
+      formData.append('id',UPDATEID);
+      console.log("updated");
+    }
+    formData.append('token',$("#website-token").attr("value"));
+
+    $.ajax({
+      type: "POST",
+      url: $("#website-url").attr("value") + "employee",
+      data: formData,
+      dataType: "application/json",
+      cache: false,
+      contentType: false,
+      processData: false,
+      beforeSend: function () {
+        $("#btn-submit").html(
+          '<button class="btn btn-primary float-right" type="button">\
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>\
+                                Loading...\
+                                </button>'
+        );
+      },
+      success: function (data) {
+        if (data.isSuccess == true) {
+          toastr.success(data.Message);
+        } else {
+          toastr.error(data.Message);
+        }
+      },
+      complete: function () {
+       console.log("uploaded");
+       $("#btn-submit-on").html(
+        "<button type='submit' class='btn btn-success' id='btn-submit'>Submit</button>" +
+          "<button type='submit' class='btn btn-danger ml-2' id='btn-cancel'>Cancel</button>"
+      );
       },
     });
   });
