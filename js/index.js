@@ -22,12 +22,19 @@ $(document).ready(function() {
                 },
                 success: function(data) {
                     if (data.isSuccess == true) {
-                        sessionready(data.Data[0]._id);
-                        alert(data.Data[0]._id);
-                        $(location).attr(
-                            "href",
-                            URL + "dashboard.php"
-                        );
+                        // sessionready(data.Data[0]._id);
+                        // alert(data.Data[0]._id);
+                        // $(location).attr(
+                        //     "href",
+                        //     URL + "dashboard.php"
+                        // );
+                        $.post(URL + "session.php", { id: data.Data[0]._id })
+                            .done(function(data) {
+                                $(location).attr(
+                                    "href",
+                                    URL + "dashboard.php"
+                                );
+                            });
                     } else {
                         if (data.Data == "invalidtext") {
                             $("#passwordError").html(data.Message);
@@ -45,18 +52,18 @@ $(document).ready(function() {
         }
     });
 
-    function sessionready(id) {
-        $.ajax({
-            type: "POST",
-            url: URL + "session.php",
-            data: {
-                id: id,
-            },
-            success: function(data) {
-                alert(JSON.stringify(data));
-            },
-        });
-    }
+    // function sessionready(id) {
+    //     $.ajax({
+    //         type: "POST",
+    //         url: URL + "session.php",
+    //         data: {
+    //             id: id,
+    //         },
+    //         success: function(data) {
+    //             //alert(JSON.stringify(data));
+    //         },
+    //     });
+    // }
 
     function validation() {
         val = 1;
