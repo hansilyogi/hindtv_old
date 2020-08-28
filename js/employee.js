@@ -5,6 +5,7 @@ $(document).ready(function () {
   loadtiming();
 
   var UPDATEID;
+  //LOAD SUBCOMPANYS MASTER DATA
   function loadsubcompany() {
     $.ajax({
       type: "POST",
@@ -29,6 +30,8 @@ $(document).ready(function () {
     });
   }
 
+
+  //LOAD TIMING MASTER DATA
   function loadtiming() {
     $.ajax({
       type: "POST",
@@ -58,6 +61,8 @@ $(document).ready(function () {
     });
   }
 
+
+  //LOAD EMPLOYEE IF EMPLOYEE'S ID GIVEN IN URL
   function loaddata() {
     $.ajax({
       type: "POST",
@@ -68,7 +73,8 @@ $(document).ready(function () {
         token: $("#website-token").attr("value"),
       },
       success: function (data) {
-        if (data.isSuccess == true) {
+        console.log("worked");
+        if (data.isSuccess == true && id != undefined) {
           UPDATEID = id;
           $("#firstname").val(data.Data.FirstName);
           $("#middlename").val(data.Data.MiddleName);
@@ -96,7 +102,6 @@ $(document).ready(function () {
           }else{
             $("#gpstrack2").prop('checked',true);
           }
-          
           $("#accountname").val(data.Data.AccountName);
           $("#bankname").val(data.Data.BankName);
           $("#accountnumber").val(data.Data.AccountNumber);
@@ -104,16 +109,16 @@ $(document).ready(function () {
           $("#branchname").val(data.Data.BranchName);
           $("#micrcode").val(data.Data.MICRCode);
           $("#upicode").val(data.Data.UPICode);
-          //$("#employeeimage").val(data.Data.ProfileImage);
-          //$("#employeedocument").val(data.Data.CertificateImage);
+          $("#lblempimg").html(data.Data.ProfileImage);
+          $("#lblempdoc").html(data.Data.CertificateImage);
           window.scrollTo(0, 0);
           /*$("#btn-submit-on").html(
             "<button type='submit' class='btn btn-success' id='btn-update'>Update</button>" +
               "<button type='submit' class='btn btn-danger ml-2' id='btn-cancel'>Cancel</button>"
           );*/
-        } else {
-          toastr.error(data.Message);
-        }
+        } //else {
+         // toastr.error(data.Message);
+       // }
       },
     });
     // $.ajax({
@@ -175,6 +180,8 @@ $(document).ready(function () {
     );
   });
 
+
+//UPDATE EMPLOYEE DATA ON BUTTON UPDATE CLICK EVENT(NOT REQUIRED)
   $(document).on("click", "#btn-update", function (e) {
     e.preventDefault();
     var formData = new FormData(this);
@@ -210,10 +217,8 @@ $(document).ready(function () {
           weekdayname: $("#weekdayname").val(),
           numofday: $("#numofday").val(),
           timing: $("#timing").val(),
-          
-    
-          //employeeimage:$("#employeeimage")[0].files[0],
-          //employeedocument:$("#employeedocument")[0].files[0],
+          employeeimage:$("#employeeimage")[0].files[0],
+          employeedocument:$("#employeedocument")[0].files[0],
           token: $("#website-token").attr("value"),
         },*/
         data: formData,
@@ -255,7 +260,10 @@ $(document).ready(function () {
       });
     }
   });
-/*
+
+
+/*SUBMIT DATA ON BUTTON CLICK EVENT (NOT REQUIRED)
+
   $(document).on("click", "#btn-submit", function (e) {
     var formData = new FormData(this);
     formData.append('type', 'insert');
@@ -357,6 +365,8 @@ $(document).ready(function () {
     $("#uploaddata")[0].reset();
   });
 
+
+  //DOWNLOAD EXCEL FILE
   $(document).on("click", "#downloademployeeexcel", function (e) {
     e.preventDefault();
     $.ajax({
@@ -392,6 +402,8 @@ $(document).ready(function () {
     });
   });
 
+
+//UPLOAD BULK FILE
   $(document).on("submit", "#uploaddata", function (e) {
     e.preventDefault();
     var formData = new FormData(this);
@@ -425,17 +437,17 @@ $(document).ready(function () {
     });
   });
 
+  
+// SUBMIT FORM EVENT UPDATE AND INSERT DATA ON FORM SUBMIT EVENT
   $('#employeedata').submit(function (e) {
     e.preventDefault();
     var formData = new FormData(this);
     if( id == undefined ){
       formData.append('type', 'insert');
-      console.log("insert");
     }
     else{
       formData.append('type','update');
       formData.append('id',UPDATEID);
-      console.log("updated");
     }
     formData.append('token',$("#website-token").attr("value"));
 

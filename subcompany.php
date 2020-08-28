@@ -122,7 +122,7 @@
                         </div>
                         <label id="errorLatLong" class='text-danger'></label>
                       </div>
-                      <div class="form-group col-md-3">
+                      <!--<div class="form-group col-md-3">
                         <label for="latlong">Sub Wifi Name</label>
                         <div class="input-group">
                           <div class="custom-file">
@@ -136,7 +136,7 @@
                           </div>
                         </div>
                         <label id="errorLatLong" class='text-danger'></label>
-                      </div>
+                      </div>-->
                       <div class="form-group col-md-3">
                         <label for="company">Company</label>
                         <div class="input-group">
@@ -162,7 +162,48 @@
                             >                            
                           </div>
                         </div>
-                      </div>                   
+                      </div> 
+
+                      <div class="form-group col-md-3">
+                        <label for="salarydate">Salary Date</label>
+                        <div class="input-group">
+                          <div class="custom-file">
+                            <select
+                            class="form-control"
+                            id="salarydate"
+                            name="salarydate"
+                            >
+                            <?php
+                            for($i=1; $i<=31; $i++) {
+                            ?>
+                            <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                            <?php
+                            }
+                            ?>
+                            </select>
+                          </div>
+                        </div>
+                        <label id="errorLatLong" class='text-danger'></label>
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <label for="memonumber">Number of Memo</label>
+                        <div class="input-group">
+                          <select
+                            class="form-control"
+                            id="memonumber"
+                            name="memonumber"
+                          >
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </div>
+                      </div>
+
                     </div>
                     <!-- /.card-body -->
                     <center>
@@ -205,6 +246,8 @@
                     <th>Company Address</th>
                     <th>Contact Person Name</th>
                     <th>Contact Person Number</th>
+                    <th>Salary of Date</th>
+                    <th>Number of Memo</th>
                     <th>Action</th>
                   </tr>
                 </thead>

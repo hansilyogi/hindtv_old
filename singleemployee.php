@@ -33,6 +33,7 @@
               <div class="card-body">
                 <table class="table table-bordered">
                 <thead>
+                <!--
                   <tr>
                     <th>Name</th>
                     <th>DOB</th>
@@ -45,7 +46,7 @@
                     <th>Prohibition</th>
                     <th>WifiName</th>
                     <th>ProfileImage</th>
-                  </tr>
+                  </tr>-->
                 </thead>
                   <tbody id="displaydata"></tbody>
                 </table>

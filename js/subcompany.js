@@ -28,6 +28,18 @@ $(document).ready(function () {
     });
   }
 
+
+  function convertdatetostring(date) {
+    if (date != "" && date != undefined) {
+      date = date.substr(0,10);
+      date = date[5]+date[6]+"/"+date[8]+date[9]+"/"+date[2]+date[3]+date[0]+date[1];
+      //date = date[2] + "/" + date[1] + "/" + date[0];
+    } else {
+      date = "";
+    }
+    return date;
+  }
+
   function loaddata() {
     $.ajax({
       type: "POST",
@@ -52,6 +64,7 @@ $(document).ready(function () {
               data.Data[i]["ContactPersonNumber"] == undefined
                 ? "-"
                 : data.Data[i]["ContactPersonNumber"];
+          
             $("#displaydata").append(
               "<tr><td>" +
                 data.Data[i]["Name"] +
@@ -62,9 +75,15 @@ $(document).ready(function () {
                 "</td><td>" +
                 data.Data[i]["ContactPersonNumber"] +
                 "</td><td>" +
+                data.Data[i]["SalaryDate"]+
+                "</td><td>"+
+                data.Data[i]["MemoNumber"]+
+                "</td><td>"+
                 '<a id="edit-data" href="subcompany.php?id=' +
                 data.Data[i]["_id"] +
                 '"><i class="fas fa-edit" aria-hidden="true"></i></a>' +
+                
+                
                 "</td></tr>"
             );
           }
@@ -99,6 +118,9 @@ $(document).ready(function () {
           $("#company").val(data.Data[0].CompanyId);
           $("#buffertime").val(data.Data[0].BufferTime);
           $("#wifiname").val(data.Data[0].wifiName);
+          $("#memonumber").val(data.Data[0].MemoNumber);
+          $("#salarydate").val(data.Data[0].SalaryDate);
+
           window.scrollTo(0, 0);
           $("#btn-submit-on").html(
             "<button type='submit' class='btn btn-success' id='btn-update'>Update</button>" +
@@ -151,7 +173,9 @@ $(document).ready(function () {
             googlelink: $("#latlong").val(),
             timing: $("#timing").val(),
             buffertime: $("#buffertime").val(),
-            wifiname: $("#wifiname").val(),
+            memonumber: $("#memonumber").val(),
+            salarydate: $("#salarydate").val(),
+            
           },
           dataType: "json",
           cache: false,
@@ -229,7 +253,9 @@ $(document).ready(function () {
           googlelink: $("#latlong").val(),
           timing: $("#timing").val(),
           buffertime: $("#buffertime").val(),
-          wifiname: $("#wifiname").val(),
+          //wifiname: $("#wifiname").val(),
+          memonumber: $("#memonumber").val(),
+          salarydate: $("#salarydate").val(),
         },
         dataType: "json",
         cache: false,

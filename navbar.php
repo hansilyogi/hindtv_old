@@ -86,12 +86,12 @@
               <p>Company<i class="fas fa-angle-left right"></i></p>
             </a>
             <ul class="nav nav-treeview" style="display: none;">
-              <li class="nav-item">
+              <!--<li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-industry"></i>
                   <p>View</p>
                 </a>
-              </li>
+              </li>-->
               <li class="nav-item">
                 <a href="company.php" class="nav-link">
                   <i class="nav-icon fas fa-plus"></i>
@@ -108,12 +108,12 @@
             </a>
 
             <ul class="nav nav-treeview" style="display: none;">
-              <li class="nav-item">
+              <!--<li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-building"></i>
                   <p>View</p>
                 </a>
-              </li>
+              </li>-->
               <li class="nav-item">
                 <a href="subcompany.php" class="nav-link">
                   <i class="nav-icon fas fa-plus"></i>
