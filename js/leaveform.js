@@ -140,15 +140,14 @@ $(document).ready(function () {
         url:$("#website-url").attr("value")+ "leaveform",
         data: {
           type:"insert",
-          employeename:$("#employeename").val(),
-          subcompanyname:$("#subcompanyname").val(),
-          companyname:$("#companyname").val(),
-          leavereasonname:$("#leavereasonname").val(),
+          EmployeeId:$("#employeename").val(),
+          SubCompanyId:$("#subcompanyname").val(),
+          CompanyId:$("#companyname").val(),
+          ReasonId:$("#leavereasonname").val(),
           ldate:$("#ldate").val(),
           description:$("#description").val()
         },
         success:function(data){
-          console.log(data);
           if(data.isSuccess ==  true){
             $("form")[0].reset();
             $("#staticmessage")

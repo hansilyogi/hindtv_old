@@ -61,6 +61,7 @@ $(document).ready(function () {
       },
       success: function (data) {
         if (data.isSuccess == true) {
+          console.log(data);
           $("#displaydata").html("");
           for (i = 0; i < data.Data.length; i++) {
             checkstring = "http://www.google.com/maps/place/";
@@ -71,12 +72,15 @@ $(document).ready(function () {
             data.Data[i]["Area"] =
               data.Data[i]["Area"] == undefined ? "-" : data.Data[i]["Area"];
             console.log(data.Data[i]["Area"].search(checkstring));
+
+            data.Data[i]["wifiName"] = data.Data[i]["wifiName"] == undefined || data.Data[i]["wifiName"] == "" ? "GPS" : "Wifi";
+
             if (data.Data[i]["Area"].search(checkstring) == 0) {
               data.Data[i]["Area"] =
                 "<a href=" +
                 data.Data[i]["Area"] +
                 " target=_blank>Outside Area</a>";
-            }
+            
             $("#displaydata").append(
               "<tr><td>" +
                 data.Data[i].EmployeeId["Name"] +
@@ -101,9 +105,11 @@ $(document).ready(function () {
                 "m" +
                 "</td><td>" +
                 data.Data[i]["Status"].toUpperCase() +
+                "</td><td>"+data.Data[i]["AttendanceType"]+
                 "</td></tr>"
             );
           }
+        }
         } else {
           $("#displaydata").html(
             '<tr><td colspan="9" class="text-center font-weight-bold">' +
@@ -152,7 +158,9 @@ $(document).ready(function () {
               data.Data[i]["Time"] == undefined ? "-" : data.Data[i]["Time"];
             data.Data[i]["Area"] =
               data.Data[i]["Area"] == undefined ? "-" : data.Data[i]["Area"];
+          
             console.log(data.Data[i]["Area"].search(checkstring));
+
             if (data.Data[i]["Area"].search(checkstring) == 0) {
               data.Data[i]["Area"] =
                 "<a href=" +
@@ -183,12 +191,12 @@ $(document).ready(function () {
                 "m" +
                 "</td><td>" +
                 data.Data[i]["Status"].toUpperCase() +
-                "</td></tr>"
+                "</td><td>"+data.Data[i]["AttendanceType"]+"</td></tr>"
             );
           }
         } else {
           $("#displaydata").html(
-            '<tr><td colspan="9" class="text-center font-weight-bold">' +
+            '<tr><td colspan="10" class="text-center font-weight-bold">' +
               data.Message +
               "</td></tr></center>"
           );

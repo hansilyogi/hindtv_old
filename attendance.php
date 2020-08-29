@@ -30,7 +30,7 @@
               </div>
               <div class="card-body">
                 <div class="row">
-                <div class="col-3">
+                <div class="col-2">
                     <label>Day Filter</label>
                     <select class="form-control" id="day-filter">
                     <option value="All">All</option>
@@ -43,17 +43,21 @@
                       <option value="Saturday">Saturday</option>
                     </select>
                   </div>
-                <div class="col-3">
-                    <label>Date Filter</label>
+                <div class="col-2">
+                    <label>Starting Date</label>
                     <input type="date" class="form-control" id="startdate" name="startdate">
-                    <input type="date" class="form-control mt-1" id="enddate" name="enddate">
                   </div>
-                  <div class="col-3">
+
+                  <div class="col-2">
+                    <label>Ending Date</label>
+                    <input type="date" class="form-control" id="enddate" name="enddate">
+                  </div>
+                  <div class="col-4">
                     <label>Area Filter</label>
                     <select class="form-control" id="area-filter">
                     </select>
                   </div>
-                  <div class="col-3">
+                  <div class="col-2">
                     <label>Status Filter</label>
                     <select class="form-control" id="status-filter">
                       <option value="0">All</option>

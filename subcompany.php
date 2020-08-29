@@ -246,7 +246,7 @@
                     <th>Company Address</th>
                     <th>Contact Person Name</th>
                     <th>Contact Person Number</th>
-                    <th>Salary of Date</th>
+                    <th>Date of Salary</th>
                     <th>Number of Memo</th>
                     <th>Action</th>
                   </tr>
