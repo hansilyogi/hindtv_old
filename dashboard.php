@@ -13,20 +13,21 @@
               </div>
             </div>
               <!-- /.col -->
+              <!--
             <div class="row">
               <div class="col-lg-4 col-6">
-                <!-- small card -->
+               
                 <div class="small-box bg-info">
                   <div class="inner">
-                    <h3><label  id="present" name="present"></label></h3>
+                    <h3><label  id="present" name="present">100</label></h3>
                     <p>Present</p>
                   </div>
 
                 </div>
             </div>
-            <!-- ./col -->
+            
             <div class="col-lg-4 col-6">
-              <!-- small card -->
+              
               <div class="small-box bg-success">
                 <div class="inner">
                   <h3>50</h3>
@@ -36,9 +37,9 @@
               </div>
             </div>
 
-            <!-- ./col -->
+          
             <div class="col-lg-4 col-6">
-              <!-- small card -->
+              
               <div class="small-box bg-warning">
                 <div class="inner">
                   <h3>150</h3>
@@ -46,6 +47,27 @@
                 </div>
               </div>
             </div>
+  -->
+          
+
+            <div class="card col-12">
+              <div class="card-header">
+                <h3 class="card-title">Display Data</h3>
+              </div>
+              <div class="card-body">
+                <table class="table table-bordered">
+                <thead>
+                <th>Sub Company Name</th>
+                <th>Number of Employee Present</th>
+                </thead>
+                  <tbody id="displaydata"></tbody>
+                </table>
+              </div>
+            </div>
+
+          
+
+
           </div>
         </div>
             <!-- /.row -->
