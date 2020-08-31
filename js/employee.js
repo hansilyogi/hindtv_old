@@ -73,7 +73,6 @@ $(document).ready(function () {
         token: $("#website-token").attr("value"),
       },
       success: function (data) {
-        console.log("worked");
         if (data.isSuccess == true && id != undefined) {
           UPDATEID = id;
           $("#firstname").val(data.Data.FirstName);

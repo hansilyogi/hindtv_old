@@ -18,7 +18,7 @@
                 <!-- small card -->
                 <div class="small-box bg-info">
                   <div class="inner">
-                    <h3>100</h3>
+                    <h3><label  id="present" name="present"></label></h3>
                     <p>Present</p>
                   </div>
 

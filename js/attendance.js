@@ -73,8 +73,11 @@ $(document).ready(function () {
               data.Data[i]["Area"] == undefined ? "-" : data.Data[i]["Area"];
             console.log(data.Data[i]["Area"].search(checkstring));
 
-            data.Data[i]["wifiName"] = data.Data[i]["wifiName"] == undefined || data.Data[i]["wifiName"] == "" ? "GPS" : "Wifi";
+            data.Data[i]["WifiName"] = 
+              data.Data[i]["WifiName"] == undefined  ? "GPS" : "WiFi";
 
+            data.Data[i]["AttendanceType"] =
+              data.Data[i]["AttendanceType"] == undefined ? data.Data[i]["WifiName"] : data.Data[i]["AttendanceType"];
             if (data.Data[i]["Area"].search(checkstring) == 0) {
               data.Data[i]["Area"] =
                 "<a href=" +
@@ -158,6 +161,12 @@ $(document).ready(function () {
               data.Data[i]["Time"] == undefined ? "-" : data.Data[i]["Time"];
             data.Data[i]["Area"] =
               data.Data[i]["Area"] == undefined ? "-" : data.Data[i]["Area"];
+
+            data.Data[i]["WifiName"] = 
+              data.Data[i]["WifiName"] == undefined ? "GPS" : "WiFi";
+
+            data.Data[i]["AttendanceType"] =
+              data.Data[i]["AttendanceType"] == undefined ? data.Data[i]["WifiName"] : data.Data[i]["AttendanceType"];
           
             console.log(data.Data[i]["Area"].search(checkstring));
 
