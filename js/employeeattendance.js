@@ -1,6 +1,15 @@
 $(document).ready(function () {
   loadcompany();
 
+  //fetching year in dropdown 
+  var start = 2000;
+  var end = new Date().getFullYear();
+  var options = "";
+  for(var year = start ; year <=end; year++){
+    options += "<option>"+ year +"</option>";
+  }
+  document.getElementById("year").innerHTML = options;
+
   var now = new Date();
   var prevMonthLastDate = new Date(now.getFullYear(), now.getMonth(), 0);
   var prevMonthFirstDate = new Date(
@@ -23,8 +32,8 @@ $(document).ready(function () {
     );
   };
 
-  $("#startdate").val(formatDate(prevMonthFirstDate));
-  $("#enddate").val(formatDate(prevMonthLastDate));
+  $("#months").val();
+  $("#year").val();
 
   function loadcompany() {
     $.ajax({
@@ -71,66 +80,68 @@ $(document).ready(function () {
       },
     });
   }
-
+  //companyname dropdown value change event 
   $(document).on("change", "#company", function () {
     COMPANY = $("#company").val();
     subcompany();
   });
 
   $(document).on("click", "#btn-apply-filter", function () {
+    var currentyear = new Date().getFullYear();
+    var currentmonth = new Date().getMonth()+1;
+    var months = $("#months").val();
+    var year = $("#year").val();
     var id = $("#subcompany").val();
     var name = $("#subcompany").find(":selected").text();
-    var startdate =
-      $("#startdate").val().split("-")[2] +
-      "/" +
-      $("#startdate").val().split("-")[1] +
-      "/" +
-      $("#startdate").val().split("-")[0];
-    var enddate =
-      $("#enddate").val().split("-")[2] +
-      "/" +
-      $("#enddate").val().split("-")[1] +
-      "/" +
-      $("#enddate").val().split("-")[0];
     name = name.split(" ").join("-");
     console.log(name);
-    $.ajax({
-      type: "POST",
-      url: $("#website-url").attr("value") + "generatereport",
-      data: {
-        type: "attendancereport",
-        company: id,
-        name: name,
-        startdate: startdate,
-        enddate: enddate,
-        token: $("#website-token").attr("value"),
-      },
-      dataType: "json",
-      cache: false,
-      beforeSend: function () {
-        $("#btn-submit-on").html(
-          '<button class="btn btn-success" type="button">\
-                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>\
-                                Loading...\
-                                </button>'
-        );
-      },
-      success: function (data) {
-        if (data.isSuccess == true) {
-          var link = document.createElement("a");
-          document.body.appendChild(link);
-          link.href = $("#website-url").attr("value") + "reports/" + data.Data;
-          link.target = "_blank";
-          link.click();
-        } else {
-          toastr.error(data.Message);
-        }
-      },
-      complete: function () {
-        $("#btn-submit-on").html(
-          '<button type="submit" class="btn btn-success"id="btn-apply-filter">Download Report</button>'
-        );
-      },
-    });
+    console.log( $("#website-token").attr("value"));
+    if(year == currentyear && months > currentmonth){
+      toastr.error("Please Check the Selected Month and Year");
+    }
+    else{
+      $.ajax({
+        type: "POST",
+        url: $("#website-url").attr("value") + "generatereport",
+        data: {
+          type: "attendancereport",
+          company: id,
+          name: name,
+          year:year,
+          month:months,
+          token: $("#website-token").attr("value"),
+          
+        },
+        dataType: "json",
+        cache: false,
+        beforeSend: function () {
+  
+          $("#btn-submit-on").html(
+            '<button class="btn btn-success" type="button">\
+                                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>\
+                                  Loading...\
+                                  </button>'
+          );
+        },
+        success: function (data) {
+          if (data.isSuccess == true) {
+            var link = document.createElement("a");
+            document.body.appendChild(link);
+            link.href = $("#website-url").attr("value") + "reports/" + data.Data;
+            link.target = "_blank";
+            link.click();
+          } else {
+            toastr.error(data.Message);
+          }
+        },
+        complete: function () {
+          $("#btn-submit-on").html(
+            '<button type="submit" class="btn btn-success"id="btn-apply-filter">Download Report</button>'
+          );
+        },
+      });
+    }
+    
+    
   });
 });

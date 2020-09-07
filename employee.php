@@ -380,7 +380,7 @@
                             id="employeeimage" 
                             name="employeeimage"   
                             accept=".png, .jpg, .jpeg"
-                            required>
+                            >
                             <label id="lblempimg" name="lblempimg" class="custom-file-label" for="employeeimage">Choose file</label>
                           </div>
                         </div>
@@ -395,7 +395,7 @@
                               id="employeedocument" 
                               name="employeedocument"
                               accept=".png, .jpg, .jpeg"
-                              required>
+                              >
                               <label id="lblempdoc" name="lblempdoc" class="custom-file-label" for="employeedocument">Choose file</label>
                           </div>
                        </div> 
