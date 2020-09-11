@@ -1,6 +1,7 @@
 $(document).ready(function () {
   //display data in single employee data
   var id = $(location).attr("href").split("=")[1];
+  console.log(id);
   if (id != undefined) {
     $.ajax({
       type: "POST",
@@ -13,6 +14,7 @@ $(document).ready(function () {
           data.Data.Prohibition = data.Data.Prohibition == "" ? "-" : data.Data.Prohibition;
           data.Data.TerminationDate = data.Data.TerminationDate == "" ? "-" : data.Data.TerminationDate;
           data.Data.GpsTrack = data.Data.GpsTrack == true ? "YES":"NO";
+
           $("#displaydata").html(
             "<tr><th>Name</th><td>"+data.Data["Name"]+"</td></tr>" +
               "<tr><th>DOB</th><td>"+data.Data.DOB+"</td></tr>" +
@@ -45,7 +47,8 @@ $(document).ready(function () {
               "</td></tr>"
           );
         } else {
-          alert("No id found");
+          toastr.error(data.Message);
+          //alert("No id found");
         }
       },
     });

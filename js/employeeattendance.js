@@ -93,9 +93,10 @@ $(document).ready(function () {
     var year = $("#year").val();
     var id = $("#subcompany").val();
     var name = $("#subcompany").find(":selected").text();
+    var monthname = $("#months").find(":selected").text();
     name = name.split(" ").join("-");
-    console.log(name);
-    console.log( $("#website-token").attr("value"));
+    console.log(id);
+    console.log($("#website-token").attr("value"));
     if(year == currentyear && months > currentmonth){
       toastr.error("Please Check the Selected Month and Year");
     }
@@ -109,6 +110,7 @@ $(document).ready(function () {
           name: name,
           year:year,
           month:months,
+          monthname:monthname,
           token: $("#website-token").attr("value"),
           
         },
@@ -124,6 +126,7 @@ $(document).ready(function () {
           );
         },
         success: function (data) {
+          console.log(data);
           if (data.isSuccess == true) {
             var link = document.createElement("a");
             document.body.appendChild(link);

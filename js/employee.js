@@ -73,6 +73,7 @@ $(document).ready(function () {
         token: $("#website-token").attr("value"),
       },
       success: function (data) {
+        console.log(data.Data.ProfileImage.length);
         if (data.isSuccess == true && id != undefined) {
           UPDATEID = id;
           $("#firstname").val(data.Data.FirstName);
@@ -108,8 +109,14 @@ $(document).ready(function () {
           $("#branchname").val(data.Data.BranchName);
           $("#micrcode").val(data.Data.MICRCode);
           $("#upicode").val(data.Data.UPICode);
-          $("#lblempimg").html(data.Data.ProfileImage);
-          $("#lblempdoc").html(data.Data.CertificateImage);
+          if(data.Data.ProfileImage.length==0 || data.Data.CertificateImage.length == 0){
+            $("#lblempimg").html('Choose File');
+            $("#lblempdoc").html('Choose File');
+          }else{
+            $("#lblempimg").html(data.Data.ProfileImage);
+            $("#lblempdoc").html(data.Data.CertificateImage);
+          }
+          
           window.scrollTo(0, 0);
           /*$("#btn-submit-on").html(
             "<button type='submit' class='btn btn-success' id='btn-update'>Update</button>" +
@@ -449,16 +456,17 @@ $(document).ready(function () {
       formData.append('id',UPDATEID);
     }
     formData.append('token',$("#website-token").attr("value"));
-
+   
     $.ajax({
       type: "POST",
       url: $("#website-url").attr("value") + "employee",
       data: formData,
-      dataType: "application/json",
+      dataType: 'json',
       cache: false,
       contentType: false,
       processData: false,
       beforeSend: function () {
+      
         $("#btn-submit").html(
           '<button class="btn btn-primary float-right" type="button">\
                                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>\
@@ -466,7 +474,9 @@ $(document).ready(function () {
                                 </button>'
         );
       },
-      success: function (data) {
+      
+      success: function(data) {
+        alert(data.Message);
         if (data.isSuccess == true) {
           toastr.success(data.Message);
         } else {
@@ -474,10 +484,9 @@ $(document).ready(function () {
         }
       },
       complete: function () {
-       console.log("uploaded");
-       $("#btn-submit-on").html(
+        $("#btn-submit-on").html(
         "<button type='submit' class='btn btn-success' id='btn-submit'>Submit</button>" +
-          "<button type='submit' class='btn btn-danger ml-2' id='btn-cancel'>Cancel</button>"
+        "<button type='submit' class='btn btn-danger ml-2' id='btn-cancel'>Cancel</button>"
       );
       },
     });

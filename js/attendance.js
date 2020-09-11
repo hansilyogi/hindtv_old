@@ -250,7 +250,7 @@ $(document).ready(function () {
     $.ajax({
       type: "POST",
       url: $("#website-url").attr("value") + "attendance",
-      data: { type: "getareafilter" },
+      data: { type: "getareafilter",token: $("#website-token").attr("value")},
       dataType: "json",
       cache: false,
       success: function (data) {
