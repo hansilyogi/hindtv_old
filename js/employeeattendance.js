@@ -2,7 +2,7 @@ $(document).ready(function () {
   loadcompany();
 
   //fetching year in dropdown 
-  var start = 2000;
+  var start = 2020;
   var end = new Date().getFullYear();
   var options = "";
   for(var year = start ; year <=end; year++){
@@ -97,7 +97,8 @@ $(document).ready(function () {
     name = name.split(" ").join("-");
     console.log(id);
     console.log($("#website-token").attr("value"));
-    if(year == currentyear && months > currentmonth){
+    console.log(currentyear, months,currentmonth);
+    if(parseInt(year) >= parseInt(currentyear) &&  parseInt(months) > parseInt(currentmonth)){
       toastr.error("Please Check the Selected Month and Year");
     }
     else{
