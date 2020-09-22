@@ -115,6 +115,8 @@ $(document).ready(function () {
           $("#email").val(data.Data[0].Email);
           $("#gstin").val(data.Data[0].GSTIN);
           $("#latlong").val(data.Data[0].Link);
+          $("#longitude").val(data.Data[0].long);
+          $("#latitude").val(data.Data[0].lat);
           $("#company").val(data.Data[0].CompanyId);
           $("#buffertime").val(data.Data[0].BufferTime);
           $("#wifiname").val(data.Data[0].wifiName);
@@ -141,10 +143,14 @@ $(document).ready(function () {
   });
 
   $(document).on("click", "#btn-update", function (e) {
+    alert("work");
     e.preventDefault();
     val1 = 1;
     if (UPDATEID !== undefined) {
-      if ($("#latlong").val() != "") {
+      if($("#latlong").val() == "" || $("#latlong").val() == undefined){
+        toastr.error("Please,Select the Location");
+      }
+      /*if ($("#latlong").val() != "") {
         if ($("#latlong").val().split("@")) {
           var lat = $("#latlong").val().split("@")[1].split(",")[0];
           var long = $("#latlong").val().split("@")[1].split(",")[1];
@@ -152,7 +158,7 @@ $(document).ready(function () {
           $("#errorLatLong").html("Invalid Link");
           val1 = 0;
         }
-      }
+      }*/
       val = validation();
       if (val == 1 && val1 == 1) {
         $.ajax({
@@ -168,8 +174,10 @@ $(document).ready(function () {
             Email: $("#email").val(),
             GSTIN: $("#gstin").val(),
             companyid: $("#company").val(),
-            lat: lat,
-            long: long,
+            //lat: lat,
+            //long: long,
+            lat: $("#latitude").val(),
+            long : $("#longitude").val(),
             googlelink: $("#latlong").val(),
             timing: $("#timing").val(),
             buffertime: $("#buffertime").val(),
@@ -189,6 +197,7 @@ $(document).ready(function () {
           },
           success: function (data) {
             if (data.isSuccess == true) {
+              alert("success");
               $("form")[0].reset();
               $("#staticmessage")
                 .removeClass("text-success text-danger")
@@ -225,7 +234,7 @@ $(document).ready(function () {
     // console.log($("#latlong").val().split("=")[1].split(",")[0]);
     // console.log($("#latlong").val().split("=")[1].split(",")[1]);
     val1 = 1;
-    if ($("#latlong").val() != "") {
+    /*if ($("#latlong").val() != "") {
       if ($("#latlong").val().split("@")) {
         var lat = $("#latlong").val().split("@")[1].split(",")[0];
         var long = $("#latlong").val().split("@")[1].split(",")[1];
@@ -233,9 +242,16 @@ $(document).ready(function () {
         $("#errorLatLong").html("Invalid Link");
         val1 = 0;
       }
-    }
+    }*/
+
     val = validation();
+    if($("#latlong").val() == "" || $("#latlong").val() == undefined){
+      toastr.error("Enter Google Map Link");
+    }
+
+    
     if (val == 1 && val1 == 1) {
+      
       $.ajax({
         type: "POST",
         url: $("#website-url").attr("value") + "subcompany",
@@ -248,8 +264,10 @@ $(document).ready(function () {
           Email: $("#email").val(),
           GSTIN: $("#gstin").val(),
           companyid: $("#company").val(),
-          lat: lat,
-          long: long,
+          lat: $("#latitude").val(),
+          long : $("#longitude").val(),
+          //lat: lat,
+          //long: long,
           googlelink: $("#latlong").val(),
           timing: $("#timing").val(),
           buffertime: $("#buffertime").val(),
@@ -300,4 +318,7 @@ $(document).ready(function () {
     }
     return val;
   }
+
+  
+  
 });

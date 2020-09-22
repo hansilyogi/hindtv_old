@@ -72,11 +72,29 @@
                       </div>
 
                       <div class="form-group col-md-3">
-                        <label>Date</label>
-                        <input type="date" class="form-control" id="ldate" name="ldate">
+                        <label>Start Date</label>
+                        <input type="date" required class="form-control" id="startdate" name="startdate" />
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <label>End Date</label>
+                        <input type="date" required class="form-control" id="enddate" name="enddate" />
                       </div>
                       
-                      <div class="form-group col-md-6">
+                      <div class="form-group col-md-3">
+                        <label>Leave Period(Days) </label>
+                        <input type="text" class="form-control" id="leaveperiod" name="leaveperiod" readonly>
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <label>Leave Type</label>
+                        <select class="form-control mt-1" id="leavetype" name="leavetype">
+                        <option value="Paid Leave">Paid Leave</option>
+                        <option value="Unpaid Leave">Unpaid Leave</option>
+                        </select>                    
+                      </div>
+
+                      <div class="form-group col-md-3">
                       <label for="description">Description</label>
                       <textarea
                           type="textarea"

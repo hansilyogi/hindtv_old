@@ -73,8 +73,8 @@ $(document).ready(function () {
         token: $("#website-token").attr("value"),
       },
       success: function (data) {
-        console.log(data.Data.ProfileImage.length);
         if (data.isSuccess == true && id != undefined) {
+          console.log(data);
           UPDATEID = id;
           $("#firstname").val(data.Data.FirstName);
           $("#middlename").val(data.Data.MiddleName);
@@ -109,6 +109,7 @@ $(document).ready(function () {
           $("#branchname").val(data.Data.BranchName);
           $("#micrcode").val(data.Data.MICRCode);
           $("#upicode").val(data.Data.UPICode);
+          $("#employeedocument").val(data.Data.CertificateImage);
           if(data.Data.ProfileImage.length==0 || data.Data.CertificateImage.length == 0){
             $("#lblempimg").html('Choose File');
             $("#lblempdoc").html('Choose File');
@@ -267,6 +268,7 @@ $(document).ready(function () {
     }
   });
 
+ 
 
 /*SUBMIT DATA ON BUTTON CLICK EVENT (NOT REQUIRED)
 
@@ -449,14 +451,17 @@ $(document).ready(function () {
     e.preventDefault();
     var formData = new FormData(this);
     if( id == undefined ){
+      alert("insert");
       formData.append('type', 'insert');
     }
     else{
+      alert("update")
       formData.append('type','update');
       formData.append('id',UPDATEID);
     }
     formData.append('token',$("#website-token").attr("value"));
-   
+    console.log(formData);
+    alert(formData);
     $.ajax({
       type: "POST",
       url: $("#website-url").attr("value") + "employee",

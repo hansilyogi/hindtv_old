@@ -135,7 +135,12 @@ $(document).ready(function () {
   //Insert value in data base
   $(document).on("click","#btn-submit",function(e){
       e.preventDefault();
-      $.ajax({
+      console.log($("#startdate").val());
+      if($("#startdate").val() == "" && $("#enddate").val() == "" ){
+        toastr.error("Please! Select The Date");
+      }
+      else{
+        $.ajax({
         type:"POST",
         url:$("#website-url").attr("value")+ "leaveform",
         data: {
@@ -144,8 +149,19 @@ $(document).ready(function () {
           SubCompanyId:$("#subcompanyname").val(),
           CompanyId:$("#companyname").val(),
           ReasonId:$("#leavereasonname").val(),
-          ldate:$("#ldate").val(),
+          startdate:$("#startdate").val(),
+          enddate:$("#enddate").val(),
+          leavetype:$("#leavetype").val(),
+          leaveperiod:$("#leaveperiod").val(),
           description:$("#description").val()
+        },
+        beforeSend: function () {
+          $("#btn-submit").html(
+            '<button class="btn btn-primary float-right" type="button">\
+                                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>\
+                                  Loading...\
+            </button>'
+          );
         },
         success:function(data){
           if(data.isSuccess ==  true){
@@ -168,7 +184,38 @@ $(document).ready(function () {
           );
         },
       });
+    }
+  });
+  var startdate,enddate;
+  $(document).on("change","#startdate",function(e){
+    startdate = $(this).val();
   });
 
+  $(document).on("change","#enddate",function(e){
+    enddate = $(this).val();
+    if(startdate!=undefined && enddate != undefined){
+      leaveperiodCount(startdate,enddate);
+    }
+  });
+
+  function leaveperiodCount(startdate,enddate){
+    const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+    const firstDate = new Date(startdate);
+    const secondDate = new Date(enddate);
+    const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay))+1;
+    $("#leaveperiod").val(diffDays);
+  }
+
+
+  function ToDate() {
+    var UserDate = document.getElementById("startdate").value;
+    var ToDate = new Date();
+
+    if (new Date(UserDate).getTime() <= ToDate.getTime()) {
+          alert("The Date must be Bigger or Equal to today date");
+          return false;
+     }
+    return true;
+}
 });
 

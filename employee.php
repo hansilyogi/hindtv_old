@@ -75,6 +75,7 @@
                         />
                         <label id="errorFirstName" class="text-danger"></label>
                       </div>
+
                       <div class="form-group col-md-3">
                         <label for="lastname">Middle Name</label>
                         <input
@@ -86,6 +87,7 @@
                         />
                         <label id="errorMiddleName"></label>
                       </div>
+
                       <div class="form-group col-md-3">
                         <label for="lastname">Last Name</label>
                         <input
@@ -97,6 +99,7 @@
                         />
                         <label id="errorLastName"></label>
                       </div>
+
                       <div class="form-group col-md-3">
                         <label for="gender">Gender</label>
                         <div class="input-group">
@@ -113,6 +116,7 @@
                         </div>
                         <label id="errorGender"></label>
                       </div>
+
                       <div class="form-group col-md-3">
                         <label for="dob">DOB</label>
                         <div class="input-group">
@@ -128,6 +132,7 @@
                         </div>
                         <label id="errorDOB"></label>
                       </div>
+
                       <div class="form-group col-md-3">
                         <label for="mobile">Mobile Number</label>
                         <div class="input-group">
@@ -143,6 +148,7 @@
                         </div>
                         <label id="errorMobile" class="text-danger"></label>
                       </div>
+
                       <div class="form-group col-md-3">
                         <label for="mail">Mail</label>
                         <div class="input-group">
@@ -158,6 +164,7 @@
                         </div>
                         <label id="errorMail"></label>
                       </div>
+
                       <div class="form-group col-md-3">
                         <label for="married">Maritial Status</label>
                         <div class="input-group">
@@ -173,6 +180,7 @@
                           </div>
                         </div>
                       </div>
+
                       <div class="form-group col-md-3">
                         <label for="joindate">Join Date</label>
                         <div class="input-group">
@@ -188,6 +196,7 @@
                         </div>
                         <label id="errorJoinDate"></label>
                       </div>
+
                       <div class="form-group col-md-3">
                         <label for="confirmationdate">Confirmation Date</label>
                         <div class="input-group">
@@ -203,6 +212,7 @@
                         </div>
                         <label id="errorConfirmationDate"></label>
                       </div>
+
                       <div class="form-group col-md-3">
                         <label for="terminationdate">Termination Date</label>
                         <div class="input-group">
@@ -218,6 +228,7 @@
                         </div>
                         <label id="errorTerminationDate"></label>
                       </div>
+
                       <div class="form-group col-md-3">
                         <label for="prohibition">Probation Period</label>
                         <input
@@ -228,6 +239,7 @@
                           placeholder="Prohibition Period(Months)"
                         />
                       </div>
+
                       <label id="Prohibition"></label>
                       <div class="form-group col-md-3">
                         <label for="subcompany">Sub Company</label>
@@ -239,6 +251,7 @@
                           ></select>
                         </div>
                       </div>
+
                       <div class="form-group col-md-3">
                         <label for="department">Department</label>
                         <div class="input-group">
@@ -253,6 +266,7 @@
                           </div>
                         </div>
                       </div>
+
                       <div class="form-group col-md-3">
                         <label for="designation">Designation</label>
                         <div class="input-group">
@@ -267,6 +281,7 @@
                           </div>
                         </div>
                       </div>
+
                       <div class="form-group col-md-3">
                         <label for="idtype">ID Type</label>
                         <div class="input-group">
@@ -281,6 +296,7 @@
                           </div>
                         </div>
                       </div>
+
                       <div class="form-group col-md-3">
                         <label for="idnumber">ID Number</label>
                         <div class="input-group">
@@ -295,6 +311,7 @@
                           </div>
                         </div>
                       </div>
+
                       <div class="form-group col-md-3">
                         <label for="timing">Timing</label>
                         <div class="input-group">
@@ -316,6 +333,7 @@
                           placeholder="Wifi Name"
                         />
                       </div>
+
                          <!--Name of days Drop Down-->
                       <div class="form-group col-md-3">
                         <label for="weekdayname">Week of Days</label>
@@ -494,9 +512,7 @@
 
 
                     </div>
-                    </div>
 
-                    </div>
                     <!-- /.card-body -->
                     <center>
                       <div class="form-check" id="staticmessage"></div>
