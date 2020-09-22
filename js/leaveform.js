@@ -220,9 +220,10 @@ $(document).ready(function () {
       return false;
     }
     else if($("#startdate").val() === "" &&  $("#enddate").val() === ""){
+      console.log("econd");
       return false;
     }
-    else if(new Date(stdate).getTime() >= new Date(eddate).getTime()){
+    else if(new Date(stdate).getTime() > new Date(eddate).getTime()){
       return false;
     }
     return true;
