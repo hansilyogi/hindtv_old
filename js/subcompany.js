@@ -122,7 +122,6 @@ $(document).ready(function () {
           $("#wifiname").val(data.Data[0].wifiName);
           $("#memonumber").val(data.Data[0].MemoNumber);
           $("#salarydate").val(data.Data[0].SalaryDate);
-
           window.scrollTo(0, 0);
           $("#btn-submit-on").html(
             "<button type='submit' class='btn btn-success' id='btn-update'>Update</button>" +
@@ -143,7 +142,6 @@ $(document).ready(function () {
   });
 
   $(document).on("click", "#btn-update", function (e) {
-    alert("work");
     e.preventDefault();
     val1 = 1;
     if (UPDATEID !== undefined) {
@@ -197,7 +195,6 @@ $(document).ready(function () {
           },
           success: function (data) {
             if (data.isSuccess == true) {
-              alert("success");
               $("form")[0].reset();
               $("#staticmessage")
                 .removeClass("text-success text-danger")

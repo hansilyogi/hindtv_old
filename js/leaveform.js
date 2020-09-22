@@ -10,6 +10,9 @@ $(document).ready(function () {
   //loademployee(): fetch value in employeename master
   //loadleavereason(): fetch value in leavereason master
 
+  var today = new Date().toISOString().split('T')[0];
+  document.getElementById("startdate").setAttribute('min', today);
+  document.getElementById("enddate").setAttribute('min',today);
 
   function loadsubcompany() {
     
@@ -135,8 +138,8 @@ $(document).ready(function () {
   //Insert value in data base
   $(document).on("click","#btn-submit",function(e){
       e.preventDefault();
-      console.log($("#startdate").val());
-      if($("#startdate").val() == "" && $("#enddate").val() == "" ){
+      var val = validation();
+      if(val == false){
         toastr.error("Please! Select The Date");
       }
       else{
@@ -189,11 +192,14 @@ $(document).ready(function () {
   var startdate,enddate;
   $(document).on("change","#startdate",function(e){
     startdate = $(this).val();
+    if(startdate!="" && enddate != ""){
+      leaveperiodCount(startdate,enddate);
+    }
   });
 
   $(document).on("change","#enddate",function(e){
     enddate = $(this).val();
-    if(startdate!=undefined && enddate != undefined){
+    if(startdate!="" && enddate != ""){
       leaveperiodCount(startdate,enddate);
     }
   });
@@ -206,16 +212,23 @@ $(document).ready(function () {
     $("#leaveperiod").val(diffDays);
   }
 
-
-  function ToDate() {
-    var UserDate = document.getElementById("startdate").value;
-    var ToDate = new Date();
-
-    if (new Date(UserDate).getTime() <= ToDate.getTime()) {
-          alert("The Date must be Bigger or Equal to today date");
-          return false;
-     }
+  function validation(){
+    var stdate = document.getElementById("startdate").value;
+    var eddate = document.getElementById("enddate").value;
+    var today = new Date();
+    if (Date(stdate) < today || Date(eddate) < today) {
+      return false;
+    }
+    else if($("#startdate").val() === "" &&  $("#enddate").val() === ""){
+      return false;
+    }
+    else if(new Date(stdate).getTime() >= new Date(eddate).getTime()){
+      return false;
+    }
     return true;
-}
+  }
+ 
+
+
 });
 

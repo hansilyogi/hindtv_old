@@ -451,17 +451,13 @@ $(document).ready(function () {
     e.preventDefault();
     var formData = new FormData(this);
     if( id == undefined ){
-      alert("insert");
       formData.append('type', 'insert');
     }
     else{
-      alert("update")
       formData.append('type','update');
       formData.append('id',UPDATEID);
     }
     formData.append('token',$("#website-token").attr("value"));
-    console.log(formData);
-    alert(formData);
     $.ajax({
       type: "POST",
       url: $("#website-url").attr("value") + "employee",
@@ -481,7 +477,6 @@ $(document).ready(function () {
       },
       
       success: function(data) {
-        alert(data.Message);
         if (data.isSuccess == true) {
           toastr.success(data.Message);
         } else {
