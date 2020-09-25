@@ -1,4 +1,9 @@
+
 $(document).ready(function () {
+  var script = document.createElement('script');
+  script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyC55UXQ86t__gJCOoemwCkDY6qWNKLJ3hM&callback=initMap";
+  document.getElementsByTagName('head')[0].appendChild(script);
+
   loaddata();
   loadcompany();
 
@@ -82,8 +87,6 @@ $(document).ready(function () {
                 '<a id="edit-data" href="subcompany.php?id=' +
                 data.Data[i]["_id"] +
                 '"><i class="fas fa-edit" aria-hidden="true"></i></a>' +
-                
-                
                 "</td></tr>"
             );
           }
@@ -97,6 +100,7 @@ $(document).ready(function () {
   }
 
   $(document).on("click", "#edit-data", function (e) {
+    
     e.preventDefault();
     var id = $(this).attr("href").split("=")[1];
     $.ajax({
@@ -122,6 +126,8 @@ $(document).ready(function () {
           $("#wifiname").val(data.Data[0].wifiName);
           $("#memonumber").val(data.Data[0].MemoNumber);
           $("#salarydate").val(data.Data[0].SalaryDate);
+          $("#latitude").val(data.Data[0].lat);
+          $("#longitude").val(data.Data[0].long);
           window.scrollTo(0, 0);
           $("#btn-submit-on").html(
             "<button type='submit' class='btn btn-success' id='btn-update'>Update</button>" +
@@ -130,6 +136,9 @@ $(document).ready(function () {
         }
       },
     });
+    console.log($("#longitude").val());
+    console.log($("#latitude").val());
+    getClean();
   });
 
   $(document).on("click", "#btn-cancel", function (e) {
@@ -316,6 +325,76 @@ $(document).ready(function () {
     return val;
   }
 
-  
+  //**********************google map */
+  var map;
+                            var markers = [];
+                            var count = 0; 
+                            var marker;
+                            var infowindow;    
+                            var myLatLng;       
+                           
+                         
+                              
+                            
+                         
+                            window.initMap = function() {
+                              myLatLng = { lat: 21.1692881, lng: 72.8300554 };
+                              infowindow = new google.maps.InfoWindow();
+                              map = new google.maps.Map(document.getElementById("map"), {
+                                  zoom: 9.92,
+                                  center: myLatLng,
+                              });
+                              var image = '/home/dhanpal/Desktop/it_futurz/hindtv/dist/img/markerImage.png';
+                              marker = new google.maps.Marker({
+                                        position: myLatLng,
+                                        map,
+                                        title: "office",
+                                        draggable: true  
+                              });
+                              google.maps.event.addListener(marker, 'dragend', function (evt) {
+                                  $('#latlong').val('http://www.google.com/maps/place/'+evt.latLng.lat()+','+ evt.latLng.lng());
+                                  $('#latitude').val(evt.latLng.lat());
+                                  $('#longitude').val(evt.latLng.lng())
+                              });
+
+                              google.maps.event.addListener(marker, 'dragstart', function (evt) {
+                                  console.log("start");
+                              });
+                              map.setCenter(marker.position);
+                              marker.setMap(map);
+                            }
+                          
+                            function getClean() { 
+                              alert("null");
+                              
+                              
+                              var latitude = $("#latitude").val();
+                              var longitude = $("#longitude").val();
+                              console.log($("#longitude").val());
+                              console.log($("#latitude").val());
+                              if(longitude == "" || latitude == ""){
+                                latitude = 21.1692881;
+                                longitude = 72.8300554;
+                              }
+                              else{
+                                latitude =  parseFloat(latitude);
+                                longitude = parseFloat(longitude);
+                              }
+                              myLatLng = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
+                              marker.setMap(null);
+                              marker = new google.maps.Marker({
+                                      position: myLatLng,
+                                      map,
+                                      title: "office",
+                                      draggable: true  
+                            });
+                              console.log("work");
+                              marker.setMap(map);      
+                            }                         
+                            setInterval(() => {
+                              //getClean();
+                              //getStarted();
+                            }, 100000);                 
+                         
   
 });

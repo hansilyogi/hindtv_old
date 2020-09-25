@@ -212,19 +212,34 @@
                               <!--Gooogle Map-->
                         <div class="form-group col-12">
                           <div id="map"></div>
-                          <script
+                           <!-- <script
                             src="https://code.jquery.com/jquery-3.5.1.js"
                             integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
                             crossorigin="anonymous"
-                          ></script>
+                          ></script> 
                           <script>
+                            
                             var map;
                             var markers = [];
                             var count = 0; 
                             var marker;
-                            var infowindow;           
+                            var infowindow;    
+                            var myLatLng;       
+                            var longitude = $("#longitude").val();
+                            var latitude = $("#latitude").val();
+                            if(longitude=="" && latitude == ""){
+                              
+                              latitude = 21.1692881;
+                              longitude = 72.8300554;
+                              //myLatLng = { lat: 21.1692881, lng: 72.8300554 };
+                            }
+                            else{
+                              latitude = parseFloat(latitude);
+                              longitude = parseFloat(longitude);
+                            }
                             function initMap() {
-                              var myLatLng = { lat: 21.1692881, lng: 72.8300554 };
+                              myLatLng = { lat: latitude , lng: longitude };
+                              //myLatLng = { lat: 21.1692881, lng: 72.8300554 };
                               infowindow = new google.maps.InfoWindow();
                               map = new google.maps.Map(document.getElementById("map"), {
                                   zoom: 9.92,
@@ -241,8 +256,6 @@
                                   $('#latlong').val('http://www.google.com/maps/place/'+evt.latLng.lat()+','+ evt.latLng.lng());
                                   $('#latitude').val(evt.latLng.lat());
                                   $('#longitude').val(evt.latLng.lng())
-                                  //console.log(evt.latLng.lat());
-                                  //console.log(evt.latLng.lng());
                               });
 
                               google.maps.event.addListener(marker, 'dragstart', function (evt) {
@@ -250,82 +263,39 @@
                               });
                               map.setCenter(marker.position);
                               marker.setMap(map);
+                            }
+                          
 
-                              /*map.addListener('click', function(mapsMouseEvent) {
-                                infowindow.close();
-                                infowindow = new google.maps.InfoWindow({position: mapsMouseEvent.latLng});
-                                console.log(infowindow);
-                                infowindow.setContent(mapsMouseEvent.latLng.toString());
-                                var coordinate = infowindow.content.split(',');
-                                //console.log(coordinate[0].replace('(',''),coordinate[1].replace(')',''));
-                                $("#latlong").val(coordinate[0].replace('(','')+'  '+coordinate[1].replace(')',''));
-                                infowindow.open(map);
-                              });*/
-                              getStarted();
+                            function getClean() { 
+                              var longitude = $("#longitude").val();
+                              var latitude = $("#latitude").val();
+                              if(longitude!="" && latitude !="" ){
+                                marker.setMap(null);
+                                myLatLng = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
+                                console.log(longitude);
+                                console.log(latitude);
+                                marker = new google.maps.Marker({
+                                        position: myLatLng,
+                                        map,
+                                        title: "office",
+                                        draggable: true  
+                              });
+                              }
+                              marker.setMap(map);      
                             }
-                            function getStarted() {    
-                              
-                              /*                    
-                              $.ajax({
-                                type: "POST",
-                                url: $("#website-url").attr("value") + "location",
-                                dataType: "json",
-                                cache: false,
-                                success: function (data) {                
-                                  $.each(data, function (key, value) {
-                                    count = count + 1;
-                                    marker = new google.maps.Marker({
-                                      position: {
-                                        lat: parseFloat(value.latitude),
-                                        lng: parseFloat(value.longitude),
-                                      },
-                                      map: map,
-                                      title: key,                     
-                                    });
-                                    marker.addListener("click", (function(marker, key, infowindow) {                          
-                                        return function () {
-                                          data = callname(key);
-                                          infowindow.setContent(data);
-                                          infowindow.open(map, marker);
-                                        }  
-                                      })(marker, key, infowindow));
-                                    markers.push(marker);                                        
-                                  });                 
-                                },
-                              });*/
-                            }
-                            /*function callname(number){              
-                              var DATA;
-                              $.ajax({
-                                type: "POST",
-                                url: $("#website-url").attr("value") + "location",
-                                data: { type: "getnamefrommobile", mobile: number },
-                                dataType: "json",
-                                cache: false,
-                                async: false,
-                                success: function(data){                  
-                                  DATA = data[0].Name + " - " + data[0].Mobile;                  
-                                }
-                              });              
-                              return DATA;
-                            }*/
-                            function getClean() {                     
-                                for (var i = 0; i < markers.length; i++) {                  
-                                  markers[i].setMap(null);
-                                }
-                                markers = [];      
-                            }
+                           
+                                                        
                             setInterval(() => {
-                              //getClean();
-                              getStarted();
-                            }, 10000);
-                          </script>
+                              getClean();
+                              //getStarted();
+                            }, 100000);
+                          </script> -->
                         
-                          <script
+                          <!-- /*<script
                             async
                             defer
                             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC55UXQ86t__gJCOoemwCkDY6qWNKLJ3hM&callback=initMap"
-                          ></script>
+                          ></script> -->
                         </div>
                               <!--/Google Map-->
 

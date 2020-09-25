@@ -44,11 +44,28 @@
             </a>
           </li>
 
-          <li class="nav-item">
-              <a href="leaveform.php" class="nav-link">
-                <i class="nav-icon fas fa-user-clock"></i>
+          <!--Leave Manage-->
+          <li class="nav-item has-treeview">
+                <a href="leaveform.php" class="nav-link">
+                <i class="nav-icon fas fa-house-user"></i>
                 <p>Leave Form</p>
-              </a>
+                <!-- <p>Leave<i class="fas fa-angle-left right"></i></p> -->
+                </a>
+
+                <!-- <ul class="nav nav-treeview" style="display: none;">
+                <li class="nav-item">
+                  <a href="leaveform.php" class="nav-link">
+                    <i class="nav-icon fas fa-user"></i>
+                    <p>Leave Form</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="defineleave.php" class="nav-link">
+                    <i class="nav-icon fas fa-user-plus"></i>
+                    <p>Define Leave</p>
+                  </a>
+                </li>
+              </ul> -->
           </li>
 
           <li class="nav-item has-treeview">

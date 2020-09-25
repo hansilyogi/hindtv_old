@@ -387,7 +387,7 @@
                           </label>
                         </div>
                       </div>
-
+                      <div class="form-group col-md-6"></div>
                         <!--Employee Profile Input File-->
                       <div class="form-group  col-md-3">
                         <label for="employeeimage">Employee's Image</label>
@@ -403,20 +403,72 @@
                           </div>
                         </div>
                       </div>
+
+                      <div class="form-group col-md-3">
+                        <img id="empImg" name="empImg" class="img-rounded" alt="Employee Profile Picture">
+                      </div>
+
+
+
+
                         <!--Employee Certificate Input File-->
                         <div class="form-group  col-md-3">
-                          <label for="employeedocument">Document</label>
-                          <div class="input-group">
-                           <div class="custom-file">
-                              <input type="file" 
-                              class="custom-file-input" 
-                              id="employeedocument" 
-                              name="employeedocument"
-                              accept=".png, .jpg, .jpeg"
-                              >
-                              <label id="lblempdoc" name="lblempdoc" class="custom-file-label" for="employeedocument">Choose file</label>
+                          <label for="employeedocument">Document(License/Pan Card)</label>
+                            <div class="input-group">
+                              <div class="custom-file">
+                                  <input type="file" 
+                                  class="custom-file-input" 
+                                  id="employeedocument" 
+                                  name="employeedocument"
+                                  accept=".png, .jpg, .jpeg"
+                                  >
+                                  <label id="lblempdoc" name="lblempdoc" class="custom-file-label" for="employeedocument">Choose file</label>
+                              </div>
+                            </div> 
+                       </div>
+
+                       <div class="form-group col-md-3">
+                        <img id="empDoc1" name="empDoc1" class="img-rounded" alt="Employee Document">
+                       </div>
+
+
+                       <div class="form-group  col-md-3">
+                        <label for="employeedocument2">Document(Ex.Adhar Card Front-Side)</label>
+                        <div class="input-group">
+                          <div class="custom-file">
+                            <input type="file" 
+                            class="custom-file-input" 
+                            id="employeedocument2" 
+                            name="employeedocument2"   
+                            accept=".png, .jpg, .jpeg"
+                            >
+                            <label id="lblempdoc2" name="lblempdoc2" class="custom-file-label" for="employeedocument2">Choose file</label>
                           </div>
-                       </div> 
+                        </div>
+                      </div>
+
+
+                      <div class="form-group col-md-3">
+                        <img id="empDoc2" name="empDoc2" class="img-rounded" alt="Employee Document">
+                       </div>
+
+                      <div class="form-group  col-md-3">
+                        <label for="employeedocument3">Document (Ex. Adhaar Card Back-Side)</label>
+                        <div class="input-group">
+                          <div class="custom-file">
+                            <input type="file" 
+                            class="custom-file-input" 
+                            id="employeedocument3" 
+                            name="employeedocument3"   
+                            accept=".png, .jpg, .jpeg"
+                            >
+                            <label id="lblempdoc2" name="lblempdoc2" class="custom-file-label" for="employeedocument3">Choose file</label>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <img id="empDoc3" name="empDoc3" class="img-rounded" alt="Employee Document">
                        </div>
                        <!--<div> <input type="file" 
                               id="employeeimage" 

@@ -5,23 +5,35 @@ $(document).ready(function () {
   loadtiming();
 
   var UPDATEID;
+  var SUBCOMPANYID;
+  var TIMINGID;
   //LOAD SUBCOMPANYS MASTER DATA
   function loadsubcompany() {
     $.ajax({
       type: "POST",
       url: $("#website-url").attr("value") + "subcompany",
-      data: { type: "getdata", token: $("#website-token").attr("value") },
+      data: { type: "getdata", token: $("#website-token").attr("value"),empID:UPDATEID,subcompanyID:SUBCOMPANYID },
       dataType: "json",
       cache: false,
       success: function (data) {
         if (data.isSuccess == true) {
           $("#subcompany").html("");
-          for (i = 0; i < data.Data.length; i++) {
+          if(data.Data.length > 1){
+            for (i = 0; i < data.Data.length; i++) {
+              $("#subcompany").append(
+                "<option value=" +
+                  data.Data[i]._id +
+                  ">" +
+                  data.Data[i].Name +
+                  "</option>"
+              );
+            }
+          } else {
             $("#subcompany").append(
               "<option value=" +
-                data.Data[i]._id +
+                data.Data._id +
                 ">" +
-                data.Data[i].Name +
+                data.Data.Name +
                 "</option>"
             );
           }
@@ -36,26 +48,41 @@ $(document).ready(function () {
     $.ajax({
       type: "POST",
       url: $("#website-url").attr("value") + "employee",
-      data: { type: "gettiming", token: $("#website-token").attr("value") },
+      data: { type: "gettiming", token: $("#website-token").attr("value"), timingID:TIMINGID },
       dataType: "json",
       cache: false,
       success: function (data) {
         if (data.isSuccess == true) {
           $("#timing").html("");
-          TIMING = data.Data[0]._id;
-          for (i = 0; i < data.Data.length; i++) {
+          TIMING = data.Data._id;
+          if(data.Data.length>1){
+            for (i = 0; i < data.Data.length; i++) {
+              $("#timing").append(
+                "<option value=" +
+                  data.Data[i]._id +
+                  ">" +
+                  data.Data[i].Name +
+                  " - " +
+                  data.Data[i].StartTime +
+                  " - " +
+                  data.Data[i].EndTime +
+                  "</option>"
+              );
+            }
+          } else {
             $("#timing").append(
               "<option value=" +
-                data.Data[i]._id +
+                data.Data._id +
                 ">" +
-                data.Data[i].Name +
+                data.Data.Name +
                 " - " +
-                data.Data[i].StartTime +
+                data.Data.StartTime +
                 " - " +
-                data.Data[i].EndTime +
+                data.Data.EndTime +
                 "</option>"
             );
           }
+          
         }
       },
     });
@@ -64,6 +91,10 @@ $(document).ready(function () {
 
   //LOAD EMPLOYEE IF EMPLOYEE'S ID GIVEN IN URL
   function loaddata() {
+    $("#empImg").hide();
+    $("#empDoc1").hide();
+    $("#empDoc2").hide();
+    $("#empDoc3").hide();
     $.ajax({
       type: "POST",
       url: $("#website-url").attr("value") + "employee",
@@ -73,51 +104,67 @@ $(document).ready(function () {
         token: $("#website-token").attr("value"),
       },
       success: function (data) {
+        $("#empImg").hide();
+        console.log(data);
         if (data.isSuccess == true && id != undefined) {
-          console.log(data);
+          console.log(data.Data[0].SubCompany);
+          SUBCOMPANYID = data.Data[0].SubCompany._id;
+          TIMINGID = data.Data[0].Timing;
           UPDATEID = id;
-          $("#firstname").val(data.Data.FirstName);
-          $("#middlename").val(data.Data.MiddleName);
-          $("#lastname").val(data.Data.LastName);
-          $("#gender").val(data.Data.Gender);
-          $("#dob").val(data.Data.DOB);
-          $("#mobile").val(data.Data.Mobile);
-          $("#mail").val(data.Data.Mail);
-          $("#married").val(data.Data.MartialStatus);
-          $("#joindate").val(data.Data.JoinDate);
-          $("#subcompany").val(data.Data.SubCompany);
-          $("#confirmationdate").val(data.Data.ConfirmationDate);
-          $("#terminationdate").val(data.Data.TerminationDate);
-          $("#prohibition").val(data.Data.Prohibition);
-          $("#department").val(data.Data.Department);
-          $("#designation").val(data.Data.Designation);
-          $("#idtype").val(data.Data.Idtype);
-          $("#idnumber").val(data.Data.IDNumber);
-          $("#wifiname").val(data.Data.WifiName);
-          $("#weekdayname").val(data.Data.WeekName);
-          $("#numofday").val(data.Data.WeekDay);
-          $("#timing").val(data.Data.Timing);
-          if(data.Data.GpsTrack == true){
+          loadsubcompany();
+          loadtiming();
+          $("#firstname").val(data.Data[0].FirstName);
+          $("#middlename").val(data.Data[0].MiddleName);
+          $("#lastname").val(data.Data[0].LastName);
+          $("#gender").val(data.Data[0].Gender);
+          $("#dob").val(data.Data[0].DOB);
+          $("#mobile").val(data.Data[0].Mobile);
+          $("#mail").val(data.Data[0].Mail);
+          $("#married").val(data.Data[0].MartialStatus);
+          $("#joindate").val(data.Data[0].JoinDate);
+        
+          $("#subcompany option:contains(" + data.Data[0].SubCompany.Name + ")").attr('selected', 'selected');
+          $("#confirmationdate").val(data.Data[0].ConfirmationDate);
+          $("#terminationdate").val(data.Data[0].TerminationDate);
+          $("#prohibition").val(data.Data[0].Prohibition);
+          $("#department").val(data.Data[0].Department);
+          $("#designation").val(data.Data[0].Designation);
+          $("#idtype").val(data.Data[0].Idtype);
+          $("#idnumber").val(data.Data[0].IDNumber);
+          $("#wifiname").val(data.Data[0].WifiName);
+          $("#weekdayname").val(data.Data[0].WeekName);
+          $("#numofday").val(data.Data[0].WeekDay);
+          $("#timing").val(data.Data[0].Timing);
+          if(data.Data[0].GpsTrack == true){
             $("#gpstrack1").prop('checked',true);
           }else{
             $("#gpstrack2").prop('checked',true);
           }
-          $("#accountname").val(data.Data.AccountName);
-          $("#bankname").val(data.Data.BankName);
-          $("#accountnumber").val(data.Data.AccountNumber);
-          $("#ifsccode").val(data.Data.IFSCCode);
-          $("#branchname").val(data.Data.BranchName);
-          $("#micrcode").val(data.Data.MICRCode);
-          $("#upicode").val(data.Data.UPICode);
-          $("#employeedocument").val(data.Data.CertificateImage);
-          if(data.Data.ProfileImage.length==0 || data.Data.CertificateImage.length == 0){
-            $("#lblempimg").html('Choose File');
-            $("#lblempdoc").html('Choose File');
-          }else{
-            $("#lblempimg").html(data.Data.ProfileImage);
-            $("#lblempdoc").html(data.Data.CertificateImage);
+          $("#accountname").val(data.Data[0].AccountName);
+          $("#bankname").val(data.Data[0].BankName);
+          $("#accountnumber").val(data.Data[0].AccountNumber);
+          $("#ifsccode").val(data.Data[0].IFSCCode);
+          $("#branchname").val(data.Data[0].BranchName);
+          $("#micrcode").val(data.Data[0].MICRCode);
+          $("#upicode").val(data.Data[0].UPICode);
+          if(data.Data[0].ProfileImage != "" || data.Data[0].CertificateImage != "" ){
+            if(data.Data[0].ProfileImage != undefined || data.Data[0].CertificateImage != undefined){
+              console.log(data.Data[0].ProfileImage);
+              $("#empImg").show();
+              $("#empImg").attr("src",$("#website-url").attr("value")+"uploads/"+data.Data[0].ProfileImage);
+              $("#empDoc1").show();
+              $("#empDoc1").attr("src",$("#website-url").attr("value")+"uploads/"+data.Data[0].CertificateImage);
+              $("#empDoc2").show();
+              $("#empDoc2").attr("src",$("#website-url").attr("value")+"uploads/"+data.Data[0].CertificateImage1);
+              $("#empDoc3").show();
+              $("#empDoc3").attr("src",$("#website-url").attr("value")+"uploads/"+data.Data[0].CertificateImage2);
+            }
           }
-          
+          // $("#lblempimg").html(data.Data.ProfileImage);
+          // $("#lblempdoc").html(data.Data.CertificateImage);
+          $("#employeedocument").val(data.Data[0].CertificateImage);
+          $("#employeeimage").val(data.Data[0].ProfileImage);
+          //$("employeedocument").prop('src',data.Data.ProfileImage);
           window.scrollTo(0, 0);
           /*$("#btn-submit-on").html(
             "<button type='submit' class='btn btn-success' id='btn-update'>Update</button>" +
@@ -240,6 +287,7 @@ $(document).ready(function () {
           );
         },
         success: function (data) {
+         
           if (data.isSuccess == true) {
             $("#staticmessage")
               .removeClass("text-success text-danger")
@@ -450,7 +498,7 @@ $(document).ready(function () {
   $('#employeedata').submit(function (e) {
     e.preventDefault();
     var formData = new FormData(this);
-    if( id == undefined ){
+    if(id == undefined){
       formData.append('type', 'insert');
     }
     else{
@@ -467,7 +515,6 @@ $(document).ready(function () {
       contentType: false,
       processData: false,
       beforeSend: function () {
-      
         $("#btn-submit").html(
           '<button class="btn btn-primary float-right" type="button">\
                                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>\
@@ -475,7 +522,6 @@ $(document).ready(function () {
                                 </button>'
         );
       },
-      
       success: function(data) {
         if (data.isSuccess == true) {
           toastr.success(data.Message);
@@ -490,5 +536,10 @@ $(document).ready(function () {
       );
       },
     });
+    loaddata();
   });
+  
+ 
+
+
 });
