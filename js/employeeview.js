@@ -15,6 +15,7 @@ function loaddata() {
       },
       success: function (data) {
         if (data.isSuccess == true) {
+          console.log(data);
           $("#displaydata").html("");
           for (i = 0; i < data.Data.length; i++) {
             data.Data[i]["MailId"] =
@@ -24,6 +25,8 @@ function loaddata() {
             $("#displaydata").append(
               "<tr><td>" +
                 data.Data[i]["Name"] +
+                "</td><td>" +
+                data.Data[i].SubCompany.Name +
                 "</td><td>" +
                 data.Data[i]["MailId"] +
                 "</td><td>" +

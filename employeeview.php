@@ -36,6 +36,7 @@
                 <thead>
                   <tr>
                     <th>Name</th>
+                    <th>SubCompany Name</th>
                     <th>Mail</th>
                     <th>Mobile</th>
                     <th>Action</th>
