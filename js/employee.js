@@ -1,14 +1,17 @@
 $(document).ready(function () {
   var id = $(location).attr("href").split("=")[1];
-  loaddata();
   loadsubcompany();
-  loadtiming();
-
+  //loadtiming();
+  var subcompanydata;
+  var timingdata;
+  //loaddata();
   var UPDATEID;
   var SUBCOMPANYID;
   var TIMINGID;
+ 
   //LOAD SUBCOMPANYS MASTER DATA
   function loadsubcompany() {
+  
     $.ajax({
       type: "POST",
       url: $("#website-url").attr("value") + "subcompany",
@@ -17,6 +20,7 @@ $(document).ready(function () {
       cache: false,
       success: function (data) {
         if (data.isSuccess == true) {
+          subcompanydata = data;
           $("#subcompany").html("");
           if(data.Data.length > 1){
             for (i = 0; i < data.Data.length; i++) {
@@ -37,6 +41,7 @@ $(document).ready(function () {
                 "</option>"
             );
           }
+          loadtiming();
         }
       },
     });
@@ -53,6 +58,7 @@ $(document).ready(function () {
       cache: false,
       success: function (data) {
         if (data.isSuccess == true) {
+          timingdata = data;
           $("#timing").html("");
           TIMING = data.Data._id;
           if(data.Data.length>1){
@@ -82,7 +88,7 @@ $(document).ready(function () {
                 "</option>"
             );
           }
-          
+          loaddata();
         }
       },
     });
@@ -91,10 +97,13 @@ $(document).ready(function () {
 
   //LOAD EMPLOYEE IF EMPLOYEE'S ID GIVEN IN URL
   function loaddata() {
+
     $("#empImg").hide();
     $("#empDoc1").hide();
     $("#empDoc2").hide();
     $("#empDoc3").hide();
+    
+    
     $.ajax({
       type: "POST",
       url: $("#website-url").attr("value") + "employee",
@@ -105,14 +114,10 @@ $(document).ready(function () {
       },
       success: function (data) {
         $("#empImg").hide();
-        console.log(data);
         if (data.isSuccess == true && id != undefined) {
-          console.log(data.Data[0].SubCompany);
           SUBCOMPANYID = data.Data[0].SubCompany._id;
           TIMINGID = data.Data[0].Timing;
           UPDATEID = id;
-          loadsubcompany();
-          loadtiming();
           $("#firstname").val(data.Data[0].FirstName);
           $("#middlename").val(data.Data[0].MiddleName);
           $("#lastname").val(data.Data[0].LastName);
@@ -122,8 +127,7 @@ $(document).ready(function () {
           $("#mail").val(data.Data[0].Mail);
           $("#married").val(data.Data[0].MartialStatus);
           $("#joindate").val(data.Data[0].JoinDate);
-        
-          $("#subcompany option:contains(" + data.Data[0].SubCompany.Name + ")").attr('selected', 'selected');
+          $('#subcompany').val(data.Data[0].SubCompany._id);
           $("#confirmationdate").val(data.Data[0].ConfirmationDate);
           $("#terminationdate").val(data.Data[0].TerminationDate);
           $("#prohibition").val(data.Data[0].Prohibition);
@@ -147,9 +151,32 @@ $(document).ready(function () {
           $("#branchname").val(data.Data[0].BranchName);
           $("#micrcode").val(data.Data[0].MICRCode);
           $("#upicode").val(data.Data[0].UPICode);
-          if(data.Data[0].ProfileImage != "" || data.Data[0].CertificateImage != "" ){
-            if(data.Data[0].ProfileImage != undefined || data.Data[0].CertificateImage != undefined){
-              console.log(data.Data[0].ProfileImage);
+          if(data.Data[0].ProfileImage != undefined || data.Data[0].CertificateImage != undefined ){
+            if(data.Data[0].ProfileImage != undefined && data.Data[0].CertificateImage == undefined && data.Data[0].CertificateImage1 == undefined && data.Data[0].CertificateImage2 == undefined ){
+              $("#empImg").show();
+              $("#empImg").attr("src",$("#website-url").attr("value")+"uploads/"+data.Data[0].ProfileImage);
+              $("#empDoc1").show();
+              $("#empDoc2").show();
+              $("#empDoc3").show();
+            }
+            else if(data.Data[0].ProfileImage != undefined && data.Data[0].CertificateImage != undefined && data.Data[0].CertificateImage1 == undefined && data.Data[0].CertificateImage2 == undefined ){
+              $("#empImg").show();
+              $("#empImg").attr("src",$("#website-url").attr("value")+"uploads/"+data.Data[0].ProfileImage);
+              $("#empDoc1").show();
+              $("#empDoc1").attr("src",$("#website-url").attr("value")+"uploads/"+data.Data[0].CertificateImage);
+              $("#empDoc2").show();
+              $("#empDoc3").show();
+            }
+            else if(data.Data[0].ProfileImage != undefined && data.Data[0].CertificateImage != undefined && data.Data[0].CertificateImage1 != undefined && data.Data[0].CertificateImage2 == undefined ){
+              $("#empImg").show();
+              $("#empImg").attr("src",$("#website-url").attr("value")+"uploads/"+data.Data[0].ProfileImage);
+              $("#empDoc1").show();
+              $("#empDoc1").attr("src",$("#website-url").attr("value")+"uploads/"+data.Data[0].CertificateImage);
+              $("#empDoc2").show();
+              $("#empDoc2").attr("src",$("#website-url").attr("value")+"uploads/"+data.Data[0].CertificateImage1);
+              $("#empDoc3").show();
+            }
+            else{
               $("#empImg").show();
               $("#empImg").attr("src",$("#website-url").attr("value")+"uploads/"+data.Data[0].ProfileImage);
               $("#empDoc1").show();
@@ -160,11 +187,6 @@ $(document).ready(function () {
               $("#empDoc3").attr("src",$("#website-url").attr("value")+"uploads/"+data.Data[0].CertificateImage2);
             }
           }
-          // $("#lblempimg").html(data.Data.ProfileImage);
-          // $("#lblempdoc").html(data.Data.CertificateImage);
-          $("#employeedocument").val(data.Data[0].CertificateImage);
-          $("#employeeimage").val(data.Data[0].ProfileImage);
-          //$("employeedocument").prop('src',data.Data.ProfileImage);
           window.scrollTo(0, 0);
           /*$("#btn-submit-on").html(
             "<button type='submit' class='btn btn-success' id='btn-update'>Update</button>" +
@@ -413,6 +435,10 @@ $(document).ready(function () {
       $("#errorMobile").html("Mobile Number can't be empty");
       val = 0;
     }
+    if($('input[name=gpstrack]:checked','#employeedata').val()==0 && $("#wifiname").val()==""){
+      $("#errorwifiname").html("WiFi Name can't be empty");
+      val=0;
+    }
     return val;
   }
 
@@ -497,6 +523,7 @@ $(document).ready(function () {
 // SUBMIT FORM EVENT UPDATE AND INSERT DATA ON FORM SUBMIT EVENT
   $('#employeedata').submit(function (e) {
     e.preventDefault();
+    
     var formData = new FormData(this);
     if(id == undefined){
       formData.append('type', 'insert');
@@ -506,6 +533,8 @@ $(document).ready(function () {
       formData.append('id',UPDATEID);
     }
     formData.append('token',$("#website-token").attr("value"));
+    var val = validation();
+    if(val==1){
     $.ajax({
       type: "POST",
       url: $("#website-url").attr("value") + "employee",
@@ -536,7 +565,8 @@ $(document).ready(function () {
       );
       },
     });
-    loaddata();
+  }
+    //loadsubcompany();
   });
   
  

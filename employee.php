@@ -332,6 +332,7 @@
                           name="wifiname"
                           placeholder="Wifi Name"
                         />
+                        <label id="errorwifiname" class="text-danger"></label>
                       </div>
 
                          <!--Name of days Drop Down-->
@@ -390,7 +391,7 @@
                       <div class="form-group col-md-6"></div>
                         <!--Employee Profile Input File-->
                       <div class="form-group  col-md-3">
-                        <label for="employeeimage">Employee's Image</label>
+                        <label for="employeeimage">Employee's Image*</label>
                         <div class="input-group">
                           <div class="custom-file">
                             <input type="file" 
@@ -405,7 +406,7 @@
                       </div>
 
                       <div class="form-group col-md-3">
-                        <img id="empImg" name="empImg" class="img-rounded" alt="Employee Profile Picture">
+                        <img id="empImg" name="empImg" src="/dist/img/defultImage.png" class="img-rounded" alt="Profile Picture" style="height:200px; width:200px;">
                       </div>
 
 
@@ -413,7 +414,7 @@
 
                         <!--Employee Certificate Input File-->
                         <div class="form-group  col-md-3">
-                          <label for="employeedocument">Document(License/Pan Card)</label>
+                          <label for="employeedocument">Document(License/Pan Card)*</label>
                             <div class="input-group">
                               <div class="custom-file">
                                   <input type="file" 
@@ -428,12 +429,12 @@
                        </div>
 
                        <div class="form-group col-md-3">
-                        <img id="empDoc1" name="empDoc1" class="img-rounded" alt="Employee Document">
+                        <img id="empDoc1" src="/dist/img/defultImage.png" name="empDoc1" class="img-rounded" alt="Pan Card/License" style="height:200px; width:200px;">
                        </div>
 
 
                        <div class="form-group  col-md-3">
-                        <label for="employeedocument2">Document(Ex.Adhar Card Front-Side)</label>
+                        <label for="employeedocument2">Document(Ex.Adhar Card Front-Side)*</label>
                         <div class="input-group">
                           <div class="custom-file">
                             <input type="file" 
@@ -449,7 +450,7 @@
 
 
                       <div class="form-group col-md-3">
-                        <img id="empDoc2" name="empDoc2" class="img-rounded" alt="Employee Document">
+                        <img id="empDoc2" src="/dist/img/defultImage.png"  name="empDoc2" class="img-rounded" alt="Adhaar Card Front-Side" style="height:200px; width:200px;">
                        </div>
 
                       <div class="form-group  col-md-3">
@@ -468,7 +469,7 @@
                       </div>
 
                       <div class="form-group col-md-3">
-                        <img id="empDoc3" name="empDoc3" class="img-rounded" alt="Employee Document">
+                        <img id="empDoc3" src="/dist/img/defultImage.png" name="empDoc3" class="img-rounded" alt="Adhaar Card Back-Side" style="height:200px; width:200px;">
                        </div>
                        <!--<div> <input type="file" 
                               id="employeeimage" 
