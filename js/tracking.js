@@ -3,6 +3,74 @@ $(document).ready(function () {
     script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyC55UXQ86t__gJCOoemwCkDY6qWNKLJ3hM&callback=initMap";
     document.getElementsByTagName('head')[0].appendChild(script);
 
+    var map;
+    var markers = [];
+    var count = 0; 
+    var marker;
+    var infowindow;    
+    var myLatLng;       
+                                  
+    window.initMap = function() {
+        myLatLng = { lat: 21.1692881, lng: 72.8300554 };
+        infowindow = new google.maps.InfoWindow();
+        map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 9.92,
+            center: myLatLng,
+        });
+        marker = new google.maps.Marker({
+                position: myLatLng,
+                map,
+                title: "Employee Location",
+                draggable: true  
+        });
+        google.maps.event.addListener(marker, 'dragend', function (evt) {
+            $('#latlong').val('http://www.google.com/maps/place/'+evt.latLng.lat()+','+ evt.latLng.lng());
+            $('#latitude').val(evt.latLng.lat());
+            $('#longitude').val(evt.latLng.lng())
+         
+        });
+
+        google.maps.event.addListener(marker, 'dragstart', function (evt) {
+            console.log("start");
+        });
+        map.setCenter(marker.position);
+        marker.setMap(map);
+    }
+                          
+    function getClean() { 
+    
+        
+        if(longitude == "" || latitude == ""){
+        latitude = 21.1692881;
+        longitude = 72.8300554;
+        }
+        else{
+        latitude =  parseFloat(latitude);
+        longitude = parseFloat(longitude);
+        }
+        myLatLng = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
+        marker.setMap(null);
+        marker = new google.maps.Marker({
+                position: myLatLng,
+                map,
+                title: "office",
+                draggable: true  
+    });
+        console.log("work");
+        marker.setMap(map);      
+    }                         
+    setInterval(() => {
+        //getClean();
+        //getStarted();
+    }, 100000);
+
+
+
+
+
+
+
+
     var SUBCOMPANY;
     loadcompanyname();
     loadsubcompanyname();
@@ -149,67 +217,7 @@ $(document).ready(function () {
     loadsubcompany();
     });
     
-    var map;
-    var markers = [];
-    var count = 0; 
-    var marker;
-    var infowindow;    
-    var myLatLng;       
-                                  
-    window.initMap = function() {
-        myLatLng = { lat: 21.1692881, lng: 72.8300554 };
-        infowindow = new google.maps.InfoWindow();
-        map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 9.92,
-            center: myLatLng,
-        });
-        var image = '/home/dhanpal/Desktop/it_futurz/hindtv/dist/img/markerImage.png';
-        marker = new google.maps.Marker({
-                position: myLatLng,
-                map,
-                title: "Employee Location",
-                draggable: true  
-        });
-        google.maps.event.addListener(marker, 'dragend', function (evt) {
-            $('#latlong').val('http://www.google.com/maps/place/'+evt.latLng.lat()+','+ evt.latLng.lng());
-            $('#latitude').val(evt.latLng.lat());
-            $('#longitude').val(evt.latLng.lng())
-         
-        });
-
-        google.maps.event.addListener(marker, 'dragstart', function (evt) {
-            console.log("start");
-        });
-        map.setCenter(marker.position);
-        marker.setMap(map);
-    }
-                          
-    function getClean() { 
-    
-        
-        if(longitude == "" || latitude == ""){
-        latitude = 21.1692881;
-        longitude = 72.8300554;
-        }
-        else{
-        latitude =  parseFloat(latitude);
-        longitude = parseFloat(longitude);
-        }
-        myLatLng = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
-        marker.setMap(null);
-        marker = new google.maps.Marker({
-                position: myLatLng,
-                map,
-                title: "office",
-                draggable: true  
-    });
-        console.log("work");
-        marker.setMap(map);      
-    }                         
-    setInterval(() => {
-        //getClean();
-        //getStarted();
-    }, 100000);                 
+                     
                          
 
 

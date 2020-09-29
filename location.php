@@ -23,28 +23,6 @@
                     <div class="card-body row">
 
                       <div class="form-group col-md-3">
-                        <label for="companyname">Company Name</label>
-                        <div class="input-group">
-                          <select
-                            class="form-control"
-                            id="companyname"
-                            name="companyname"
-                          ></select>
-                        </div>
-                      </div>
-
-                      <div class="form-group col-md-3">
-                        <label for="subcompanyname">Sub Company Name</label>
-                        <div class="input-group">
-                          <select
-                            class="form-control"
-                            id="subcompanyname"
-                            name="subcompanyname"
-                          ></select>
-                        </div>
-                      </div>
-
-                      <div class="form-group col-md-6">
                         <label for="locationname">Location Name</label>
                         <input
                           type="text"
@@ -137,7 +115,6 @@
                 <thead>
                   <tr>
                     <th>Location Name</th>
-                    <th>SubCompany Name</th>
                     <th>View Location</th>
                   </tr>
                 </thead>

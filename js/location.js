@@ -4,8 +4,8 @@ $(document).ready(function(){
     document.getElementsByTagName('head')[0].appendChild(script);
 
     var SUBCOMPANY;
-    loadcompanyname();
-    loadsubcompanyname();
+    //loadcompanyname();
+    //loadsubcompanyname();
     loaddata();
 
     function loadsubcompanyname() {
@@ -81,8 +81,6 @@ $(document).ready(function(){
                       "<tr><td>" +
                       data.Data[i].Name +
                       "</td><td>" +
-                        data.Data[i].SubCompanyId.Name +
-                        "</td><td>" +
                         '<a target="blank" href=' +
                         data.Data[i]["Link"] +
                         ">View Location</a></td></tr>"
@@ -100,7 +98,6 @@ $(document).ready(function(){
 
     $(document).on("click", "#btn-submit",function(e){
         e.preventDefault();
-        var sid = $('#subcompanyname').val();
         var lat  =  $('#latitude').val();
         var long =  $('#longitude').val();
         var link = $('#link').val();
@@ -111,7 +108,6 @@ $(document).ready(function(){
             data:{
                 type:"insert",
                 name:name,
-                subcompanyid:sid,
                 latitude:lat,
                 longitude:long,
                 link:link
@@ -251,9 +247,4 @@ $(document).ready(function(){
         map.setCenter(marker.position);
         marker.setMap(map);
     }
-
-    $(document).on("change", "#companyname", function () {
-    COMPANY = $("#companyname").val();
-    loadsubcompanyname();
-    });
 });
