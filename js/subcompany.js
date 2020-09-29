@@ -4,8 +4,9 @@ $(document).ready(function () {
   script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyC55UXQ86t__gJCOoemwCkDY6qWNKLJ3hM&callback=initMap";
   document.getElementsByTagName('head')[0].appendChild(script);
 
-  loaddata();
+  //loaddata();
   loadcompany();
+  //loadlocation();
 
   var UPDATEID;
 
@@ -29,6 +30,33 @@ $(document).ready(function () {
             );
           }
         }
+        loadlocation();
+      },
+    });
+  }
+
+
+  function loadlocation() {
+    $.ajax({
+      type: "POST",
+      url: $("#website-url").attr("value") + "subcompnaylocation",
+      data: {  type:"getdata" },
+      dataType: "json",
+      cache: false,
+      success: function (data) {
+        if (data.isSuccess == true) {
+          $("#officelocation").html("");
+          for (i = 0; i < data.Data.length; i++) {
+            $("#officelocation").append(
+              "<option value=" +
+                data.Data[i]._id +
+                ">" +
+                data.Data[i].Name +
+                "</option>"
+            );
+          }
+        }
+        loaddata();
       },
     });
   }
@@ -100,7 +128,6 @@ $(document).ready(function () {
   }
 
   $(document).on("click", "#edit-data", function (e) {
-    
     e.preventDefault();
     var id = $(this).attr("href").split("=")[1];
     $.ajax({
@@ -118,16 +145,18 @@ $(document).ready(function () {
           $("#cpn").val(data.Data[0].ContactPersonNumber);
           $("#email").val(data.Data[0].Email);
           $("#gstin").val(data.Data[0].GSTIN);
-          $("#latlong").val(data.Data[0].Link);
-          $("#longitude").val(data.Data[0].long);
+          // $("#latlong").val(data.Data[0].Link);
+          // $("#longitude").val(data.Data[0].long);
           $("#latitude").val(data.Data[0].lat);
           $("#company").val(data.Data[0].CompanyId);
           $("#buffertime").val(data.Data[0].BufferTime);
           $("#wifiname").val(data.Data[0].wifiName);
           $("#memonumber").val(data.Data[0].MemoNumber);
           $("#salarydate").val(data.Data[0].SalaryDate);
-          $("#latitude").val(data.Data[0].lat);
-          $("#longitude").val(data.Data[0].long);
+          $("#officelocation").val(data.Data[0].LocationId);
+          // $("#latitude").val(data.Data[0].lat);
+          // $("#longitude").val(data.Data[0].long);
+          $("#location").val(data.Data[0].LocationId);
           window.scrollTo(0, 0);
           $("#btn-submit-on").html(
             "<button type='submit' class='btn btn-success' id='btn-update'>Update</button>" +
@@ -136,8 +165,7 @@ $(document).ready(function () {
         }
       },
     });
-    console.log($("#longitude").val());
-    console.log($("#latitude").val());
+   
     getClean();
   });
 
@@ -154,9 +182,9 @@ $(document).ready(function () {
     e.preventDefault();
     val1 = 1;
     if (UPDATEID !== undefined) {
-      if($("#latlong").val() == "" || $("#latlong").val() == undefined){
-        toastr.error("Please,Select the Location");
-      }
+      // if($("#latlong").val() == "" || $("#latlong").val() == undefined){
+      //   toastr.error("Please,Select the Location");
+      // }
       /*if ($("#latlong").val() != "") {
         if ($("#latlong").val().split("@")) {
           var lat = $("#latlong").val().split("@")[1].split(",")[0];
@@ -181,10 +209,12 @@ $(document).ready(function () {
             Email: $("#email").val(),
             GSTIN: $("#gstin").val(),
             companyid: $("#company").val(),
+            location: $("#officelocation").val(),
+
             //lat: lat,
             //long: long,
-            lat: $("#latitude").val(),
-            long : $("#longitude").val(),
+            //lat: $("#latitude").val(),
+            //long : $("#longitude").val(),
             googlelink: $("#latlong").val(),
             timing: $("#timing").val(),
             buffertime: $("#buffertime").val(),
@@ -251,13 +281,10 @@ $(document).ready(function () {
     }*/
 
     val = validation();
-    if($("#latlong").val() == "" || $("#latlong").val() == undefined){
-      toastr.error("Enter Google Map Link");
-    }
-
-    
+    // if($("#latlong").val() == "" || $("#latlong").val() == undefined){
+    //   toastr.error("Enter Google Map Link");
+    // }
     if (val == 1 && val1 == 1) {
-      
       $.ajax({
         type: "POST",
         url: $("#website-url").attr("value") + "subcompany",
@@ -270,11 +297,12 @@ $(document).ready(function () {
           Email: $("#email").val(),
           GSTIN: $("#gstin").val(),
           companyid: $("#company").val(),
-          lat: $("#latitude").val(),
-          long : $("#longitude").val(),
+          //lat: $("#latitude").val(),
+          //long : $("#longitude").val(),
+          location: $("#officelocation").val(),
           //lat: lat,
           //long: long,
-          googlelink: $("#latlong").val(),
+          //googlelink: $("#latlong").val(),
           timing: $("#timing").val(),
           buffertime: $("#buffertime").val(),
           //wifiname: $("#wifiname").val(),
@@ -325,76 +353,7 @@ $(document).ready(function () {
     return val;
   }
 
-  //**********************google map */
-  var map;
-                            var markers = [];
-                            var count = 0; 
-                            var marker;
-                            var infowindow;    
-                            var myLatLng;       
-                           
-                         
-                              
-                            
-                         
-                            window.initMap = function() {
-                              myLatLng = { lat: 21.1692881, lng: 72.8300554 };
-                              infowindow = new google.maps.InfoWindow();
-                              map = new google.maps.Map(document.getElementById("map"), {
-                                  zoom: 9.92,
-                                  center: myLatLng,
-                              });
-                              var image = '/home/dhanpal/Desktop/it_futurz/hindtv/dist/img/markerImage.png';
-                              marker = new google.maps.Marker({
-                                        position: myLatLng,
-                                        map,
-                                        title: "office",
-                                        draggable: true  
-                              });
-                              google.maps.event.addListener(marker, 'dragend', function (evt) {
-                                  $('#latlong').val('http://www.google.com/maps/place/'+evt.latLng.lat()+','+ evt.latLng.lng());
-                                  $('#latitude').val(evt.latLng.lat());
-                                  $('#longitude').val(evt.latLng.lng())
-                              });
-
-                              google.maps.event.addListener(marker, 'dragstart', function (evt) {
-                                  console.log("start");
-                              });
-                              map.setCenter(marker.position);
-                              marker.setMap(map);
-                            }
-                          
-                            function getClean() { 
-                              alert("null");
-                              
-                              
-                              var latitude = $("#latitude").val();
-                              var longitude = $("#longitude").val();
-                              console.log($("#longitude").val());
-                              console.log($("#latitude").val());
-                              if(longitude == "" || latitude == ""){
-                                latitude = 21.1692881;
-                                longitude = 72.8300554;
-                              }
-                              else{
-                                latitude =  parseFloat(latitude);
-                                longitude = parseFloat(longitude);
-                              }
-                              myLatLng = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
-                              marker.setMap(null);
-                              marker = new google.maps.Marker({
-                                      position: myLatLng,
-                                      map,
-                                      title: "office",
-                                      draggable: true  
-                            });
-                              console.log("work");
-                              marker.setMap(map);      
-                            }                         
-                            setInterval(() => {
-                              //getClean();
-                              //getStarted();
-                            }, 100000);                 
-                         
+  // google map start */
+  // google map end        
   
 });

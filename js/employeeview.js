@@ -15,7 +15,6 @@ function loaddata() {
       },
       success: function (data) {
         if (data.isSuccess == true) {
-          console.log(data);
           $("#displaydata").html("");
           for (i = 0; i < data.Data.length; i++) {
             data.Data[i]["MailId"] =

@@ -108,7 +108,9 @@
                             </div>
                           </div>
                         </div>
-                        <div class="form-group col-md-3">
+
+
+                        <!-- <div class="form-group col-md-3">
                           <label for="latlong">Google Map Link</label>
                           <div class="input-group">
                             <div class="custom-file">
@@ -122,7 +124,24 @@
                             </div>
                           </div>
                           <label id="errorLatLong" class='text-danger'></label>
+                        </div> -->
+
+                        <div class="form-group col-md-3">
+                          <label for="officelocation">Office Location</label>
+                          <div class="input-group">
+                            <div class="custom-file">
+                              <select
+                                class="form-control"
+                                name="officelocation"
+                                id="officelocation"
+                              >
+                              </select>
+                            </div>
+                          </div>
                         </div>
+
+
+
                         <!--<div class="form-group col-md-3">
                           <label for="latlong">Sub Wifi Name</label>
                           <div class="input-group">
@@ -209,101 +228,9 @@
                         <input type="hidden"  id="longitude" name="longitude">
                         </div>
 
-                              <!--Gooogle Map-->
-                        <div class="form-group col-12">
-                          <div id="map"></div>
-                           <!-- <script
-                            src="https://code.jquery.com/jquery-3.5.1.js"
-                            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-                            crossorigin="anonymous"
-                          ></script> 
-                          <script>
-                            
-                            var map;
-                            var markers = [];
-                            var count = 0; 
-                            var marker;
-                            var infowindow;    
-                            var myLatLng;       
-                            var longitude = $("#longitude").val();
-                            var latitude = $("#latitude").val();
-                            if(longitude=="" && latitude == ""){
-                              
-                              latitude = 21.1692881;
-                              longitude = 72.8300554;
-                              //myLatLng = { lat: 21.1692881, lng: 72.8300554 };
-                            }
-                            else{
-                              latitude = parseFloat(latitude);
-                              longitude = parseFloat(longitude);
-                            }
-                            function initMap() {
-                              myLatLng = { lat: latitude , lng: longitude };
-                              //myLatLng = { lat: 21.1692881, lng: 72.8300554 };
-                              infowindow = new google.maps.InfoWindow();
-                              map = new google.maps.Map(document.getElementById("map"), {
-                                  zoom: 9.92,
-                                  center: myLatLng,
-                              });
-                              var image = '/home/dhanpal/Desktop/it_futurz/hindtv/dist/img/markerImage.png';
-                              marker = new google.maps.Marker({
-                                        position: myLatLng,
-                                        map,
-                                        title: "office",
-                                        draggable: true  
-                              });
-                              google.maps.event.addListener(marker, 'dragend', function (evt) {
-                                  $('#latlong').val('http://www.google.com/maps/place/'+evt.latLng.lat()+','+ evt.latLng.lng());
-                                  $('#latitude').val(evt.latLng.lat());
-                                  $('#longitude').val(evt.latLng.lng())
-                              });
-
-                              google.maps.event.addListener(marker, 'dragstart', function (evt) {
-                                  console.log("start");
-                              });
-                              map.setCenter(marker.position);
-                              marker.setMap(map);
-                            }
-                          
-
-                            function getClean() { 
-                              var longitude = $("#longitude").val();
-                              var latitude = $("#latitude").val();
-                              if(longitude!="" && latitude !="" ){
-                                marker.setMap(null);
-                                myLatLng = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
-                                console.log(longitude);
-                                console.log(latitude);
-                                marker = new google.maps.Marker({
-                                        position: myLatLng,
-                                        map,
-                                        title: "office",
-                                        draggable: true  
-                              });
-                              }
-                              marker.setMap(map);      
-                            }
-                           
-                                                        
-                            setInterval(() => {
-                              getClean();
-                              //getStarted();
-                            }, 100000);
-                          </script> -->
-                        
-                          <!-- /*<script
-                            async
-                            defer
-                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC55UXQ86t__gJCOoemwCkDY6qWNKLJ3hM&callback=initMap"
-                          ></script> -->
-                        </div>
-                              <!--/Google Map-->
-
-
-
-
-
-
+                        <!--Gooogle Map-->
+                  
+                        <!--/Google Map-->
 
                       </div>
                       <!-- /.card-body -->

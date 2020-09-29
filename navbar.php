@@ -137,6 +137,13 @@
                   <p>Add/Update</p>
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a href="location.php" class="nav-link">
+                  <i class="nav-icon fas fa-map-marker-alt"></i>
+                  <p>Add Office Location</p>
+                </a>
+              </li>
             </ul>
 
           </li>
