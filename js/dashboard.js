@@ -1,11 +1,12 @@
 $(document).ready(function(){
     loaddata();
     function loaddata(){
+        console.log("word");
         $.ajax({
             type:"POST",
             url: $("#website-url").attr("value") + "dashboard",
             data : {
-                type:"getdata",
+                type:"getempdata",
             },
             beforeSend: function () {
                 $("#displaydata").html(
@@ -13,6 +14,7 @@ $(document).ready(function(){
                 );
               },
             success: function(data){
+                console.log(data);
                 $("#displaydata").html("");
                 if(data.isSuccess == true){
                     for(i=0;i<data.Data.length;i++){

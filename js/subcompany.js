@@ -1,9 +1,5 @@
 
 $(document).ready(function () {
-  var script = document.createElement('script');
-  script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyC55UXQ86t__gJCOoemwCkDY6qWNKLJ3hM&callback=initMap";
-  document.getElementsByTagName('head')[0].appendChild(script);
-
   //loaddata();
   loadcompany();
   //loadlocation();
@@ -166,7 +162,6 @@ $(document).ready(function () {
       },
     });
    
-    getClean();
   });
 
   $(document).on("click", "#btn-cancel", function (e) {
@@ -180,6 +175,7 @@ $(document).ready(function () {
 
   $(document).on("click", "#btn-update", function (e) {
     e.preventDefault();
+    console.log(UPDATEID);
     val1 = 1;
     if (UPDATEID !== undefined) {
       // if($("#latlong").val() == "" || $("#latlong").val() == undefined){
@@ -196,6 +192,7 @@ $(document).ready(function () {
       }*/
       val = validation();
       if (val == 1 && val1 == 1) {
+        alert("work");
         $.ajax({
           type: "POST",
           url: $("#website-url").attr("value") + "subcompany",
@@ -210,17 +207,11 @@ $(document).ready(function () {
             GSTIN: $("#gstin").val(),
             companyid: $("#company").val(),
             location: $("#officelocation").val(),
-
-            //lat: lat,
-            //long: long,
-            //lat: $("#latitude").val(),
-            //long : $("#longitude").val(),
             googlelink: $("#latlong").val(),
             timing: $("#timing").val(),
             buffertime: $("#buffertime").val(),
             memonumber: $("#memonumber").val(),
             salarydate: $("#salarydate").val(),
-            
           },
           dataType: "json",
           cache: false,
@@ -352,8 +343,6 @@ $(document).ready(function () {
     }
     return val;
   }
-
-  // google map start */
-  // google map end        
+     
   
 });

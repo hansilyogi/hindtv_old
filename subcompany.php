@@ -223,10 +223,7 @@
                             </select>
                           </div>
                         </div>
-                        <div class="form-group col-md-3">
-                        <input type="hidden"  id="latitude" name="latitude">
-                        <input type="hidden"  id="longitude" name="longitude">
-                        </div>
+                       
 
                         <!--Gooogle Map-->
                   

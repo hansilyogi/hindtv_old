@@ -9,7 +9,7 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Track</h1>
+                <h1 class="m-0 text-dark">Tracking</h1>
               </div>
             </div>
 
@@ -17,9 +17,9 @@
               <div class="col-lg-12">
                 <div class="card card-success">
                   <div class="card-header">
-                    <h3 class="card-title">Track</h3>
+                    <h3 class="card-title">Choose Detail</h3>
                   </div>
-                  <form role="form">
+                  <form role="form" id="trackingform">
                     <div class="card-body row">
 
                       <div class="form-group col-md-3">
@@ -59,7 +59,7 @@
                         <label>Date</label>
                         <input type="date" required class="form-control" id="date" name="date" />
                       </div>
-                
+
                       <div class="form-group col-12">
                           <div id="map"></div>
                      </div>
@@ -94,6 +94,20 @@
 
           </div>
                       <!-- /.container-fluid -->
+                      <div class="content">
+            <div class="card">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Time</th>
+                    <th>Location</th>
+                  </tr>
+                </thead>
+                <tbody id="displaydata"></tbody>
+              </table>
+            </div>
+
+        </div>
         </div>
         <div class="content">
         </div>

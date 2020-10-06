@@ -13,44 +13,39 @@
               </div>
             </div>
               <!-- /.col -->
-              <!--
-            <div class="row">
+              
+            <!-- <div class="row">
               <div class="col-lg-4 col-6">
-               
                 <div class="small-box bg-info">
                   <div class="inner">
                     <h3><label  id="present" name="present">100</label></h3>
                     <p>Present</p>
                   </div>
-
                 </div>
-            </div>
+              </div>
             
-            <div class="col-lg-4 col-6">
-              
-              <div class="small-box bg-success">
-                <div class="inner">
-                  <h3>50</h3>
-                  <p>Absent</p>
-                </div>
-
-              </div>
-            </div>
-
-          
-            <div class="col-lg-4 col-6">
-              
-              <div class="small-box bg-warning">
-                <div class="inner">
-                  <h3>150</h3>
-                  <p>Employee</p>
+              <div class="col-lg-4 col-6">
+                <div class="small-box bg-success">
+                  <div class="inner">
+                    <h3>50</h3>
+                    <p>Absent</p>
+                  </div>
                 </div>
               </div>
-            </div>
-  -->
-          
 
-            <div class="card col-12">
+          
+              <div class="col-lg-4 col-6">
+                <div class="small-box bg-warning">
+                  <div class="inner">
+                    <h3>150</h3>
+                    <p>Employee</p>
+                  </div>
+                </div>
+              </div> -->
+ 
+          
+            <!-- Subcompany wise employee present -->
+            <!-- <div class="card col-12">
               <div class="card-header">
                 <h3 class="card-title">Display Data</h3>
               </div>
@@ -63,7 +58,8 @@
                   <tbody id="displaydata"></tbody>
                 </table>
               </div>
-            </div>
+            </div> -->
+            <!-- End Subcompany wise employee present -->
 
           
 

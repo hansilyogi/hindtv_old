@@ -35,7 +35,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="index2.html"><b>Hind</b>TV</a>
+    <a href="index2.html"><b>DL GTPL</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="card">

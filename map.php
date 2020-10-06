@@ -48,7 +48,8 @@
                 url: $("#website-url").attr("value") + "location",
                 dataType: "json",
                 cache: false,
-                success: function (data) {                
+                success: function (data) {   
+                  console.log(data);             
                   $.each(data, function (key, value) {
                     count = count + 1;
                     marker = new google.maps.Marker({

@@ -17,59 +17,24 @@ $(document).ready(function () {
             zoom: 9.92,
             center: myLatLng,
         });
-        marker = new google.maps.Marker({
-                position: myLatLng,
-                map,
-                title: "Employee Location",
-                draggable: true  
-        });
-        google.maps.event.addListener(marker, 'dragend', function (evt) {
-            $('#latlong').val('http://www.google.com/maps/place/'+evt.latLng.lat()+','+ evt.latLng.lng());
-            $('#latitude').val(evt.latLng.lat());
-            $('#longitude').val(evt.latLng.lng())
-         
-        });
-
-        google.maps.event.addListener(marker, 'dragstart', function (evt) {
-            console.log("start");
-        });
-        map.setCenter(marker.position);
-        marker.setMap(map);
     }
                           
     function getClean() { 
-    
-        
-        if(longitude == "" || latitude == ""){
-        latitude = 21.1692881;
-        longitude = 72.8300554;
-        }
-        else{
-        latitude =  parseFloat(latitude);
-        longitude = parseFloat(longitude);
-        }
-        myLatLng = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
+        myLatLng = { lat: 21.1692881, lng: 72.8300554 };
         marker.setMap(null);
         marker = new google.maps.Marker({
                 position: myLatLng,
                 map,
                 title: "office",
                 draggable: true  
-    });
-        console.log("work");
-        marker.setMap(map);      
+        });
+        marker.setMap(null);
+        //marker.setMap(map);      
     }                         
-    setInterval(() => {
-        //getClean();
-        //getStarted();
-    }, 100000);
-
-
-
-
-
-
-
+    // setInterval(() => {
+    //     //getClean();
+    //     //getStarted();
+    // }, 100000);
 
     var SUBCOMPANY;
     loadcompanyname();
@@ -136,7 +101,7 @@ $(document).ready(function () {
     $.ajax({
         type: "POST",
         url: $("#website-url").attr("value") + "employee",
-        data: { type: "getsubcompanyemployee", 
+        data: { type: "getgpsemployee", 
         SubCompany:  SUBCOMPANY
         
     },
@@ -161,6 +126,8 @@ $(document).ready(function () {
     }
 
     $(document).on("click", "#btn-submit", function (e) {
+        window.initMap();
+        $("#displaydata").html("");
         var empid = $("#employeename").val();
         var date = $("#date").val();
         $.ajax({
@@ -182,26 +149,68 @@ $(document).ready(function () {
                 );
             },
             success: function(data){
-                console.log(data);
-                $.each(data, function (key, value) {
-                    count = count + 1;
-                    marker = new google.maps.Marker({
-                      position: {
-                        lat: parseFloat(value.latitude),
-                        lng: parseFloat(value.longitude),
-                      },
-                      map: map,
-                      title: key,                     
+                if(data.isSuccess == true){
+                
+                    // $("#btn-submit-on").html(
+                    //     "<button type='submit' class='btn btn-success' id='btn-update'>Refresh</button>" +
+                    //     "<button type='submit' class='btn btn-danger ml-1'id='btn-cancel'>Cancel</button>"
+                    // );
+                    $("#btn-submit-on").html(
+                        "<button type='submit' class='btn btn-success' id='btn-submit'>Submit</button>" +
+                          "<button type='submit' class='btn btn-danger ml-1'id='btn-cancel'>Cancel</button>"
+                      );
+                    var employeepath = [];
+                    for(i=0;i<data.Data.length;i++){
+                    employeepath.push({
+                        lat:parseFloat(data.Data[i].Latitude),
+                        lng:parseFloat(data.Data[i].Longitude)
                     });
-                    marker.addListener("click", (function(marker, key, infowindow) {                          
-                        return function () {
-                          data = callname(key);
-                          infowindow.setContent(data);
-                          infowindow.open(map, marker);
-                        }  
-                      })(marker, key, infowindow));
-                    markers.push(marker);                                        
-                }); 
+                    }
+                    
+                    for(i=0;i<data.Data.length;i++){
+                        marker = new google.maps.Marker({
+                        position: {
+                            lat: parseFloat(data.Data[i].Latitude),
+                            lng: parseFloat(data.Data[i].Longitude),
+                        },
+                        map: map,
+                        title: data.Data[i].Time,                     
+                        });
+                    
+                        var line = new google.maps.Polyline({
+                            path: employeepath,
+                            strokeColor: "#FF0000",
+                            strokeOpacity: 1.0,
+                            strokeWeight: 10,
+                            geodesic: true,
+                            map: map
+                        });
+                        line.setMap(map);
+                        line.addListener("click", (function(line, infowindow) {                          
+                            return function () {
+                            infowindow.setContent(data.Data[i].Time);
+                            infowindow.open(map, marker);
+                            }  
+                            })(line, infowindow));
+                            markers.push(line);    
+                    } 
+                    for(i=0;i<data.Data.length;i++){
+                        $("#displaydata").append(
+                            "<tr><td>" +
+                            data.Data[i].Time +
+                            "</td><td>" +
+                            data.Data[i].Name
+                                +"</td></tr>"
+                                
+                            );
+                    } 
+                } else if(data.isSuccess == false) {
+                    toastr.error(data.Message);
+                    $("#btn-submit-on").html(
+                        "<button type='submit' class='btn btn-success' id='btn-submit'>Submit</button>" +
+                          "<button type='submit' class='btn btn-danger ml-1'id='btn-cancel'>Cancel</button>"
+                      );
+                }                           
             }
         });
     });
@@ -216,9 +225,5 @@ $(document).ready(function () {
     COMPANY = $("#companyname").val();
     loadsubcompany();
     });
-    
-                     
-                         
-
-
+                    
 });

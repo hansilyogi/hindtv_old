@@ -2,9 +2,10 @@ $(document).ready(function () {
   var SUBCOMPANY = $("#subcompanyname").val();
   var COMPANY ; 
   loadcompanyname();
-  loadsubcompany();
-  loademployee();
-  loadleavereason();
+  //loadsubcompany();
+  //loademployee();
+  //loadleavereason();
+  //loaddata();
   //loadsubcompany(): fetch value in subcompany master
   //loadcompany(): fetch value in subcompany master
   //loademployee(): fetch value in employeename master
@@ -65,6 +66,7 @@ $(document).ready(function () {
             );
           }
         }
+        loadsubcompany();
       },
     });
   }
@@ -91,6 +93,7 @@ $(document).ready(function () {
             );
           }
         }
+        loadleavereason();
       },
     });
 
@@ -116,10 +119,80 @@ $(document).ready(function () {
             
           }
         }
+        loaddata();
       },
       error:function(err){
         console.log(err);
       }
+    });
+  }
+
+  function loaddata(){
+    $.ajax({
+      type:"POST",
+      url:$("#website-url").attr("value")+ "leaveform",
+      data: {
+        type:"getdata"
+      },
+      
+      success:function(data){
+        if(data.isSuccess ==  true){
+          console.log(data);
+          $("#displaydata").html("");
+          for (i = 0; i < data.Data.length; i++) {   
+            data.Data[i]["EmployeeId"] =
+              data.Data[i]["EmployeeId"] == undefined
+                ? "-"
+                : data.Data[i]["EmployeeId"];
+
+                data.Data[i]["SubCompany"] =
+              data.Data[i]["SubCompany"] == undefined
+                ? "-"
+                : data.Data[i]["SubCompany"];
+
+                data.Data[i]["Reason"] =
+              data.Data[i]["Reason"] == undefined
+                ? "-"
+                : data.Data[i]["Reason"];
+
+                data.Data[i]["StartDate"] =
+                data.Data[i]["StartDate"] == undefined
+                  ? "-"
+                  : "2020-08-01T00:00:00:00Z";
+
+                data.Data[i]["EndDate"] =
+                data.Data[i]["EndDate"] == undefined
+                  ? "-"
+                  : "2020-08-01T00:00:00:00Z";
+
+                  data.Data[i]["LeaveStatus"] =
+                  data.Data[i]["LeaveStatus"] == undefined
+                    ? "Pending"
+                    : data.Data[i]["LeaveStatus"];
+            $("#displaydata").append(
+              "<tr><td>" +
+                data.Data[i]["EmployeeId"].Name +
+                "</td><td>" +
+                data.Data[i].SubCompany.Name +
+                "</td><td>" +
+                convertdateformate(data.Data[i]["StartDate"]) +
+                "</td><td>" +
+                convertdateformate(data.Data[i]["EndDate"]) +
+                "</td><td>" +
+                data.Data[i]["LeavePeriod"]+
+                "</td><td>"+
+                data.Data[i].Reason.MasterName+
+                "</td><td>"+
+                data.Data[i]["LeaveType"]+
+                "</td><td>"+
+                data.Data[i]["Description"]+
+                "</td><td>"+
+                data.Data[i]["LeaveStatus"]+
+                "</td></tr>"
+            );
+         }
+        }
+      },
     });
   }
   
@@ -229,6 +302,15 @@ $(document).ready(function () {
     return true;
   }
  
+  function convertdateformate(date){
+      if(date.includes('T')){
+        date = date.split('T')[0];
+        date = date.split('-');
+        date = date[2]+'/'+date[1]+'/'+date[0];
+      }
+      
+      return date;
+  }
 
 
 });

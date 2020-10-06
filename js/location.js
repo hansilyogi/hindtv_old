@@ -74,7 +74,6 @@ $(document).ready(function(){
             dataType:"json",
             cache:"false",
             success: function(data){
-              console.log(data);
                 $("#displaydata").append("");
                 for (i = 0; i < data.Data.length; i++) {
                     $("#displaydata").append(

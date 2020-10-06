@@ -15,10 +15,10 @@
         <div class="logo mb-4">
           <a href="#" class="d-block">
             <span class="logo-xs text-center">
-            <h5><b>H TV</b></h5>
+            <h5><b>D G</b></h5>
             </span>
             <span class="logo-xl text-center">
-              <h5><b>HIND TV</b></h5>
+              <h5><b>DL GTPL</b></h5>
             </span>
           </a>
         </div>
@@ -188,6 +188,12 @@
                 <a href="employeedetails.php" class="nav-link">
                   <i class="nav-icon fas fa-user-clock"></i>
                   <p>Employee Attendance</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="tracking.php" class="nav-link">
+                  <i class="nav-icon fas fa-map-marker-alt"></i>
+                  <p>Employee Tracking</p>
                 </a>
               </li>
             </ul>

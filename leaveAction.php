@@ -23,62 +23,66 @@
                   <form role="form">
                     <div class="card-body row">
 
-                      <div class="form-group col-md-3">
+                    <div class="form-group col-md-3">
                         <label for="companyname">Company Name</label>
-                        <div class="input-group">
-                          <select
-                            class="form-control"
-                            id="companyname"
-                            name="companyname"
-                          ></select>
-                        </div>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="companyname"
+                          name="companyname"
+                          placeholder="Company Name"
+                          readonly
+                        />
+                        <label id="errorCompanyName" class="text-danger"></label>
                       </div>
 
                       <div class="form-group col-md-3">
-                        <label for="subcompanyname">Sub Company Name</label>
-                        <div class="input-group">
-                          <select
-                            class="form-control"
-                            id="subcompanyname"
-                            name="subcompanyname"
-                          ></select>
-                        </div>
+                        <label for="subcompanyname">Sub-Company Name</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="subcompanyname"
+                          name="subcompanyname"
+                          placeholder="SubCompany Name"
+                          readonly
+                        />
+                        <label id="errorSubCompanyName" class="text-danger"></label>
                       </div>
 
                       <div class="form-group col-md-3">
-                        <label for="employeename">Employee Name</label>
-                        <div class="input-group">
-                          <select
-                            class="form-control"
-                            id="employeename"
-                            name="employeename"
-                          ></select>
-                        </div>
+                        <label for="employeename">Longitude</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="employeename"
+                          name="employeename"
+                          placeholder="Employee Name"
+                          readonly
+                        />
+                        <label id="errorEmployeeName" class="text-danger"></label>
                       </div>
 
                       <div class="form-group col-md-3">
-                        <label for="leavereason">Reason</label>
-                        <div class="input-group">
-                          <div class="custom-file">
-                            <div class="input-group">
-                              <select
-                                class="form-control"
-                                id="leavereasonname"
-                                name="leavereasonname"
-                              ></select>
-                            </div>
-                          </div>
-                        </div>
+                        <label for="leavereasonname">Longitude</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="leavereasonname"
+                          name="leavereasonname"
+                          placeholder="Reason"
+                          readonly
+                        />
+                        <label id="errorReason" class="text-danger"></label>
                       </div>
 
                       <div class="form-group col-md-3">
                         <label>Start Date</label>
-                        <input type="date" required class="form-control" id="startdate" name="startdate" />
+                        <input type="date" required class="form-control" id="startdate" name="startdate" readonly/>
                       </div>
 
                       <div class="form-group col-md-3">
                         <label>End Date</label>
-                        <input type="date" required class="form-control" id="enddate" name="enddate" />
+                        <input type="date" required class="form-control" id="enddate" name="enddate" readonly/>
                       </div>
                       
                       <div class="form-group col-md-3">
@@ -88,7 +92,7 @@
 
                       <div class="form-group col-md-3">
                         <label>Leave Type</label>
-                        <select class="form-control mt-1" id="leavetype" name="leavetype">
+                        <select class="form-control mt-1" id="leavetype" name="leavetype" readonly>
                         <option value="Paid Leave">Paid Leave</option>
                         <option value="Unpaid Leave">Unpaid Leave</option>
                         </select>                    
@@ -103,7 +107,17 @@
                           name="description"
                           placeholder="Description"
                           rows="3"
+                          readonly
                         ></textarea>
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <label>Status</label>
+                        <select class="form-control mt-1" id="leavestatus" name="leavestatus">
+                        <option value="Pending">Pending</option>
+                        <option value="Rejected">Rejected</option>
+                        <option value="Approved">Approved</option>
+                        </select>                    
                       </div>
                     </div>
                     <!-- /.card-body -->
@@ -111,7 +125,7 @@
                       <div class="form-check" id="staticmessage"></div>
                     </center>
                     <div class="card-footer" id="btn-submit-on">
-                      <button
+                      <!-- <button
                         type="submit"
                         class="btn btn-success"
                         id="btn-submit"
@@ -124,7 +138,7 @@
                         id="btn-cancel"
                       >
                         Cancel
-                      </button>
+                      </button> -->
                     </div>
                   </form>
                 </div>
@@ -153,6 +167,7 @@
                                 <th>Leave Type</th>
                                 <th>Description</th>
                                 <th>Status</th>
+                                <th>Action</th>
                               </tr>
                             </thead>
                             <tbody id="displaydata"></tbody>
@@ -168,6 +183,6 @@
       </footer>
     </div>
     <?php include('script.php'); ?>
-    <script src="js/leaveform.js"></script>
+    <script src="js/leaveAction.js"></script>
   </body>
 </html>

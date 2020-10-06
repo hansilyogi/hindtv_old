@@ -106,22 +106,22 @@
           </div>
                       <!-- /.container-fluid -->
                       <div class="container-fluid">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Display Data</h3>
-              </div>
-              <!-- /.card-header -->
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>Location Name</th>
-                    <th>View Location</th>
-                  </tr>
-                </thead>
-                <tbody id="displaydata"></tbody>
-              </table>
-            </div>
-          </div>
+                        <div class="card">
+                          <div class="card-header">
+                            <h3 class="card-title">Display Data</h3>
+                          </div>
+                          <!-- /.card-header -->
+                          <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th>Location Name</th>
+                                <th>View Location</th>
+                              </tr>
+                            </thead>
+                            <tbody id="displaydata"></tbody>
+                          </table>
+                        </div>
+                      </div>
         </div>
         <div class="content">
         </div>
