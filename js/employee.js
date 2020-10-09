@@ -8,6 +8,10 @@ $(document).ready(function () {
   var UPDATEID;
   var SUBCOMPANYID;
   var TIMINGID;
+
+  var today = new Date().toISOString().split('T')[0];
+  document.getElementById("dob").setAttribute('max', today);
+
  
   //LOAD SUBCOMPANYS MASTER DATA
   function loadsubcompany() {
@@ -113,6 +117,7 @@ $(document).ready(function () {
         token: $("#website-token").attr("value"),
       },
       success: function (data) {
+        console.log(data);
         $("#empImg").hide();
         if (data.isSuccess == true && id != undefined) {
           SUBCOMPANYID = data.Data[0].SubCompany._id;
@@ -569,7 +574,5 @@ $(document).ready(function () {
     //loadsubcompany();
   });
   
- 
-
-
+  
 });

@@ -1,41 +1,115 @@
 $(document).ready(function(){
     loaddata();
+    loadmemo();
+    countgpsemp();
+    countwifiemp();
+    getempdata();
     function loaddata(){
-        console.log("word");
         $.ajax({
             type:"POST",
             url: $("#website-url").attr("value") + "dashboard",
             data : {
                 type:"getempdata",
             },
-            beforeSend: function () {
-                $("#displaydata").html(
-                  '<tr><td colspan="5" class="text-center font-weight-bold">Loading...</td></tr></center>'
-                );
-              },
+            dataType: "json",
+            cache: false,
             success: function(data){
-                console.log(data);
-                $("#displaydata").html("");
                 if(data.isSuccess == true){
-                    for(i=0;i<data.Data.length;i++){
-                        $("#displaydata").append(
-                            "<tr><td>" +
-                              data.Data[i]["SubCompanyName"] +
-                              "</td><td>" +
-                              data.Data[i]["Attendance"] +
-                              "</td></tr>"
-                          );
+                    if(data.Data == null){
+                        $("#present").text(0);    
                     }
+                    $("#present").text(data.Data);
                 }
-                else {
-                    $("#displaydata").html(
-                      '<tr><td colspan="5" class="text-center font-weight-bold">' +
-                        data.Message +
-                        "</td></tr></center>"
-                    );
+                else{
+                    $("#present").text(0);  
                 }
             },
-
+        });
+    }
+    function loadmemo(){
+        $.ajax({
+            type:"POST",
+            url: $("#website-url").attr("value") + "dashboard",
+            data : {
+                type:"countmemo",
+            },
+            dataType: "json",
+            cache: false,
+            success: function(data){
+                if(data.isSuccess == true){
+                    if(data.Data == null){
+                        $("#memo").text(0);    
+                    }
+                    $("#memo").text(data.Data);
+                }
+                else{
+                    $("#memo").text(0);  
+                }
+            },
+        });
+    }function countgpsemp(){
+        $.ajax({
+            type:"POST",
+            url: $("#website-url").attr("value") + "dashboard",
+            data : {
+                type:"getgpsemp",
+            },
+            dataType: "json",
+            cache: false,
+            success: function(data){
+                if(data.isSuccess == true){
+                    if(data.Data == null){
+                        $("#gpsemployee").text(0);    
+                    }
+                    $("#gpsemployee").text(data.Data);
+                }
+                else{
+                    $("#gpsemployee").text(0);  
+                }
+            },
+        });
+    }function countwifiemp(){
+        $.ajax({
+            type:"POST",
+            url: $("#website-url").attr("value") + "dashboard",
+            data : {
+                type:"getwifiemp",
+            },
+            dataType: "json",
+            cache: false,
+            success: function(data){
+                if(data.isSuccess == true){
+                    if(data.Data == null){
+                        $("#wifiemployee").text(0);    
+                    }
+                    $("#wifiemployee").text(data.Data);
+                }
+                else{
+                    $("#wifiemployee").text(0);  
+                }
+            },
+        });
+    }
+    function getempdata(){
+        $.ajax({
+            type:"POST",
+            url: $("#website-url").attr("value") + "dashboard",
+            data : {
+                type:"getempnum",
+            },
+            dataType: "json",
+            cache: false,
+            success: function(data){
+                if(data.isSuccess == true){
+                    if(data.Data == null){
+                        $("#employee").text(0);    
+                    }
+                    $("#employee").text(data.Data);
+                }
+                else{
+                    $("#employee").text(0);  
+                }
+            },
         });
     }
 });
