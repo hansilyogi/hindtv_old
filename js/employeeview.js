@@ -67,7 +67,6 @@ function loaddata() {
   });
 
   function loadsubcompanyname() {
-    
     $.ajax({
       type: "POST",
       url: $("#website-url").attr("value") + "subcompany",
@@ -77,9 +76,11 @@ function loaddata() {
       dataType: "json",
       cache: false,
       success: function (data) {
-       
         if (data.isSuccess == true) {
           $("#subcompanyname").html("");
+          $("#subcompanyname").append(
+            "<option value=0>All</option>"
+          );
           for (i = 0; i < data.Data.length; i++) {
             $("#subcompanyname").append(
               "<option value=" +

@@ -54,6 +54,8 @@ $(document).ready(function () {
         if (data.isSuccess == true) {
           $("#subcompany").html("");
           SUBCOMPANY = data.Data[0]._id;
+          $("#subcompany").append('<option value=0>All</option>');
+          SUBCOMPANY = $("#subcompany").val();
           for (i = 0; i < data.Data.length; i++) {
             $("#subcompany").append(
               "<option value=" +
@@ -160,8 +162,6 @@ $(document).ready(function () {
                     " hr " +
                     Math.abs(data.Data[i].Minutes) +
                     " mn " +
-                    Math.abs(data.Data[i].Seconds) +
-                    " sec " +
                     mess +
                     "</td><td>" +
                     data.Data[i].Type +

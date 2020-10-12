@@ -167,9 +167,8 @@ $(document).ready(function () {
 
             data.Data[i]["AttendanceType"] =
               data.Data[i]["AttendanceType"] == undefined ? data.Data[i]["WifiName"] : data.Data[i]["AttendanceType"];
-          
+              
             console.log(data.Data[i]["Area"].search(checkstring));
-
             if (data.Data[i]["Area"].search(checkstring) == 0) {
               data.Data[i]["Area"] =
                 "<a href=" +

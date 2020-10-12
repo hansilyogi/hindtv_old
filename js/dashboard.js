@@ -4,12 +4,14 @@ $(document).ready(function(){
     countgpsemp();
     countwifiemp();
     getempdata();
+    countleave();
     function loaddata(){
         $.ajax({
             type:"POST",
             url: $("#website-url").attr("value") + "dashboard",
             data : {
                 type:"getempdata",
+                token: $("#website-token").attr("value"),
             },
             dataType: "json",
             cache: false,
@@ -32,6 +34,7 @@ $(document).ready(function(){
             url: $("#website-url").attr("value") + "dashboard",
             data : {
                 type:"countmemo",
+                token: $("#website-token").attr("value"),
             },
             dataType: "json",
             cache: false,
@@ -53,6 +56,7 @@ $(document).ready(function(){
             url: $("#website-url").attr("value") + "dashboard",
             data : {
                 type:"getgpsemp",
+                token: $("#website-token").attr("value"),
             },
             dataType: "json",
             cache: false,
@@ -74,6 +78,7 @@ $(document).ready(function(){
             url: $("#website-url").attr("value") + "dashboard",
             data : {
                 type:"getwifiemp",
+                token: $("#website-token").attr("value"),
             },
             dataType: "json",
             cache: false,
@@ -96,6 +101,7 @@ $(document).ready(function(){
             url: $("#website-url").attr("value") + "dashboard",
             data : {
                 type:"getempnum",
+                token: $("#website-token").attr("value"),
             },
             dataType: "json",
             cache: false,
@@ -108,6 +114,30 @@ $(document).ready(function(){
                 }
                 else{
                     $("#employee").text(0);  
+                }
+            },
+        });
+    }
+    function countleave(){
+        $.ajax({
+            type:"POST",
+            url: $("#website-url").attr("value") + "dashboard",
+            data : {
+                type:"countleave",
+                token: $("#website-token").attr("value"),
+            },
+            dataType: "json",
+            cache: false,
+            success: function(data){
+                console.log(data);
+                if(data.isSuccess == true){
+                    if(data.Data == null){
+                        $("#leavecount").text(0);    
+                    }
+                    $("#leavecount").text(data.Data);
+                }
+                else{
+                    $("#leavecount").text(0);  
                 }
             },
         });

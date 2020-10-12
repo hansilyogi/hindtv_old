@@ -67,6 +67,8 @@ $(document).ready(function () {
         if (data.isSuccess == true) {
           $("#subcompany").html("");
           SUBCOMPANY = data.Data[0]._id;
+          // $("#subcompany").append("<option value=0>All</option>");
+          // SUBCOMPANY = $("#subcompany").val();
           for (i = 0; i < data.Data.length; i++) {
             $("#subcompany").append(
               "<option value=" +
@@ -95,9 +97,9 @@ $(document).ready(function () {
     var name = $("#subcompany").find(":selected").text();
     var monthname = $("#months").find(":selected").text();
     name = name.split(" ").join("-");
-    console.log(id);
-    console.log($("#website-token").attr("value"));
-    console.log(currentyear, months,currentmonth);
+    //console.log(id);
+    //console.log($("#website-token").attr("value"));
+    //console.log(currentyear, months,currentmonth);
     if(parseInt(year) >= parseInt(currentyear) &&  parseInt(months) > parseInt(currentmonth)){
       toastr.error("Please Check the Selected Month and Year");
     }
@@ -127,7 +129,7 @@ $(document).ready(function () {
           );
         },
         success: function (data) {
-          console.log(data);
+          //console.log(data);
           if (data.isSuccess == true) {
             var link = document.createElement("a");
             document.body.appendChild(link);
@@ -145,7 +147,5 @@ $(document).ready(function () {
         },
       });
     }
-    
-    
   });
 });

@@ -12,8 +12,8 @@ $(document).ready(function () {
   //loadleavereason(): fetch value in leavereason master
 
   var today = new Date().toISOString().split('T')[0];
+  $("#enddate").hide();
   document.getElementById("startdate").setAttribute('min', today);
-  document.getElementById("enddate").setAttribute('min',today);
 
   function loadsubcompany() {
     
@@ -116,7 +116,6 @@ $(document).ready(function () {
                   "</option>"
               );
             }
-            
           }
         }
         loaddata();
@@ -132,14 +131,13 @@ $(document).ready(function () {
       type:"POST",
       url:$("#website-url").attr("value")+ "leaveform",
       data: {
-        type:"getdata"
+        type:"getdata",
+        token: $("#website-token").attr("value"),
       },
-      
       success:function(data){
         if(data.isSuccess ==  true){
-          console.log(data);
           $("#displaydata").html("");
-          for (i = 0; i < data.Data.length; i++) {   
+          for (i = 0; i < data.Data.length; i++) {
             data.Data[i]["EmployeeId"] =
               data.Data[i]["EmployeeId"] == undefined
                 ? "-"
@@ -158,12 +156,12 @@ $(document).ready(function () {
                 data.Data[i]["StartDate"] =
                 data.Data[i]["StartDate"] == undefined
                   ? "-"
-                  : "2020-08-01T00:00:00:00Z";
+                  : convertdateformate(data.Data[i]["StartDate"]);
 
                 data.Data[i]["EndDate"] =
                 data.Data[i]["EndDate"] == undefined
                   ? "-"
-                  : "2020-08-01T00:00:00:00Z";
+                  : convertdateformate(data.Data[i]["EndDate"]);
 
                   data.Data[i]["LeaveStatus"] =
                   data.Data[i]["LeaveStatus"] == undefined
@@ -175,9 +173,9 @@ $(document).ready(function () {
                 "</td><td>" +
                 data.Data[i].SubCompany.Name +
                 "</td><td>" +
-                convertdateformate(data.Data[i]["StartDate"]) +
+                data.Data[i]["StartDate"] +
                 "</td><td>" +
-                convertdateformate(data.Data[i]["EndDate"]) +
+                data.Data[i]["EndDate"] +
                 "</td><td>" +
                 data.Data[i]["LeavePeriod"]+
                 "</td><td>"+
@@ -229,7 +227,8 @@ $(document).ready(function () {
           enddate:$("#enddate").val(),
           leavetype:$("#leavetype").val(),
           leaveperiod:$("#leaveperiod").val(),
-          description:$("#description").val()
+          description:$("#description").val(),
+          token: $("#website-token").attr("value"),
         },
         beforeSend: function () {
           $("#btn-submit").html(
@@ -268,6 +267,9 @@ $(document).ready(function () {
     if(startdate!="" && enddate != ""){
       leaveperiodCount(startdate,enddate);
     }
+    $("#enddate").show();
+    document.getElementById("enddate").setAttribute('min',startdate);
+
   });
 
   $(document).on("change","#enddate",function(e){
@@ -293,7 +295,6 @@ $(document).ready(function () {
       return false;
     }
     else if($("#startdate").val() === "" &&  $("#enddate").val() === ""){
-      console.log("econd");
       return false;
     }
     else if(new Date(stdate).getTime() > new Date(eddate).getTime()){
@@ -308,10 +309,8 @@ $(document).ready(function () {
         date = date.split('-');
         date = date[2]+'/'+date[1]+'/'+date[0];
       }
-      
       return date;
   }
-
 
 });
 

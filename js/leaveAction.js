@@ -10,11 +10,11 @@ $(document).ready(function () {
         type:"POST",
         url:$("#website-url").attr("value")+ "leaveform",
         data: {
-          type:"getdata"
+          type:"getdata",
+          token: $("#website-token").attr("value"),
         },
         success:function(data){
           if(data.isSuccess ==  true){
-            console.log(data);
             $("#displaydata").html("");
             for (i = 0; i < data.Data.length; i++) {   
               data.Data[i]["EmployeeId"] =
@@ -35,12 +35,12 @@ $(document).ready(function () {
                   data.Data[i]["StartDate"] =
                   data.Data[i]["StartDate"] == undefined
                     ? "-"
-                    : "2020-08-01T00:00:00:00Z";
+                    : convertdateformate(data.Data[i]["StartDate"]);
   
                   data.Data[i]["EndDate"] =
                   data.Data[i]["EndDate"] == undefined
                     ? "-"
-                    : "2020-08-01T00:00:00:00Z";
+                    : convertdateformate(data.Data[i]["EndDate"]);
   
                     data.Data[i]["LeaveStatus"] =
                     data.Data[i]["LeaveStatus"] == undefined
@@ -91,7 +91,8 @@ $(document).ready(function () {
           data: {
             type:"update",
             id:UPDATEID,
-            status:$("#leavestatus").val()
+            status:$("#leavestatus").val(),
+            token: $("#website-token").attr("value")
           },
           beforeSend: function () {
             $("#btn-submit").html(
@@ -102,7 +103,6 @@ $(document).ready(function () {
             );
           },
           success:function(data){
-              console.log(data);
             if(data.isSuccess ==  true){
               $("form")[0].reset();
               $("#staticmessage")
@@ -115,6 +115,7 @@ $(document).ready(function () {
               $("#staticmessage");
             });
             }
+            loaddata();
           },
           complete: function () {
             $("#btn-submit-on").html(
@@ -132,11 +133,10 @@ $(document).ready(function () {
         $.ajax({
           type: "POST",
           url: $("#website-url").attr("value") + "leaveform",
-          data: { type: "getsingledata", id: id },
+          data: { type: "getsingledata", id: id,token: $("#website-token").attr("value") },
           dataType: "json",
           cache: false,
           success: function (data) {
-              console.log(data);
             if (data.isSuccess == true) {
               UPDATEID = id;
               $("#companyname").val(data.Data[0].Company.Name);
@@ -168,7 +168,6 @@ $(document).ready(function () {
         return false;
       }
       else if($("#startdate").val() === "" &&  $("#enddate").val() === ""){
-        console.log("econd");
         return false;
       }
       else if(new Date(stdate).getTime() > new Date(eddate).getTime()){

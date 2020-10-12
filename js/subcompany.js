@@ -192,7 +192,6 @@ $(document).ready(function () {
       }*/
       val = validation();
       if (val == 1 && val1 == 1) {
-        alert("work");
         $.ajax({
           type: "POST",
           url: $("#website-url").attr("value") + "subcompany",

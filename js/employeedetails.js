@@ -46,6 +46,10 @@ $(document).ready(function () {
         if (data.isSuccess == true) {
           $("#subcompany").html("");
           SUBCOMPANY = data.Data[0]._id;
+          $("#subcompany").append(
+            "<option value=0>All</option>"
+          );
+          SUBCOMPANY = $("#subcompany").val();
           for (i = 0; i < data.Data.length; i++) {
             $("#subcompany").append(
               "<option value=" +

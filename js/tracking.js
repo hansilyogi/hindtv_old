@@ -9,7 +9,7 @@ $(document).ready(function () {
     var marker;
     var infowindow;    
     var myLatLng;       
-                                  
+    var geocoder                  
     window.initMap = function() {
         myLatLng = { lat: 21.1692881, lng: 72.8300554 };
         infowindow = new google.maps.InfoWindow();
@@ -17,20 +17,21 @@ $(document).ready(function () {
             zoom: 9.92,
             center: myLatLng,
         });
+        geocoder = new google.maps.Geocoder();
     }
                           
-    function getClean() { 
-        myLatLng = { lat: 21.1692881, lng: 72.8300554 };
-        marker.setMap(null);
-        marker = new google.maps.Marker({
-                position: myLatLng,
-                map,
-                title: "office",
-                draggable: true  
-        });
-        marker.setMap(null);
-        //marker.setMap(map);      
-    }                         
+    // function getClean() { 
+    //     myLatLng = { lat: 21.1692881, lng: 72.8300554 };
+    //     marker.setMap(null);
+    //     marker = new google.maps.Marker({
+    //             position: myLatLng,
+    //             map,
+    //             title: "office",
+    //             draggable: true  
+    //     });
+    //     marker.setMap(null);
+    //     //marker.setMap(map);      
+    // }                         
     // setInterval(() => {
     //     //getClean();
     //     //getStarted();
@@ -150,7 +151,6 @@ $(document).ready(function () {
             },
             success: function(data){
                 if(data.isSuccess == true){
-                
                     // $("#btn-submit-on").html(
                     //     "<button type='submit' class='btn btn-success' id='btn-update'>Refresh</button>" +
                     //     "<button type='submit' class='btn btn-danger ml-1'id='btn-cancel'>Cancel</button>"
@@ -176,7 +176,7 @@ $(document).ready(function () {
                         map: map,
                         title: data.Data[i].Time,                     
                         });
-                    
+
                         var line = new google.maps.Polyline({
                             path: employeepath,
                             strokeColor: "#FF0000",

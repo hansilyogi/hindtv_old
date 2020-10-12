@@ -130,7 +130,7 @@
                       <ul class="pt-1">
                       <a href="leaveform.php"><li class="text-dark p-1">Leave Apply</li></a>
                       <!-- <a href="leaveform.php"><li class="text-dark p-1">Leave Status</li></a> -->
-                      <a href="leaveAction.php"><li class="text-dark p-1">Leave Request</li></a>
+                      <a href="leaveAction.php"><li class="text-dark p-1">Action on Leave &nbsp<label class="badge badge-info right" id="leavecount"></label></li></a>
                       <br>
                       </ul></h5>
                     </div>
