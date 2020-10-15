@@ -53,7 +53,7 @@ $(document).ready(function () {
                   Math.abs(data.Data[i].Hour) +
                   ` hrs ` +
                   Math.abs(data.Data[i].Minutes) +
-                  ` min ` 
+                  ` min ` +
                   ` on ` +
                   data.Data[i].Date +
                   `</h5>
