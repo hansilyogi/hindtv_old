@@ -1,5 +1,6 @@
 $(document).ready(function () {
   var d = new Date();
+  var SUBCOMPANY;
   var REMOVEFILTER = 0; //0 means the query filter is on, 1 means the query filter is off
   $("#startdate").val(createdate());
   $("#enddate").val(createdate());
@@ -40,7 +41,7 @@ $(document).ready(function () {
     loaddata();
   }
   loadarea();
-
+  loademployee();
   function loadsingleemployee() {
     var afilter = $("#area-filter").val();
     $.ajax({
@@ -61,7 +62,7 @@ $(document).ready(function () {
       },
       success: function (data) {
         if (data.isSuccess == true) {
-          console.log(data);
+          //console.log(data);
           $("#displaydata").html("");
           for (i = 0; i < data.Data.length; i++) {
             checkstring = "http://www.google.com/maps/place/";
@@ -71,7 +72,7 @@ $(document).ready(function () {
               data.Data[i]["Time"] == undefined ? "-" : data.Data[i]["Time"];
             data.Data[i]["Area"] =
               data.Data[i]["Area"] == undefined ? "-" : data.Data[i]["Area"];
-            console.log(data.Data[i]["Area"].search(checkstring));
+            //console.log(data.Data[i]["Area"].search(checkstring));
 
             data.Data[i]["WifiName"] = 
               data.Data[i]["WifiName"] == undefined  ? "GPS" : "WiFi";
@@ -130,6 +131,7 @@ $(document).ready(function () {
     ed = convertdatetostring($("#enddate").val());
     day = $("#day-filter").val();
     status = $("#status-filter").val();
+    eid = $("#employeename").val();
     $.ajax({
       type: "POST",
       url: $("#website-url").attr("value") + "attendance",
@@ -142,6 +144,7 @@ $(document).ready(function () {
         day: day,
         status: status,
         token: $("#website-token").attr("value"),
+        employeeid:eid,
       },
       dataType: "json",
       cache: false,
@@ -151,6 +154,7 @@ $(document).ready(function () {
         );
       },
       success: function (data) {
+        console.log(data);
         if (data.isSuccess == true) {
           $("#displaydata").html("");
           for (i = 0; i < data.Data.length; i++) {
@@ -168,7 +172,7 @@ $(document).ready(function () {
             data.Data[i]["AttendanceType"] =
               data.Data[i]["AttendanceType"] == undefined ? data.Data[i]["WifiName"] : data.Data[i]["AttendanceType"];
               
-            console.log(data.Data[i]["Area"].search(checkstring));
+            //console.log(data.Data[i]["Area"].search(checkstring));
             if (data.Data[i]["Area"].search(checkstring) == 0) {
               data.Data[i]["Area"] =
                 "<a href=" +
@@ -261,7 +265,7 @@ $(document).ready(function () {
           for (i = 0; i < data.Data.length; i++) {
             $("#area-filter").append(
               "<option value='" +
-                data.Data[i]["Name"] +
+                data.Data[i]["_id"] +
                 "'>" +
                 data.Data[i]["Name"] +
                 "</option>"
@@ -271,4 +275,37 @@ $(document).ready(function () {
       },
     });
   }
+
+  //Updated 13.10
+  function loademployee(){
+    $.ajax({
+      type: "POST",
+      url: $("#website-url").attr("value") + "employee",
+      data: { type: "getsubcompanyemployee", 
+      SubCompany:  SUBCOMPANY,
+      token: $("#website-token").attr("value")
+    },
+      dataType: "json",
+      cache: false,
+      success: function (data) {
+        if (data.isSuccess == true) {
+          $("#employeename").html("");
+          $("#employeename").append("<option value=0>All</option");
+          for (i = 0; i < data.Data.length; i++) {
+            $("#employeename").append(
+              "<option value=" +
+                data.Data[i]._id +
+                ">" +
+                data.Data[i].Name +
+                "</option>"
+            );
+          }
+        }
+      },
+    });
+  }
+  $(document).on("change", "#area-filter", function () {
+    SUBCOMPANY = $("#area-filter").val();
+    loademployee();
+  });
 });

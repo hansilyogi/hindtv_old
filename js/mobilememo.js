@@ -30,7 +30,8 @@ $(document).ready(function () {
       if (data.isSuccess == true) {
         $("#displaydata").html("");
         if (data.Data.length > 0) {
-          for (i = 0; i < data.Data.length; i++) {
+          //for (i = 0; i < data.Data.length; i++) {
+          for(i = data.Data.length;i>0;i--){
             mess =
               data.Data[i].Type == "in" ? "You where late " : "You went early ";
             if (
@@ -52,9 +53,7 @@ $(document).ready(function () {
                   Math.abs(data.Data[i].Hour) +
                   ` hrs ` +
                   Math.abs(data.Data[i].Minutes) +
-                  ` min ` +
-                  Math.abs(data.Data[i].Seconds) +
-                  ` sec` +
+                  ` min ` 
                   ` on ` +
                   data.Data[i].Date +
                   `</h5>
@@ -70,7 +69,7 @@ $(document).ready(function () {
                   `">
                       <button type="submit" class="btn btn-primary" id="btn-submit-request" data-id="` +
                   data.Data[i]._id +
-                  `">Submit Reason</button>
+                  `">Submit Request</button>
                   </div>
               </div>`
               );
@@ -91,8 +90,6 @@ $(document).ready(function () {
                   ` hrs ` +
                   Math.abs(data.Data[i].Minutes) +
                   ` min ` +
-                  Math.abs(data.Data[i].Seconds) +
-                  ` sec` +
                   ` on ` +
                   data.Data[i].Date +
                   `</h5> ` +
@@ -138,8 +135,6 @@ $(document).ready(function () {
                 ` hrs ` +
                 Math.abs(data.Data.Minutes) +
                 ` min ` +
-                Math.abs(data.Data.Seconds) +
-                ` sec` +
                 ` on ` +
                 data.Data.Date +
                 `</h5> ` +

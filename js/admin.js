@@ -51,6 +51,9 @@ $(document).ready(function () {
       success: function (data) {
         if (data.Data.length > 0) {
           $("#subcompany").html("");
+          $("#subcompany").append(
+            "<option value=0>Master-All Subcompany Access</option>"
+          );
           for (i = 0; i < data.Data.length > 0; i++) {
             $("#subcompany").append(
               "<option value=" +
@@ -60,9 +63,7 @@ $(document).ready(function () {
                 "</option>"
             );
           }
-          $("#subcompany").append(
-            "<option value=0>Master-All Subcompany Access</option>"
-          );
+          
         }
       },
     });

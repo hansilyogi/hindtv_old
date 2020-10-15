@@ -2,13 +2,21 @@ $(document).ready(function () {
   loadcompany();
 
   //fetching year in dropdown 
-  var start = 2020;
-  var end = new Date().getFullYear();
-  var options = "";
-  for(var year = start ; year <=end; year++){
-    options += "<option>"+ year +"</option>";
-  }
-  document.getElementById("year").innerHTML = options;
+  // var start = 2020;
+  // var end = new Date().getFullYear();
+  // var options = "";
+  // for(var year = start ; year <=end; year++){
+  //   options += "<option>"+ year +"</option>";
+  // }
+  // document.getElementById("year").innerHTML = options;
+
+    var firstdate = new Date("2020-07-14T00:00:00.000Z").toISOString().split('T')[0];
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementById("startdate").setAttribute('min', firstdate);
+    document.getElementById("enddate").setAttribute('max', today);
+    document.getElementById("startdate").setAttribute('max', today);
+
+
 
   var now = new Date();
   var prevMonthLastDate = new Date(now.getFullYear(), now.getMonth(), 0);
@@ -32,8 +40,8 @@ $(document).ready(function () {
     );
   };
 
-  $("#months").val();
-  $("#year").val();
+  // $("#months").val();
+  // $("#year").val();
 
   function loadcompany() {
     $.ajax({
@@ -89,21 +97,24 @@ $(document).ready(function () {
   });
 
   $(document).on("click", "#btn-apply-filter", function () {
-    var currentyear = new Date().getFullYear();
-    var currentmonth = new Date().getMonth()+1;
-    var months = $("#months").val();
-    var year = $("#year").val();
+    //var currentyear = new Date().getFullYear();
+    //var currentmonth = new Date().getMonth()+1;
+    //var months = $("#months").val();
+    //var year = $("#year").val();
     var id = $("#subcompany").val();
     var name = $("#subcompany").find(":selected").text();
-    var monthname = $("#months").find(":selected").text();
+    //var monthname = $("#months").find(":selected").text();
     name = name.split(" ").join("-");
     //console.log(id);
     //console.log($("#website-token").attr("value"));
     //console.log(currentyear, months,currentmonth);
-    if(parseInt(year) >= parseInt(currentyear) &&  parseInt(months) > parseInt(currentmonth)){
-      toastr.error("Please Check the Selected Month and Year");
-    }
-    else{
+    var sdate = $("#startdate").val();
+    var edate = $("#enddate").val();
+    console.log(edate,sdate);
+    // if(parseInt(year) >= parseInt(currentyear) &&  parseInt(months) > parseInt(currentmonth)){
+    //   toastr.error("Please Check the Selected Month and Year");
+    // }
+    //else{
       $.ajax({
         type: "POST",
         url: $("#website-url").attr("value") + "generatereport",
@@ -111,16 +122,13 @@ $(document).ready(function () {
           type: "attendancereport",
           company: id,
           name: name,
-          year:year,
-          month:months,
-          monthname:monthname,
+          startdate:sdate,
+          enddate:edate,
           token: $("#website-token").attr("value"),
-          
         },
         dataType: "json",
         cache: false,
         beforeSend: function () {
-  
           $("#btn-submit-on").html(
             '<button class="btn btn-success" type="button">\
                                   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>\
@@ -129,7 +137,6 @@ $(document).ready(function () {
           );
         },
         success: function (data) {
-          //console.log(data);
           if (data.isSuccess == true) {
             var link = document.createElement("a");
             document.body.appendChild(link);
@@ -146,6 +153,6 @@ $(document).ready(function () {
           );
         },
       });
-    }
+    //}
   });
 });

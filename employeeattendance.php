@@ -24,19 +24,19 @@
                                         <select class="form-control" id="subcompany"></select>
                                         <label></label>                                    
                                     </div>
-                                    <!-- Starting Months and Ending Months
+                                    <!-- Starting Months and Ending Months -->
                                     <div class="col-12 row">
                                         <div class="col-md-6">
-                                            <label> Start Date</label>
+                                            <label>Start Date</label>
                                             <input type="date" class="form-control" id="startdate" name="startdate">                    
                                         </div>
                                         <div class="col-md-6">
-                                            <label> End Date</label>
+                                            <label>End Date</label>
                                             <input type="date" class="form-control mt-1" id="enddate" name="enddate">
                                         </div>    
                                     </div>
-                                    -->
-                                    <div class="col-12 row">
+                                    
+                                    <!-- <div class="col-12 row">
                                         <div class="col-md-6">
                                             <label> Months</label>
                                             <select class="form-control mt-1" id="months" name="months">
@@ -58,7 +58,7 @@
                                             <label> Year</label>
                                             <select class="form-control mt-1" id="year" name="year"></select>
                                         </div>    
-                                    </div>     
+                                    </div>      -->
                                 </div>
                             </div> 
                             <label class="text-center text-danger" id="errorMessage"></label>

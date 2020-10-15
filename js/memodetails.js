@@ -14,7 +14,6 @@ $(document).ready(function () {
     success: function (data) {
       if (data.isSuccess == true) {
         CONDITIONCHECK = data.Data[0].Status;
-        console.log(data);
         sts =
           data.Data[0].Type == "in" ? "He/She was late " : "He/She went early ";
         if (
@@ -37,8 +36,6 @@ $(document).ready(function () {
               " hr " +
               Math.abs(data.Data[0].Minutes) +
               " min " +
-              Math.abs(data.Data[0].Seconds) +
-              " sec" +
               "</td></tr>" +
               "<tr><td>Reason:</td><td>" +
               data.Data[0].Reason +
@@ -63,8 +60,6 @@ $(document).ready(function () {
                 " hr " +
                 Math.abs(data.Data[0].Minutes) +
                 " min " +
-                Math.abs(data.Data[0].Seconds) +
-                " sec" +
                 "</td></tr>" +
                 "<tr><td>Reason:</td><td>" +
                 data.Data[0].Reason +
@@ -87,8 +82,6 @@ $(document).ready(function () {
                 " hr " +
                 Math.abs(data.Data[0].Minutes) +
                 " min " +
-                Math.abs(data.Data[0].Seconds) +
-                " sec" +
                 "</td></tr>" +
                 "<tr><td>Reason:</td><td>" +
                 data.Data[0].Reason +
@@ -111,8 +104,6 @@ $(document).ready(function () {
                 " hr " +
                 Math.abs(data.Data[0].Minutes) +
                 " min " +
-                Math.abs(data.Data[0].Seconds) +
-                " sec" +
                 "</td></tr>" +
                 "<tr><td>Reason:</td><td>Reason Not Provided.</td></tr>"
             );

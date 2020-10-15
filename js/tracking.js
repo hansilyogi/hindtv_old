@@ -43,7 +43,6 @@ $(document).ready(function () {
     loademployeename();
 
     function loadsubcompanyname() {
-    
         $.ajax({
           type: "POST",
           url: $("#website-url").attr("value") + "subcompany",
@@ -56,6 +55,7 @@ $(document).ready(function () {
            
             if (data.isSuccess == true) {
               $("#subcompanyname").html("");
+              $("#subcompanyname").append("<option value=0>All</option>")
               for (i = 0; i < data.Data.length; i++) {
                 $("#subcompanyname").append(
                   "<option value=" +
@@ -102,9 +102,10 @@ $(document).ready(function () {
     $.ajax({
         type: "POST",
         url: $("#website-url").attr("value") + "employee",
-        data: { type: "getgpsemployee", 
-        SubCompany:  SUBCOMPANY
-        
+        data: { type: "getsubcompanyemployee", 
+        SubCompany:  SUBCOMPANY,
+        token: $("#website-token").attr("value"),
+
     },
         dataType: "json",
         cache: false,
@@ -168,6 +169,7 @@ $(document).ready(function () {
                     }
                     
                     for(i=0;i<data.Data.length;i++){
+                        var position;
                         marker = new google.maps.Marker({
                         position: {
                             lat: parseFloat(data.Data[i].Latitude),
@@ -175,6 +177,25 @@ $(document).ready(function () {
                         },
                         map: map,
                         title: data.Data[i].Time,                     
+                        });
+
+                        geocoder.geocode({ location: position }, (results, status) => {
+                            if (status === "OK") {
+                                if (results[0]) {
+                                    console.log(results[0].formatted_address);
+                                  map.setZoom(11);
+                                  const marker = new google.maps.Marker({
+                                    position: latlng,
+                                    map: map,
+                                  });
+                                  //infowindow.setContent(results[0].formatted_address);
+                                  //infowindow.open(map, marker);
+                                }  //else {
+                            //       window.alert("No results found");
+                            //     }
+                            //   } else {
+                            //     window.alert("Geocoder failed due to: " + status);
+                            }
                         });
 
                         var line = new google.maps.Polyline({

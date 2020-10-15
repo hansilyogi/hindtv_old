@@ -29,6 +29,7 @@ $(document).ready(function () {
        
         if (data.isSuccess == true) {
           $("#subcompanyname").html("");
+          $("#subcompanyname").append("<option value=0>All</option>");
           for (i = 0; i < data.Data.length; i++) {
             $("#subcompanyname").append(
               "<option value=" +
@@ -75,8 +76,8 @@ $(document).ready(function () {
       type: "POST",
       url: $("#website-url").attr("value") + "employee",
       data: { type: "getsubcompanyemployee", 
-      SubCompany:  SUBCOMPANY
-      
+      SubCompany:  SUBCOMPANY,
+      token: $("#website-token").attr("value"),      
     },
       dataType: "json",
       cache: false,
