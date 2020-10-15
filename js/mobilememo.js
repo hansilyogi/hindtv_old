@@ -2,7 +2,7 @@ $(document).ready(function () {
   var date = new Date();
   var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
   var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-
+  console.log(firstDay,lastDay);
   Month =
     firstDay.getMonth() + 1 < 10
       ? "0" + (firstDay.getMonth() + 1)
@@ -31,7 +31,7 @@ $(document).ready(function () {
         $("#displaydata").html("");
         if (data.Data.length > 0) {
           //for (i = 0; i < data.Data.length; i++) {
-          for(i = data.Data.length;i>0;i--){
+          for(i = data.Data.length-1;i>0;i--){
             mess =
               data.Data[i].Type == "in" ? "You where late " : "You went early ";
             if (
