@@ -1,5 +1,7 @@
 $(document).ready(function() {
     //var URL = "http://localhost:81/HindTV---FRONTEND/";
+
+
     var URL = "http://15.206.236.83/"; //server
     // var URL = "http://localhost:8080/";  //localhost
 

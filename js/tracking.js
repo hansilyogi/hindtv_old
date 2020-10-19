@@ -17,7 +17,7 @@ $(document).ready(function () {
             zoom: 9.92,
             center: myLatLng,
         });
-        geocoder = new google.maps.Geocoder();
+        //geocoder = new google.maps.Geocoder();
     }
                           
     // function getClean() { 
@@ -105,8 +105,7 @@ $(document).ready(function () {
         data: { type: "getsubcompanyemployee", 
         SubCompany:  SUBCOMPANY,
         token: $("#website-token").attr("value"),
-
-    },
+        },
         dataType: "json",
         cache: false,
         success: function (data) {
@@ -151,6 +150,7 @@ $(document).ready(function () {
                 );
             },
             success: function(data){
+                console.log(data);
                 if(data.isSuccess == true){
                     // $("#btn-submit-on").html(
                     //     "<button type='submit' class='btn btn-success' id='btn-update'>Refresh</button>" +
@@ -175,28 +175,29 @@ $(document).ready(function () {
                             lat: parseFloat(data.Data[i].Latitude),
                             lng: parseFloat(data.Data[i].Longitude),
                         },
+                        icon:"https://raw.githubusercontent.com/Concept211/Google-Maps-Markers/master/images/marker_red"+i+".png",
                         map: map,
                         title: data.Data[i].Time,                     
                         });
 
-                        geocoder.geocode({ location: position }, (results, status) => {
-                            if (status === "OK") {
-                                if (results[0]) {
-                                    console.log(results[0].formatted_address);
-                                  map.setZoom(11);
-                                  const marker = new google.maps.Marker({
-                                    position: latlng,
-                                    map: map,
-                                  });
-                                  //infowindow.setContent(results[0].formatted_address);
-                                  //infowindow.open(map, marker);
-                                }  //else {
-                            //       window.alert("No results found");
-                            //     }
-                            //   } else {
-                            //     window.alert("Geocoder failed due to: " + status);
-                            }
-                        });
+                        // geocoder.geocode({ location: position }, (results, status) => {
+                        //     if (status === "OK") {
+                        //         if (results[0]) {
+                        //             console.log(results[0].formatted_address);
+                        //           map.setZoom(11);
+                        //           const marker = new google.maps.Marker({
+                        //             position: latlng,
+                        //             map: map,
+                        //           });
+                        //           //infowindow.setContent(results[0].formatted_address);
+                        //           //infowindow.open(map, marker);
+                        //         }  //else {
+                        //     //       window.alert("No results found");
+                        //     //     }
+                        //     //   } else {
+                        //     //     window.alert("Geocoder failed due to: " + status);
+                        //     }
+                        // });
 
                         var line = new google.maps.Polyline({
                             path: employeepath,
@@ -218,11 +219,10 @@ $(document).ready(function () {
                     for(i=0;i<data.Data.length;i++){
                         $("#displaydata").append(
                             "<tr><td>" +
-                            data.Data[i].Time +
-                            "</td><td>" +
-                            data.Data[i].Name
-                                +"</td></tr>"
-                                
+                            data.Data[i].Time +"--"+
+                            data.Data[i].Name +"--"+
+                            data.Data[i].Distance+"m"+
+                            "</td></tr>"
                             );
                     } 
                 } else if(data.isSuccess == false) {

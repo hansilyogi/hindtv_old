@@ -164,6 +164,7 @@
                       <ul class="pt-1">
                       <a href="employeeattendance.php"><li class="text-dark p-1">View Report</li></a>
                       <a href="memo.php"><li class="text-dark p-1">View Memo</li></a>
+                      <!-- <a href="memostatus.php"><li class="text-dark p-1">Memo Status</li></a> -->
                       </ul></h5>
                     </div>
                   </div>

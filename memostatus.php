@@ -9,7 +9,7 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Leave Form</h1>
+                <h1 class="m-0 text-dark">Memo Status Form</h1>
               </div>
             </div>
 
@@ -18,23 +18,10 @@
               <div class="col-lg-12">
                 <div class="card card-success">
                   <div class="card-header">
-                    <h3 class="card-title">Add Company</h3>
+                    <h3 class="card-title">Memo Info</h3>
                   </div>
                   <form role="form">
                     <div class="card-body row">
-
-                    <div class="form-group col-md-3">
-                        <label for="companyname">Company Name</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="companyname"
-                          name="companyname"
-                          placeholder="Company Name"
-                          readonly
-                        />
-                        <label id="errorCompanyName" class="text-danger"></label>
-                      </div>
 
                       <div class="form-group col-md-3">
                         <label for="subcompanyname">Sub-Company Name</label>
@@ -63,48 +50,30 @@
                       </div>
 
                       <div class="form-group col-md-3">
-                        <label for="leavereasonname">Reason</label>
+                        <label for="leavereasonname">Duty Type</label>
                         <input
                           type="text"
                           class="form-control"
-                          id="leavereasonname"
+                          id="leavetype"
                           name="leavereasonname"
-                          placeholder="Reason"
+                          placeholder="Duty Type"
                           readonly
                         />
                         <label id="errorReason" class="text-danger"></label>
                       </div>
 
                       <div class="form-group col-md-3">
-                        <label>Start Date</label>
+                        <label>Date</label>
                         <input type="date" required class="form-control" id="startdate" name="startdate" readonly/>
                       </div>
 
                       <div class="form-group col-md-3">
-                        <label>End Date</label>
-                        <input type="date" required class="form-control" id="enddate" name="enddate" readonly/>
-                      </div>
-                      
-                      <div class="form-group col-md-3">
-                        <label>Leave Period(Days) </label>
-                        <input type="text" class="form-control" id="leaveperiod" name="leaveperiod" readonly>
-                      </div>
-
-                      <div class="form-group col-md-3">
-                        <label>Leave Type</label>
-                        <select class="form-control mt-1" id="leavetype" name="leavetype" readonly>
-                        <option value="Paid Leave">Paid Leave</option>
-                        <option value="Unpaid Leave">Unpaid Leave</option>
-                        </select>                    
-                      </div>
-
-                      <div class="form-group col-md-3">
-                      <label for="description">Description</label>
+                      <label for="leavereasonname">Description</label>
                       <textarea
                           type="textarea"
                           class="form-control"
-                          id="description"
-                          name="description"
+                          id="leavereasonname"
+                          name="leavereasonname"
                           placeholder="Description"
                           rows="3"
                           readonly
@@ -160,12 +129,9 @@
                               <tr>
                                 <th>Name</th>
                                 <th>SubCompany Name</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Period</th>
+                                <th>Date</th>
                                 <th>Reason</th>
-                                <th>Leave Type</th>
-                                <th>Description</th>
+                                <th>Duty Type</th>
                                 <th>Status</th>
                                 <th>Action</th>
                               </tr>
@@ -183,6 +149,6 @@
       </footer>
     </div>
     <?php include('script.php'); ?>
-    <script src="js/leaveAction.js"></script>
+    <script src="js/memostatus.js"></script>
   </body>
 </html>

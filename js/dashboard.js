@@ -129,7 +129,6 @@ $(document).ready(function(){
             dataType: "json",
             cache: false,
             success: function(data){
-                console.log(data);
                 if(data.isSuccess == true){
                     if(data.Data == null){
                         $("#leavecount").text(0);    

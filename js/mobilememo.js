@@ -33,7 +33,7 @@ $(document).ready(function () {
           //for (i = 0; i < data.Data.length; i++) {
           for(i = data.Data.length-1;i>0;i--){
             mess =
-              data.Data[i].Type == "in" ? "You where late " : "You went early ";
+              data.Data[i].Type == "in" ? "You are late " : "You went early ";
             if (
               data.Data[i].ReasonSend == false ||
               data.Data[i].ReasonSend == undefined

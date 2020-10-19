@@ -99,8 +99,7 @@
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th>Time</th>
-                    <th>Location</th>
+                    <th>Detail</th>
                   </tr>
                 </thead>
                 <tbody id="displaydata"></tbody>
