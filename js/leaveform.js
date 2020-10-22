@@ -16,7 +16,6 @@ $(document).ready(function () {
   document.getElementById("startdate").setAttribute('min', today);
 
   function loadsubcompany() {
-    
     $.ajax({
       type: "POST",
       url: $("#website-url").attr("value") + "subcompany",
@@ -26,7 +25,6 @@ $(document).ready(function () {
       dataType: "json",
       cache: false,
       success: function (data) {
-       
         if (data.isSuccess == true) {
           $("#subcompanyname").html("");
           $("#subcompanyname").append("<option value=0>All</option>");
@@ -47,6 +45,7 @@ $(document).ready(function () {
       }
     });
   }
+
   function loadcompanyname() {
     $.ajax({
       type: "POST",
@@ -71,6 +70,7 @@ $(document).ready(function () {
       },
     });
   }
+
   function loademployee(){
     $.ajax({
       type: "POST",
@@ -99,6 +99,7 @@ $(document).ready(function () {
     });
 
   }
+
   function loadleavereason(){
     $.ajax({
       type: "POST",
@@ -219,7 +220,7 @@ $(document).ready(function () {
         type:"POST",
         url:$("#website-url").attr("value")+ "leaveform",
         data: {
-          type:"insert",
+          type:"insertforweb",
           EmployeeId:$("#employeename").val(),
           SubCompanyId:$("#subcompanyname").val(),
           CompanyId:$("#companyname").val(),

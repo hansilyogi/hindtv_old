@@ -175,7 +175,7 @@ $(document).ready(function () {
                             lat: parseFloat(data.Data[i].Latitude),
                             lng: parseFloat(data.Data[i].Longitude),
                         },
-                        icon:"https://raw.githubusercontent.com/Concept211/Google-Maps-Markers/master/images/marker_red"+i+".png",
+                        icon:"https://raw.githubusercontent.com/Concept211/Google-Maps-Markers/master/images/marker_red"+parseInt(1+i)+".png",
                         map: map,
                         title: data.Data[i].Time,                     
                         });

@@ -26,7 +26,6 @@ $(document).ready(function () {
     dataType: "json",
     cache: false,
     success: function (data) {
-      console.log(data);
       if (data.isSuccess == true) {
         $("#displaydata").html("");
         if (data.Data.length > 0) {
@@ -93,7 +92,7 @@ $(document).ready(function () {
                   ` on ` +
                   data.Data[i].Date +
                   `</h5> ` +
-                  `<br/><p class="ml-5">Reason: ` +
+                  `<br>&nbsp<p class="mt-0">Reason: ` +
                   data.Data[i].Reason +
                   `</p>` +
                   `<p class="mt-1">Status: ` +

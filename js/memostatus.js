@@ -81,7 +81,7 @@ $(document).ready(function(){
             $("#employeename").val(data.Data[0]["Eid"].Name);
             $("#leavetype").val( data.Data[0].Type);
             $("#startdate").val(reversedateFormate(data.Data[0].Date));
-            $("#leavereasonname").val(data.Data[0].ReasonSend);
+            $("#leavereasonname").val(data.Data[0].Reason);
             //$("#description").val(data.Data[0].Type);
             window.scrollTo(0, 0);
             $("#btn-submit-on").html(
