@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    //var TOKEN=$(location).attr("href").split("=")[1];
-    var TOKEN = $("#website-token").attr("value");
+    var TOKEN=$(location).attr("href").split("=")[1];
+    // var TOKEN = $("#website-token").attr("value");
     loadpresentEmployee();
     countleaveapply();
 
